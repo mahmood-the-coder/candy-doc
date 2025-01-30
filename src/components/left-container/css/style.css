@@ -1,0 +1,13 @@
+.candyDoc__leftContainer {
+  position: absolute;
+  top: 150px;
+  bottom: 150px;
+  left: 0;
+  right: calc(100% - 100px);
+  ;
+}
+.candyDoc__leftContainer:hover {
+
+    outline: 1px dotted var(--color);
+  }
+  

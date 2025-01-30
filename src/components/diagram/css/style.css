@@ -1,0 +1,167 @@
+.candyDoc__diagram {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  outline: 1px dotted var(--color);
+}
+
+.candyDoc__diagram > .candyDoc__diagramSVG {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.candyDoc__diagramWrapper {
+  width: 300px;
+  max-width: 100%;
+  height: 300px;
+  position: relative;
+}
+.candyDoc__diagramBraces {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px dotted black;
+  border-bottom: none;
+  border-top: none;
+  border-radius: 20px;
+  z-index: 1;
+}
+.candyDoc__diagramDiamond {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  padding: 0;
+  outline: none;
+  user-select: none;
+  border-radius: 100%;
+  background-color: transparent;
+}
+.candyDoc__diagramDiamondSVG {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+.candyDoc__diagramNodeFromPoint {
+  transform: translate(-50%, -50%);
+  user-select: none;
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 4px;
+  border: 1px dotted black;
+}
+
+.candyDoc__diagramNodeToPoint {
+  transform: translate(-50%, -50%);
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+.candyDoc__diagramRect {
+  position: absolute;
+  background-color: white;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 0;
+  outline: none;
+  user-select: none;
+  justify-content: center;
+  align-content: center;
+  z-index: 2;
+}
+.candyDoc__diagramNodeTextBox {
+  width: 65%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  outline: 1px dotted var(--color);
+  resize: none;
+  overflow: hidden;
+  text-align: center;
+}
+
+.candyDoc__diagramRepeat {
+  position: absolute;
+  top: 0;
+  background-color: white;
+  z-index: 2;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  padding: 0;
+  outline: none;
+  user-select: none;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+.candyDoc__diagramRepeatSVG {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  left: 20%;
+  top: 132%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+.candyDoc__diagramNodeWrapper {
+  width: 75px;
+  height: 50px;
+  position: absolute;
+}
+.candyDoc__diagramNodePoint {
+  position: absolute;
+  background-color: transparent;
+  border: 1px solid var(--color);
+  border-radius: 50%;
+  z-index: 30;
+  width: 5px;
+  height: 5px;
+}
+
+.candyDoc__diagramNodePoint.pointTop {
+  top: -5px;
+  left: calc(50% - 2px);
+}
+.candyDoc__diagramNodePoint.pointBottom {
+  bottom: -5px;
+  left: calc(50% - 2px);
+}
+.candyDoc__diagramNodePoint.pointRight {
+  left: -5px;
+  top: calc(50% - 2px);
+}
+.candyDoc__diagramNodePoint.pointLeft {
+  right: -5px;
+  top: calc(50% - 2px);
+}
+

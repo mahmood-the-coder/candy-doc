@@ -1,0 +1,53 @@
+.candyDoc__inspectorWrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  width: 100%;
+  height:calc(100% - 25px);
+  padding: 10px;
+}
+
+.candyDoc__inspectorHeader {
+  display: flex;
+  font-size: large;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: var(--color);
+  color: var(--background);
+  height: 20px;
+  padding: 3px;
+
+}
+.candyDoc__inspectorToolsWrapper {
+  display: flex;
+  height: auto;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 10px;
+  padding-bottom: 15px;
+  gap:20px;
+  border: 1px solid var(--color);
+  border-radius: 5px;
+  position: relative;
+  width: 100%;
+  color: var(--color);
+  font-size: x-small;
+
+  
+}
+
+.candyDoc__inspectorToolLabel {
+  padding: 5px;
+  color: var(--color);
+  font-size: x-small;
+  font-weight: bolder;
+  width: 100%;
+  background-color: var(--background);
+ 
+}
+

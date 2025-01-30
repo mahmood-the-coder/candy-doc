@@ -1,0 +1,21 @@
+.candyDoc__guideCenterVertical,
+.candyDoc__guideRight,
+.candyDoc__guideLeft {
+  width: 5px;
+  transform: translateX(-50%);
+  position: absolute;
+  height: 100%;
+  background-color: var(--color);
+  opacity: 0.1;
+}
+
+.candyDoc__guideCenterHorizontal,
+.candyDoc__guideTop,
+.candyDoc__guideBottom {
+  height: 5px;
+  transform: translateY(-50%);
+  width: 100%;
+  position: absolute;
+  background-color: var(--color);
+  opacity: 0.1;
+}

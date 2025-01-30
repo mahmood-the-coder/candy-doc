@@ -1,0 +1,44 @@
+.candyDoc__resizeHandleBottom {
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 5px;
+  background-color: var(--color);
+  cursor: crosshair;
+  z-index:100
+}
+.candyDoc__resizeHandleTop {
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 5px;
+  background-color: var(--color);
+  cursor: crosshair;
+  z-index:100
+}
+.candyDoc__resizeHandleLeft {
+  position: absolute;
+  left: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 30px;
+  width: 5px;
+  background-color: var(--color);
+  cursor: crosshair;
+  z-index:100
+}
+.candyDoc__resizeHandleRight {
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 30px;
+  width: 5px;
+  background-color: var(--color);
+  cursor: crosshair;
+  z-index:100
+}

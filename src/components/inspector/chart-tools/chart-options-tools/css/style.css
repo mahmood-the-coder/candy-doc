@@ -1,0 +1,172 @@
+.candyDoc__inspectorChartOptionItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+  width: 100%;
+  border: 1px solid var(--color);
+  border-radius: 5px;
+  margin-top: 10px;
+  height: auto;
+  padding: 3px;
+}
+
+.candyDoc__inspectorChartOptionsBoxPlotColors,
+.candyDoc__inspectorChartOptionsColors {
+  width: 100%;
+  height: auto;
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border: 1px solid var(--color);
+  border-radius: 3px;
+  margin-top: 10px;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.candyDoc__inspectorChartOptionItemLabel {
+  font-size: x-small;
+  color: var(--color);
+  border-radius: 5px;
+  padding: 3px;
+}
+
+.candyDoc__inspectorChartOptionsBoxPlotColorsLabel,
+.candyDoc__inspectorChartOptionBarHeightLabel,
+.candyDoc__inspectorChartOptionItemLineDashLabel,
+.candyDoc__inspectorChartOptionColumnWidthLabel,
+.candyDoc__inspectorChartOptionLabelPositionLabel,
+.candyDoc__inspectorChartOptionBorderApplicationLabel,
+.candyDoc__inspectorChartOptionItemBorderRadiusLabel,
+.candyDoc__inspectorChartOptionItemCurveLabel,
+.candyDoc__inspectorChartOptionsColorsLabel,
+.candyDoc__inspectorChartOptionItemStrokeLabel {
+  font-size: x-small;
+  color: var(--color);
+  border-radius: 5px;
+  padding: 5px;
+  background-color: var(--background);
+  position: absolute;
+  bottom: 95%;
+  left: 5px;
+}
+
+.candyDoc__inspectorChartOptionsColorsItem {
+  width: 100%;
+  height: 20px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.candyDoc__inspectorChartOptionsColorsItemRemoveIcon {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.candyDoc__inspectorChartColorDragIcon,
+.candyDoc__inspectorChartOptionsColorItemDragIcon {
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.candyDoc__inspectorChartOptionsColorItemAddIcon {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  width: 10px !important;
+  height: 10px !important;
+}
+
+.candyDoc__inspectorControllerRadioWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 30px;
+  gap: 5px;
+}
+
+.candyDoc__inspectorControllerWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: auto;
+  flex-wrap: wrap;
+}
+
+.candyDoc__inspectorChartControllerItemLabel {
+
+
+  font-size: x-small;
+  color: var(--color);
+  background-color: var(--background);
+  border-radius: 5px;
+
+}
+
+.candyDoc__inspectorChartOptionsBackgroundBarColorItem {
+  width: 100%;
+  height: 20px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.candyDoc__inspectorChartOptionsBackgroundBarColorItemRemoveIcon {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.candyDoc__inspectorChartOptionsBackgroundBarColorItemDragIcon {
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.candyDoc__inspectorChartOptionsBackgroundBarColorItemAddIcon {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 10px !important;
+  height: 10px !important;
+}
+
+.candyDoc__inspectorChartOptionsBackgroundBarColor {
+  width: 100%;
+  height: auto;
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.candyDoc__inspectorChartToolsWrapper {
+  overflow-y: hidden;
+  height: 40px;
+}

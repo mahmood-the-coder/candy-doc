@@ -1,0 +1,115 @@
+.candyDoc__gradientBar {
+  width: 99%;
+  height: 15px;
+  max-height: 15px;
+  background-image: linear-gradient(90deg, #0065dd 0%, #0065dd 100%);
+  position: relative;
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.candyDoc__gradientWrapper {
+  width: 50%;
+  height: 85px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  border: 1px solid var(--color);
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 500;
+  background-color: white;
+}
+.candyDoc__gradientColorLocation {
+  height: 20px;
+  width: 10px;
+  border: 1px solid black;
+  border-radius: 1px;
+  position: absolute;
+  background-color: #0065dd;
+  top: -5px;
+  cursor: crosshair;
+  color: black;
+  font-size: x-small;
+  font-weight: 900;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.candyDoc__addColorLocationButton {
+  position: absolute;
+  left: 33px;
+  top: 5px;
+}
+
+.candyDoc__degreeController {
+  border: 1px solid var(--color);
+  outline: none;
+  width: 45px;
+  height: 22px;
+  border-radius: 3px;
+}
+.candyDoc__degreeInput {
+  position: absolute;
+  top: 5px;
+  left: 60px;
+}
+.candyDoc__degreeLabel {
+  position: absolute;
+  left: 22px;
+  top: 1px;
+}
+
+.candyDoc__gradientType {
+  display: flex;
+}
+
+.candyDoc__radialType,
+.candyDoc__linearType {
+  opacity: 0.5;
+}
+.candyDoc__gradientClear {
+  position: absolute;
+  right: 45px;
+  top: 7px;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+.candyDoc__gradientApply {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  border: 1px solid var(--color);
+  background-color: rgb(from var(--color) r g b/0.05);
+  border-radius: 5px;
+  width: 30px;
+  height: 20px;
+}
+
+.candyDoc__gradientColorController {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  cursor: pointer;
+  user-select: none;
+}
+.candyDoc__gradientTypeWrapper {
+  position: absolute;
+  top: 5px;
+  left: 150px;
+}
+.candyDoc__gradientClose {
+  position: absolute;
+  top: -11px;
+  right: -9px;
+  cursor: pointer;
+}

@@ -1,0 +1,10 @@
+.candyDoc__rightContainer {
+  position: absolute;
+  top: 150px;
+  bottom: 150px;
+  right: 0;
+  left: calc(100% - 100px);
+}
+.candyDoc__rightContainer:hover {
+  outline: 1px dotted var(--color);
+}

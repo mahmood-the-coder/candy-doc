@@ -1,0 +1,16 @@
+.candyDoc__groupRectWrapper
+{
+    outline: 3px solid black;
+    position: absolute;
+    
+
+}
+
+.candyDoc__group
+{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    outline: 3px solid black;
+}
+

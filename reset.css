@@ -1,0 +1,21 @@
+html,
+body {
+  CONTAIN-INTRINSIC-BLOCK-SIZE: AUTO 100PX;
+  width: 100vw;
+  height: 100vh;
+  min-height: 720px;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+* {
+   box-sizing: border-box;
+   user-select: none; 
+}
+

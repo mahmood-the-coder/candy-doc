@@ -1,0 +1,35 @@
+.candyDoc__viewIcon {
+  width: 25px;
+  height: 17px;
+  border: 1px solid var(--color);
+
+  border-radius: 5px;
+  background-color: rgb(from var(--color) r g b/0.08);
+  
+}
+.candyDoc__viewToolWrapper {
+  border: 1px solid var(--color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  padding: 5px;
+  border-radius: 5px;
+  
+}
+.candyDoc__exportIcon,
+.candyDoc__backIcon {
+  width: 25px;
+  height: 25px;
+}
+
+.candyDoc__viewBackIconWrapper {
+  left: 15px;
+}
+
+.candyDoc__viewExportIconWrapper {
+  left: calc(100% - 70px);
+}

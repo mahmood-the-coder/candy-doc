@@ -1,0 +1,52 @@
+.candyDoc___editorUIMultiChoiceItem{
+    display: block;
+    width: fit-content;
+    border: 1px solid var(--color);
+    background-color: rgb(from var(--color) r g b / 0.3);
+    height: 20px;
+    border-radius: 3px;
+    font-size: x-small;
+    color: var(--color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5px;
+}
+
+.candyDoc__editorUIMultiChoicesList{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 3px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.candyDoc__editorUIMultiChoiceWrapper
+{
+    position: relative;
+    width: fit-content;
+    height: auto;
+    min-height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.candyDoc__editorUIMultiChoiceLabel
+{
+    position: absolute;
+    bottom: 95%;
+    left: 5px;
+    background-color:var(--background);
+    border-radius: 5px;
+    font-size: x-small;
+    color: var(--color);
+    
+    
+}
+
+.candyDoc__multiChoiceSelected
+{
+    color: white;
+    background-color: var(--color);
+}

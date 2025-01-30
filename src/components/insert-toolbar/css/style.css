@@ -1,0 +1,18 @@
+.candyDoc__insertToolsWrapper
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 130px;
+    border: 1px solid var(--color);
+    border-radius: 5px;
+    height:30px;
+    position: absolute;
+    background-color: var(--background);
+    opacity: 0.8;
+    padding: 5px;
+    left: 75%;
+    bottom: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+}

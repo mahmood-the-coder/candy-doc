@@ -1,0 +1,84 @@
+import { getExportsOptions } from "../export/index.js";
+import { getCenterLayoutElement } from "../layout/index.js";
+import { backIcon } from "../view-tools/elements/backIcon.js";
+import { exportIcon } from "../view-tools/elements/exportIcon.js";
+import { viewToolWrapper } from "../view-tools/elements/viewToolWrapper.js";
+
+export function createView() {
+ 
+  const pagesWrapper = document.createElement("div");
+  pagesWrapper.classList.add( "candyDoc__viewPagesWrapper","candyDoc__scroll")
+  pagesWrapper.innerHTML = getPagesData()
+  document.body.append(pagesWrapper);
+  const backIconWrapper = viewToolWrapper.cloneNode(true);
+  backIconWrapper.append(backIcon)
+  backIconWrapper.classList.add("candyDoc__viewBackIconWrapper")
+  const exportIconWrapper = viewToolWrapper.cloneNode(true);
+  exportIconWrapper.append(exportIcon)
+  exportIconWrapper.classList.add("candyDoc__viewExportIconWrapper")
+  exportIconWrapper.append(getExportsOptions())
+  document.body.append(backIconWrapper, exportIconWrapper)
+  document.body.classList.add("candyDoc__viewMode")
+  pagesWrapper.querySelectorAll("*").forEach(el => el.style.pointerEvents = "none")
+
+
+}
+function getPagesData() {
+
+  
+  const pagesWrapperElement = getCenterLayoutElement().querySelector(
+    ".candyDoc__pagesWrapper"
+  );
+  const pagesWrapperClone = pagesWrapperElement.cloneNode(true);
+  pagesWrapperClone.querySelectorAll(".ce-toolbar__actions").forEach(t=>t.remove())
+  pagesWrapperClone.querySelectorAll(".candyDoc__tableCellTransformedIcon").forEach(t=>t.remove())
+  pagesWrapperClone
+    .querySelectorAll(".candyDoc__rulerHandle")
+    .forEach((n) => n.remove());
+  pagesWrapperClone
+    .querySelectorAll(".candyDoc__resizeHandle")
+    .forEach((n) => n.remove());
+  pagesWrapperClone
+    .querySelectorAll(".candyDoc__dragHandle")
+    .forEach((n) => n.remove());
+  pagesWrapperClone
+    .querySelectorAll(".candyDoc__removeIcon")
+    .forEach((n) => n.remove());
+  pagesWrapperClone
+    .querySelectorAll(".candyDoc__cursor")
+    .forEach((n) => n.remove());
+  pagesWrapperClone
+    .querySelectorAll(".candyDoc__tableHandle")
+    .forEach((n) => n.remove());
+  pagesWrapperClone
+    .querySelectorAll(".candyDoc__selectIndicator")
+    .forEach((n) => n.remove());
+  pagesWrapperClone
+    .querySelectorAll(".candyDoc__shapeHandle")
+    .forEach((n) => n.remove());
+  pagesWrapperClone
+    .querySelectorAll(".candyDoc__textSelectionIndicator")
+    .forEach((n) => n.remove());
+  
+
+  pagesWrapperClone.querySelectorAll(".removable").forEach(el => el.classList.remove("removable"))
+  pagesWrapperClone.querySelectorAll(".candyDoc__selectedText").forEach(el => el.classList.remove("candyDoc__selectedText"))
+  pagesWrapperClone.querySelectorAll(".draggable").forEach(el => el.classList.remove("draggable"))
+  pagesWrapperClone.querySelectorAll(".resizable").forEach(el => el.classList.remove("resizable"))
+  pagesWrapperClone.querySelectorAll(".selectable").forEach(el => el.classList.remove("selectable"))
+  pagesWrapperClone.querySelectorAll(".candyDoc__textBox").forEach(el => el.contentEditable = "false")
+  pagesWrapperClone.querySelectorAll(".candyDoc__page").forEach(p => p.style.backgroundColor = "white")
+  pagesWrapperClone.querySelectorAll("div:not(.candyDoc__page)").forEach(el => { el.style.outline = "none" })
+  return pagesWrapperClone.innerHTML;
+}
+window.addEventListener("resize", (e) => {
+    const wrapper=document.body.querySelector(".candyDoc__viewPagesWrapper")
+    if(!wrapper)return;
+    const factor = screen.width / document.body.offsetWidth 
+      if (document.body.offsetWidth < 700)
+          document.body.style.transform = `scale(${2.7/ factor})`
+      else
+          document.body.style.transform = "scale(1)"
+ 
+
+})
