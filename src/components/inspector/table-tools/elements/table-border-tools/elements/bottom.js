@@ -1,6 +1,6 @@
 import { getSelected } from "../../../../../selection/index.js";
 export const bottom = document.createElement("div");
-bottom.classList.add("candyDoc__icon","candyDoc__active","candyDoc__activeIcon");
+bottom.classList.add("candyDoc__icon","candyDoc__active");
 bottom.innerHTML =
   /*html*/
   `

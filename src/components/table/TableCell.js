@@ -9,6 +9,10 @@ export function createTableCell(area, value, rowIdex, colIndex) {
   cell.dataset.row = (rowIdex + 1).toString();
   cell.dataset.col = (colIndex + 1).toString();
   cell.style.gridArea = area;
+  cell.style.borderTop="none"
+  cell.style.borderLeft="none"
+  cell.style.borderRight="none"
+  cell.style.borderBottom="none"
 
   cell.contentEditable = "false";
   cell.draggable = false;
