@@ -12,6 +12,7 @@ export function initDiagramLine() {
   let deltaY = 0;
   let origin = null;
   let end = null;
+  let zoom=1
   window.addEventListener("mousedown", (e) => {
     if (e.target.classList.contains("candyDoc__diagramNodePoint")) {
       origin = e.target;
@@ -33,6 +34,9 @@ export function initDiagramLine() {
     }
 
     if (!svg) return;
+    const page=document.body.querySelector(".candyDoc__page")
+    const pageScale=page.getBoundingClientRect().width/page.offsetWidth
+    zoom=window.devicePixelRatio * pageScale
     isDragging = true;
     deltaX = 0;
     deltaY = 0;
@@ -132,8 +136,8 @@ export function initDiagramLine() {
       );
       return;
     }
-    deltaX += e.movementX;
-    deltaY += e.movementY;
+    deltaX += e.movementX/zoom;
+    deltaY += e.movementY/zoom;
     updateArrowLinePath(
       svg,
       currentLine,

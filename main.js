@@ -47,6 +47,12 @@ function createWindow() {
   win.on("closed", () => {
     win = null;
   });
+  win.webContents.setZoomFactor(1.4);
+  win.webContents
+    .setVisualZoomLevelLimits(1, 5)
+    .then(()=>zoom(win))
+    .catch((err) => console.log(err));
+    
 }
 
 app.whenReady().then(() => {
@@ -68,3 +74,29 @@ app.on("window-all-closed", () => {
 });
 
 
+const MAX_ZOOM = 1.4;
+const MIN_ZOOM = 0.90;
+function zoom(win)
+{
+  let currentZoom = 1.4;
+  win.webContents.on("zoom-changed", (event, zoomDirection) => {
+  
+   
+   
+    if (zoomDirection === "in") {
+      
+        // win.webContents.setZoomFactor(currentZoom + 0.20);
+        currentZoom+=0.01
+
+      
+    }
+    if (zoomDirection === "out") {
+      
+      currentZoom-=0.01
+
+    }
+    if(currentZoom>MAX_ZOOM)currentZoom=MAX_ZOOM
+    if(currentZoom<MIN_ZOOM)currentZoom=MIN_ZOOM
+    win.webContents.setZoomFactor(currentZoom);
+});
+}
