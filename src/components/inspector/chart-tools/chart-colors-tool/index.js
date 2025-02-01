@@ -41,11 +41,14 @@ export function renderColors(selected) {
         const colors = wrapper.querySelector(".colors");
         if (colors)
             colors.style.display = "flex"
-        const add = wrapper.querySelector(".colorsAdd");
-        if (add)
-            add.style.display = "none"
-        const copy = [...options.colors].splice(0, 1)
-        addChartOptionsColors(copy, false)
+       
+    
+            const copy = [...options.colors].splice(0,options.series.length)
+            
+            
+            addChartOptionsColors(copy, true)
+        
+       
         return;
     }
 

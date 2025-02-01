@@ -1,4 +1,5 @@
 import { getSelected } from "../../../../selection/index.js";
+import { renderColors } from "../../chart-colors-tool/index.js";
 import { renderApexChart, renderChartData } from "../../render.js";
 export const seriesList = document.createElement("div");
 seriesList.classList.add("candyDoc__inspectorChartSeriesList");
@@ -54,4 +55,5 @@ window.addEventListener("mousedown", (e) => {
 
   renderApexChart(options)
   renderChartData();
+  renderColors(selected)
 });
