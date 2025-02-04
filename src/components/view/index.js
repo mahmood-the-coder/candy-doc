@@ -31,6 +31,8 @@ function getPagesData() {
   );
   const pagesWrapperClone = pagesWrapperElement.cloneNode(true);
   pagesWrapperClone.querySelectorAll(".ce-toolbar__actions").forEach(t=>t.remove())
+  pagesWrapperClone.querySelectorAll(".ce-popover__container").forEach(t=>t.remove())
+  pagesWrapperClone.querySelectorAll("[data-placeholder-active]").forEach(t=>t.dataset.placeholderActive="")
   pagesWrapperClone.querySelectorAll(".candyDoc__tableCellTransformedIcon").forEach(t=>t.remove())
   pagesWrapperClone
     .querySelectorAll(".candyDoc__rulerHandle")
@@ -71,14 +73,3 @@ function getPagesData() {
   pagesWrapperClone.querySelectorAll("div:not(.candyDoc__page)").forEach(el => { el.style.outline = "none" })
   return pagesWrapperClone.innerHTML;
 }
-window.addEventListener("resize", (e) => {
-    const wrapper=document.body.querySelector(".candyDoc__viewPagesWrapper")
-    if(!wrapper)return;
-    const factor = screen.width / document.body.offsetWidth 
-      if (document.body.offsetWidth < 700)
-          document.body.style.transform = `scale(${2.7/ factor})`
-      else
-          document.body.style.transform = "scale(1)"
- 
-
-})

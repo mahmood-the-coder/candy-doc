@@ -96,6 +96,9 @@ function initSave() {
 }
 function setPagesData(pagesWrapper) {
   const pagesWrapperClone = pagesWrapper.cloneNode(true);
+   pagesWrapperClone.querySelectorAll(".ce-toolbar__actions").forEach(t=>t.remove())
+  pagesWrapperClone.querySelectorAll(".ce-popover__container").forEach(t=>t.remove())
+  pagesWrapperClone.querySelectorAll(".candyDoc__tableCellTransformedIcon").forEach(t=>t.remove())
   pagesWrapperClone.querySelectorAll(".candyDoc__runningEditor").forEach(re=>re.remove())
   pagesWrapperClone
     .querySelectorAll(".candyDoc__rulerHandle")

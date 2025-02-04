@@ -48,7 +48,7 @@ export function initEditorJS() {
                             class: ForeColorTool,
                             shortcut: 'CMD+SHIFT+C',
                         },
-                        color: {
+                        marker: {
                             class: BackColorTool,
                             shortcut: 'CTRL+ALT+H',
                         },
