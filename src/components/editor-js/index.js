@@ -1,4 +1,5 @@
 import { BackColorTool, ForeColorTool } from "../editor-js-color/index.js";
+import { FontTool } from "../editor-js-font/index.js";
 export function saveEditorData(editor, id) {
     editor.save().then((data) => {
         const textBox = document.getElementById(id);
@@ -16,7 +17,7 @@ export function initEditorJS() {
                 tb.innerHTML = ""; // Clear existing content
                 let editorData;
                 try {
-                    editorData = JSON.parse(tb?.parentElement?.dataset?.blocks);
+                    editorData = JSON.parse(tb?.parentElement?.dataset?.blocks??"[]");
                 } catch (e) {
                     console.error("Invalid data format. Using default.", e);
                     editorData = { blocks: [] }; // Default fallback
@@ -52,6 +53,10 @@ export function initEditorJS() {
                             class: BackColorTool,
                             shortcut: 'CTRL+ALT+H',
                         },
+                        font: {  // Add the FontTool here
+                            class: FontTool,
+                           
+                        }
                       
                     },
                     onChange: () => saveEditorData(editor, tb.parentElement.id),

@@ -5,7 +5,6 @@ import "../editor-js/index.js"
 import "../editor-js/list.js"
 import "../editor-js/code.js"
 import "../editor-js/header.js"
-
 import { initDraggable } from "./components/drag/index.js";
 import { initGrouping } from "./components/group/index.js";
 import { initHierarchyDrag } from "./components/hierarchy/drag.js";
@@ -81,6 +80,8 @@ initEditorJS()
 document.body.querySelectorAll("*").forEach((el) => {
   el.addEventListener("dragstart", (e) => e.preventDefault());
 });
+
+
 
 
 

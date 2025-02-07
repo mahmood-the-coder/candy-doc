@@ -15,6 +15,7 @@ import { getInspectorTransformTools } from "../inspector/transform-tools/index.j
 import { textBoxWrapper } from "./elements/wrapper.js";
 import { saveEditorData } from "../editor-js/index.js";
 import { BackColorTool, ForeColorTool } from "../editor-js-color/index.js"
+import { FontTool } from "../editor-js-font/index.js";
 
 export function insertTextBox() {
   const clone = textBoxWrapper.cloneNode(true);
@@ -49,6 +50,10 @@ export function insertTextBox() {
         class: BackColorTool,
         shortcut: 'CTRL+ALT+H',
       },
+      font:{
+        class:FontTool,
+        
+      }
     },
     onChange: () => saveEditorData(editor, clone.id)
   })

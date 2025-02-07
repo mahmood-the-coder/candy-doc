@@ -1,4 +1,6 @@
 import { app, BrowserWindow ,globalShortcut  } from "electron";
+
+
 let win = null;
 
 
