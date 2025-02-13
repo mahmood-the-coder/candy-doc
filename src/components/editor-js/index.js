@@ -1,3 +1,4 @@
+import {InsertText} from "../dynamic-text/index.js";
 import { BackColorTool, ForeColorTool } from "../editor-js-color/index.js";
 import { FontTool } from "../editor-js-font/index.js";
 export function saveEditorData(editor, id) {
@@ -56,6 +57,9 @@ export function initEditorJS() {
                         font: {  // Add the FontTool here
                             class: FontTool,
                            
+                        },
+                        InsertText:{
+                            class:InsertText
                         }
                       
                     },

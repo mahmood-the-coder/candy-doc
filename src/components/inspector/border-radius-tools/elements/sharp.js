@@ -1,4 +1,4 @@
-import { getSelected } from "../../../selection/index.js";
+import { getSelected, getSelectedElements } from "../../../selection/index.js";
 export const sharp=document.createElement("div");
 sharp.classList.add("candyDoc__icon","candyDoc__toggle");
 sharp.innerHTML=/*html*/
@@ -26,8 +26,10 @@ sharp.innerHTML=/*html*/
 
 `
 sharp.addEventListener("mouseup", () => {
-    const currentTarget = getSelected()
-    if (!currentTarget) return;
-    currentTarget.querySelector(".target").style.borderRadius = "3px"
+  const selectedElements = getSelectedElements()
+    selectedElements.forEach(selected=>{
+      selected.querySelector(".target").style.borderRadius = "3px"
+
+    })
 })
 

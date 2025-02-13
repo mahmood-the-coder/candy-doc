@@ -2,7 +2,7 @@ import { insertShape } from "../../shapes/index.js";
 
 export const shapes = document.createElement("div");
 shapes.dataset.tooltip="Shapes"
-shapes.classList.add("candyDoc__icon");
+shapes.classList.add("candyDoc__icon","insertShape");
 shapes.innerHTML =
   /*html*/
   `
@@ -35,7 +35,9 @@ shapes.innerHTML =
 `;
 
 
-shapes.addEventListener("mousedown",(e)=>{
+window.addEventListener("mousedown",(e)=>{
+  if(!e.target.classList.contains("insertShape"))return;
+
   insertShape()
 })
 

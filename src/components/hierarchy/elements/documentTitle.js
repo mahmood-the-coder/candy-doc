@@ -6,7 +6,7 @@ title.dir = "ltr";
 title.addEventListener("input", (e) => {
   document.title = e.target.value;
   document.body
-    .querySelectorAll(".candyDoc__runningHeaderBookTitleTextBox")
+    .querySelectorAll(".candyDoc__pageActionsBookTitleTextBox")
     .forEach((c) => {
       c.innerText = e.target.value;
     });

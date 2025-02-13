@@ -1,5 +1,5 @@
 import { getCenterLayoutElement } from "../../../../layout/index.js";
-import { getSelected, setSelected } from "../../../../selection/index.js";
+import { getSelected } from "../../../../selection/index.js";
 import { getInspector } from "../../../index.js";
 import { getInspectorShapesAttributesTools } from "../../attributes/index.js";
 import {
@@ -302,7 +302,7 @@ window.addEventListener("mouseup", (e) => {
   if (!getCenterLayoutElement().contains(e.target)) return;
   if (!e.target.classList.contains("candyDoc__shapeSquare")) return;
   e.stopPropagation();
-  setSelected(e.target);
+
 
   const inspector = getInspector();
   const scrollTop = inspector.scrollTop;

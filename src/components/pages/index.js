@@ -1,12 +1,12 @@
 import { getContent } from "../content/index.js";
-import { getHierarchyItems } from "../hierarchy-items/index.js";
 import { getLeftContainer } from "../left-container/index.js";
 import { getRightContainer } from "../right-container/index.js";
+import { userData } from "../user-data/userData.js";
 import { page } from "./elements/page.js";
 import { wrapper } from "./elements/wrapper.js";
 export function createPages() {
   wrapper.innerHTML = "";
-  getHierarchyItems()
+  userData.hierarchyItems
     .filter((i) => i.type != "parent")
     .forEach((i) => {
       const page = createPage(i);
@@ -37,10 +37,10 @@ export function createPage(item) {
 
   if (item.parentId) {
     clone.dataset.parentId = item.parentId;
-    clone.dataset.relativeIndex = getHierarchyItems()
+    clone.dataset.relativeIndex = userData.hierarchyItems
       .filter((i) => i.parentId == item.parentId)
       .findIndex((i) => i.id == item.id);
-    clone.dataset.parentName = getHierarchyItems().find(
+    clone.dataset.parentName = userData.hierarchyItems.find(
       (i) => i.id == item.parentId
     ).name;
   } else {

@@ -1,4 +1,4 @@
-import { getSelected } from "../../../selection/index.js";
+import { getSelectedElements } from "../../../selection/index.js";
 import { getTransform } from "./transform.js";
 
 export const translate = document.createElement("div");
@@ -42,23 +42,26 @@ translateZ.append(translateZLabel, translateZController);
 translate.append(translateLabel, translateX, translateY, translateZ);
 
 translateXController.addEventListener("input", (e) => {
-  const selected = getSelected();
-  if (!selected) return;
-  const transform=getTransform(selected.querySelector(".target"))
-  transform[0][0] = e.target.value+"px";
-  selected.querySelector(".target").style.transform = `translate3d(${transform[0].join(", ")}) rotate3d(${transform[1].join(", ")}) scale3d(${transform[2].join(", ")}) skew(${transform[3].join(", ")})`;
+  const selectedElements = getSelectedElements();
+  selectedElements.forEach(selected=>{
+    const transform=getTransform(selected.querySelector(".target"))
+    transform[0][0] = e.target.value+"px";
+    selected.querySelector(".target").style.transform = `translate3d(${transform[0].join(", ")}) rotate3d(${transform[1].join(", ")}) scale3d(${transform[2].join(", ")}) skew(${transform[3].join(", ")})`;
+  })
 });
 translateYController.addEventListener("input", (e) => {
-  const selected = getSelected();
-  if (!selected) return;
-  const transform=getTransform(selected.querySelector(".target"))
+  const selectedElements = getSelectedElements();
+  selectedElements.forEach(selected=>{
+    const transform=getTransform(selected.querySelector(".target"))
   transform[0][1] = e.target.value+"px";
   selected.querySelector(".target").style.transform = `translate3d(${transform[0].join(", ")}) rotate3d(${transform[1].join(", ")}) scale3d(${transform[2].join(", ")}) skew(${transform[3].join(", ")})`;
+  })
 });
 translateZController.addEventListener("input", (e) => {
-  const selected = getSelected();
-  if (!selected) return;
-  const transform=getTransform(selected.querySelector(".target"))
-  transform[0][2] = e.target.value+"px";
-  selected.querySelector(".target").style.transform = `translate3d(${transform[0].join(", ")}) rotate3d(${transform[1].join(", ")}) scale3d(${transform[2].join(", ")}) skew(${transform[3].join(", ")})`;
+  const selectedElements = getSelectedElements();
+  selectedElements.forEach(selected=>{
+    const transform=getTransform(selected.querySelector(".target"))
+    transform[0][2] = e.target.value+"px";
+    selected.querySelector(".target").style.transform = `translate3d(${transform[0].join(", ")}) rotate3d(${transform[1].join(", ")}) scale3d(${transform[2].join(", ")}) skew(${transform[3].join(", ")})`;
+  })
 });

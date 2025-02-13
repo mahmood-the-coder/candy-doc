@@ -1,105 +1,101 @@
 import { save } from "../DB/save.js";
 import { load } from "../DB/load.js";
-import { getHierarchyItems } from "../hierarchy-items/index.js";
 import { cursor } from "../insert/cursor.js";
+import { container } from "../hierarchy/elements/container.js";
 
 
 export const userData = {
   id: "user-data",
   pagesWrapper: "",
-  runningHeader: "",
+  pageActions: "",
   runningFooter: "",
-  hierarchyItems: [],
-  editorsJs:[]
+  hierarchyItems: [{
+    index: 0,
+    id: "0",
+    number: 1,
+    name: "new page",
+    type: "page",
+    parentId: null,
+    innerHTML: ""
+  }],
+  editorsJs: []
 };
 
-export function initUserData() {
-  load("user-data")
-    .then((data) => {
-      const pagesWrapperElement = document.body.querySelector(
-        ".candyDoc__pagesWrapper"
-      );
-      pagesWrapperElement.innerHTML = data.pagesWrapper;
-      const RunningHeaderEditor=document.body.querySelector(".candyDoc__runningHeaderEditor");
-      RunningHeaderEditor.innerHTML=data.runningHeader;
-      const RunningFooterEditor=document.body.querySelector(".candyDoc__runningFooterEditor");
-      RunningFooterEditor.innerHTML=data.runningFooter;
-      userData.editorsJs=data.editorsJs        
-    })
-    .catch(() => {
-      const pagesWrapperElement = document.body.querySelector(
-        ".candyDoc__pagesWrapper"
-      );
-      userData.pagesWrapper = pagesWrapperElement.innerHTML;
-     
-      userData.hierarchyItems = getHierarchyItems();
+export function initLoad() {
+  window.addEventListener("load", () => {
+    load("user-data")
+      .then((data) => {
+        const pagesWrapperElement = document.body.querySelector(
+          ".candyDoc__pagesWrapper"
+        );
+        pagesWrapperElement.innerHTML = data.pagesWrapper;
+        userData.editorsJs = data.editorsJs
+      })
+      .catch(() => {
+        const pagesWrapper = document.body.querySelector(
+          ".candyDoc__pagesWrapper"
+        );
+        userData.pagesWrapper = pagesWrapper.innerHTML;
+        save(userData);
+      })
+      .finally(() => {
+        const content =
+          document.body.querySelector(".candyDoc__content");
+        if (!document.body.querySelector(".candyDoc__cursor"))
+          content?.append(cursor);
+      });
+  })
 
-      const runningHeaderEditor=document.body.querySelector(".candyDoc__runningHeaderEditor");
-      userData.runningHeader=runningHeaderEditor?.innerHTML??"";
-      const runningFooterEditor=document.body.querySelector(".candyDoc__runningFooterEditor");
-      userData.runningFooter=runningFooterEditor?.innerHTML??"";
-      save(userData);
-    })
-    .finally(() => {
-      const content =
-        document.body.querySelector(".candyDoc__content");
-      content.append(cursor);
-    });
-
-  initSave();
 }
-function initSave() {
-  
-  window.addEventListener("mouseup", (e) => {
-    setTimeout(() => {
-      const pagesWrapper = document.body.querySelector(
-        ".candyDoc__pagesWrapper"
-      );
-      if (pagesWrapper?.innerHTML != userData?.pagesWrapper)
-        setPagesData(pagesWrapper);
-      const runningHeaderEditor = document.body.querySelector(
-        ".candyDoc__runningHeaderEditor"
-      );
-      if (runningHeaderEditor?.innerHTML != userData?.runningHeader)
-        if(runningHeaderEditor)
-        setRunningHeaderData(runningHeaderEditor);
-      const runningFooterEditor = document.body.querySelector(
-        ".candyDoc__runningFooterEditor"
-      );
-      if (runningFooterEditor?.innerHTML != userData?.runningFooter)
-        if(runningFooterEditor)
-        setRunningFooterData(runningFooterEditor);
+export function initSave() {
 
-      save(userData);
-    }, 10);
+  window.addEventListener("load",()=>{
+    saveData()
+  })
+  window.addEventListener("mouseup", (e) => {
+    saveData();
   });
   window.addEventListener("keyup", (e) => {
-    setTimeout(() => {
-      const pagesWrapper = document.body.querySelector(
-        ".candyDoc__pagesWrapper"
-      );
-      if (pagesWrapper.innerHTML != userData.pagesWrapper)
-        setPagesData(pagesWrapper);
-      const runningHeaderEditor = document.body.querySelector(
-        ".candyDoc__runningHeaderEditor"
-      );
-      if (runningHeaderEditor?.innerHTML != userData.runningHeader)
-        setRunningHeaderData(runningHeaderEditor);
-      const runningFooterEditor = document.body.querySelector(
-        ".candyDoc__runningFooterEditor"
-      );
-      if (runningFooterEditor?.innerHTML != userData.runningFooter)
-        setRunningFooterData(runningFooterEditor);
-      save(userData);
-    }, 10);
+    saveData()
   });
 }
+function saveData() {
+  setTimeout(() => {
+    getHierarchyItems(container);
+    const pagesWrapper = document.body.querySelector(
+      ".candyDoc__pagesWrapper"
+    );
+    if (pagesWrapper?.innerHTML != userData?.pagesWrapper)
+      setPagesData(pagesWrapper);
+    save(userData);
+
+  }, 100);
+}
+
+function getHierarchyItems(container) {
+  userData.hierarchyItems = [...container.querySelectorAll(".candyDoc__hierarchyItemWrapper")].filter(item => !item.classList.contains("candyDoc__hierarchyDummy")).map((item, index) => {
+    return {
+      id: item.dataset.id,
+      index: index,
+      number: (index + 1).toString(),
+      name: item.querySelector("input")?.value ?? "",
+      parentId: item?.parentElement?.dataset?.id ?? null,
+      innerHTML: document.body.querySelector(`[data-page-id='${item.dataset.id}']`)?.innerHTML ?? "",
+      type: item.dataset.type
+    };
+  });
+
+  save(userData);
+
+
+}
+
 function setPagesData(pagesWrapper) {
   const pagesWrapperClone = pagesWrapper.cloneNode(true);
-   pagesWrapperClone.querySelectorAll(".ce-toolbar__actions").forEach(t=>t.remove())
-  pagesWrapperClone.querySelectorAll(".ce-popover__container").forEach(t=>t.remove())
-  pagesWrapperClone.querySelectorAll(".candyDoc__tableCellTransformedIcon").forEach(t=>t.remove())
-  pagesWrapperClone.querySelectorAll(".candyDoc__runningEditor").forEach(re=>re.remove())
+  pagesWrapperClone.querySelectorAll(".ce-toolbar__actions").forEach(t => t.remove())
+  pagesWrapperClone.querySelectorAll(".ce-popover__container").forEach(t => t.remove())
+  pagesWrapperClone.querySelectorAll(".candyDoc__tableCellTransformedIcon").forEach(t => t.remove())
+  pagesWrapperClone.querySelectorAll(".candyDoc__runningEditor").forEach(re => re.remove())
   pagesWrapperClone
     .querySelectorAll(".candyDoc__rulerHandle")
     .forEach((n) => n.remove());
@@ -121,58 +117,8 @@ function setPagesData(pagesWrapper) {
   pagesWrapperClone
     .querySelectorAll(".candyDoc__selectIndicator")
     .forEach((n) => n.remove());
- 
+
   userData.pagesWrapper = pagesWrapperClone.innerHTML;
-  userData.hierarchyItems = getHierarchyItems();
+
 }
 
-function setRunningHeaderData(editor) {
-  if(!editor)return;
-  const editorClone = editor.cloneNode(true);
-  editorClone
-    .querySelectorAll(".candyDoc__rulerHandle")
-    .forEach((n) => n.remove());
-  editorClone
-    .querySelectorAll(".candyDoc__resizeHandle")
-    .forEach((n) => n.remove());
-  editorClone
-    .querySelectorAll(".candyDoc__dragHandle")
-    .forEach((n) => n.remove());
-  editorClone
-    .querySelectorAll(".candyDoc__removeIcon")
-    .forEach((n) => n.remove());
-  editorClone.querySelectorAll(".candyDoc__cursor").forEach((n) => n.remove());
-  editorClone
-    .querySelectorAll(".candyDoc__tableHandle")
-    .forEach((n) => n.remove());
-  editorClone
-    .querySelectorAll(".candyDoc__selectIndicator")
-    .forEach((n) => n.remove());
-
-  userData.runningHeader = editorClone.innerHTML;
-}
-function setRunningFooterData(editor) {
-  if(!editor)return;
-  const editorClone = editor.cloneNode(true);
-  editorClone
-    .querySelectorAll(".candyDoc__rulerHandle")
-    .forEach((n) => n.remove());
-  editorClone
-    .querySelectorAll(".candyDoc__resizeHandle")
-    .forEach((n) => n.remove());
-  editorClone
-    .querySelectorAll(".candyDoc__dragHandle")
-    .forEach((n) => n.remove());
-  editorClone
-    .querySelectorAll(".candyDoc__removeIcon")
-    .forEach((n) => n.remove());
-  editorClone.querySelectorAll(".candyDoc__cursor").forEach((n) => n.remove());
-  editorClone
-    .querySelectorAll(".candyDoc__tableHandle")
-    .forEach((n) => n.remove());
-  editorClone
-    .querySelectorAll(".candyDoc__selectIndicator")
-    .forEach((n) => n.remove());
-  
-  userData.runningFooter = editorClone.innerHTML;
-}

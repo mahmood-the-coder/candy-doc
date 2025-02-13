@@ -1,2 +1,2 @@
-export const left=document.createElement("div");
-left.classList.add("candyDoc__guideLeft","candyDoc__guide");
+export const guideLeft=document.createElement("div");
+guideLeft.classList.add("candyDoc__guideLeft","candyDoc__guide");

@@ -1,4 +1,4 @@
-import { app, BrowserWindow ,globalShortcut  } from "electron";
+import { app, BrowserWindow ,globalShortcut ,session } from "electron";
 
 
 let win = null;
@@ -11,9 +11,7 @@ if (!gotTheLock) {
   app.quit()
 } else {
   app.on('second-instance', (event, commandLine, workingDirectory, additionalData) => {
-    // Print out data received from the second instance.
-
-    // Someone tried to run a second instance, we should focus our window.
+  
     if (win) {
       if (win.isMinimized()) win.restore()
       win.focus()
@@ -34,11 +32,12 @@ function createWindow() {
   });
   // Remove the menu
   win.removeMenu();
+  session.defaultSession.clearCache();
 
   // Register shortcuts
   globalShortcut.register('CmdOrCtrl+W', () => {
       win.close(); // Close window shortcut
-  });
+  }); 
 
   globalShortcut.register('CmdOrCtrl+Shift+I', () => {
       win.webContents.toggleDevTools(); // Toggle DevTools

@@ -1,6 +1,6 @@
 import { load } from "../../DB/load.js";
 import { closeModal } from "../../file-modal/index.js";
-import { getSelected } from "../../selection/index.js";
+import { getSelected, getSelectedElements } from "../../selection/index.js";
 import { getBorderImageRepeat } from "./elements/borderImageRepeat.js";
 import { getBorderImageSlice } from "./elements/borderImageSlice.js";
 import { getBorderImageWidth } from "./elements/borderImageWidth.js";
@@ -22,7 +22,8 @@ export function getInspectorBorderImageTools() {
 }
 
 window.addEventListener("mouseup", (e) => {
-  const selected = getSelected();
+  const selectedElements=getSelectedElements();
+  const selected = selectedElements[selectedElements.length-1]
   if (!selected) return;
   if (selected?.id != e?.target?.parentElement?.id) return;
       if(!(selected?.querySelector))return

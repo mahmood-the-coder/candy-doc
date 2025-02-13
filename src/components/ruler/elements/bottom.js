@@ -1,42 +1,12 @@
 import { top } from "./top.js";
 import { getCenterLayoutElement } from "../../layout/index.js";
-import { setRunningEditorDimensions } from "./runnigEditorSize.js";
 export const bottom = document.createElement("div");
 bottom.classList.add(
   "candyDoc__rulerHandle",
   "candyDoc__rulerHandleBottom",
-  "candyDoc__icon"
-);
-bottom.innerHTML =
-  /*html*/
-  `
-  <svg
-  fill="var(--color)"
-  height="15px"
-  width="15px"
-  version="1.1"
-  id="Layer_1"
-  xmlns="http://www.w3.org/2000/svg"
-  xmlns:xlink="http://www.w3.org/1999/xlink"
-  viewBox="0 0 24 24"
-  xml:space="preserve"
-  transform="rotate(270)"
->
-  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-  <g
-    id="SVGRepo_tracerCarrier"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  ></g>
-  <g id="SVGRepo_iconCarrier">
-    <polygon
-      style="fill-rule: evenodd; clip-rule: evenodd"
-      points="3,6 21,6 12,19 "
-    ></polygon>
-  </g>
-</svg>
 
-`;
+);
+
 export function initRulerBottomHandle() {
   let startY = 0;
   let deltaY = 0;
@@ -172,7 +142,6 @@ export function initRulerBottomHandle() {
       cursor.style.top = cursorY + "px";
     }
 
-    setRunningEditorDimensions()
   }
 }
 

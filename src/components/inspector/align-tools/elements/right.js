@@ -1,4 +1,4 @@
-import { getSelected } from "../../../selection/index.js";
+import { getSelected, getSelectedElements } from "../../../selection/index.js";
 
 export const right=document.createElement("div");
 right.classList.add("candyDoc__icon","candyDoc__toggle");
@@ -45,11 +45,14 @@ right.innerHTML=/*html*/
 `
 
 right.addEventListener("mouseup", () => {
-    const currentTarget = getSelected()
-    if (!currentTarget) return;
-    currentTarget.style.left = "unset";
-    currentTarget.style.right = "unset";
-    currentTarget.style.float = "none";
-    currentTarget.style.left = `calc( 100% - ${currentTarget.offsetWidth}px)`;
+ 
+
+    const selectedElements=getSelectedElements();
+    selectedElements.forEach(selected=>{
+      selected.style.left = "unset";
+      selected.style.right = "unset";
+      selected.style.float = "none";
+      selected.style.left = `calc( 100% - ${selected.offsetWidth}px)`;
+    })
    
 });

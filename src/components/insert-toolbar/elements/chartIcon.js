@@ -2,7 +2,7 @@ import { insertChart } from "../../chart/index.js";
 
 export const chartIcon = document.createElement("div");
 chartIcon.dataset.tooltip="Chart"
-chartIcon.classList.add("candyDoc__icon");
+chartIcon.classList.add("candyDoc__icon","insertChart");
 chartIcon.innerHTML =
   /*html*/
   `
@@ -33,6 +33,7 @@ chartIcon.innerHTML =
 </svg>
 `;
 
-chartIcon.addEventListener("mousedown",()=>{
+window.addEventListener("mousedown",(e)=>{
+  if(!e.target.classList.contains("insertChart"))return;
   insertChart()
 })

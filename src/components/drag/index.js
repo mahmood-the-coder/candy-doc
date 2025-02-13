@@ -1,14 +1,13 @@
 import { findAncestor } from "../find-ancestor/index.js";
-import { bottom } from "../guide/elements/bottom.js";
-import { centerHorizontal } from "../guide/elements/centerHorizontal.js";
-import { centerVertical } from "../guide/elements/centerVertical.js";
-import { left } from "../guide/elements/left.js";
-import { right } from "../guide/elements/right.js";
-import { top } from "../guide/elements/top.js";
+import { guideBottom } from "../guide/elements/bottom.js";
+import { guideCenterHorizontal } from "../guide/elements/centerHorizontal.js";
+import { guideCenterVertical } from "../guide/elements/centerVertical.js";
+import { guideLeft } from "../guide/elements/left.js";
+import { guideRight } from "../guide/elements/right.js";
+import { guideTop } from "../guide/elements/top.js";
 import { getSnapSize } from "../guide/snapSize.js";
 import { isInside } from "../intersection/index.js";
 import { getCenterLayoutElement } from "../layout/index.js";
-import { setZIndex } from "../z-index/index.js";
 import { dragHandle } from "./elements/dragHandle.js";
 let target;
 let content;
@@ -116,12 +115,12 @@ window.addEventListener("mouseup", () => {
     
   }
   target.classList.remove("dragging");
-  top?.remove();
-  left?.remove();
-  bottom?.remove();
-  right?.remove();
-  centerHorizontal?.remove();
-  centerVertical?.remove();
+  guideTop?.remove();
+  guideLeft?.remove();
+  guideBottom?.remove();
+  guideRight?.remove();
+  guideCenterHorizontal?.remove();
+  guideCenterVertical?.remove();
 });
 
 function handleMousemove(e) {
@@ -148,8 +147,8 @@ function handleMousemove(e) {
   const minX = 0 ;
 
   if (
-    !target.parentElement.classList.contains("braces") &&
     !target.parentElement.parentElement.classList.contains("candyDoc__group") &&
+    !target.parentElement.classList.contains("candyDoc__group") &&
     !target.classList.contains("candyDoc__tableWrapper")
   ) {
     if (x < minX) {
@@ -166,8 +165,8 @@ function handleMousemove(e) {
   const minY = 0 ;
 
   if (
-    !target.parentElement.classList.contains("braces") &&
     !target.parentElement.parentElement.classList.contains("candyDoc__group") &&
+    !target.parentElement.classList.contains("candyDoc__group") &&
     !target.classList.contains("candyDoc__tableWrapper")
   ) {
     if (y < minY) {
@@ -181,19 +180,24 @@ function handleMousemove(e) {
   clone.style.top = y+"px";
   clone.style.left = x+"px";
 
-  setZIndex(clone);
+
   target.style.zIndex = clone.style.zIndex;
   if (!e.ctrlKey) {
     isDraggingX = true;
     isDraggingY = true;
-    top?.remove();
-    bottom?.remove();
-    left?.remove();
-    right?.remove();
-    centerHorizontal?.remove();
-    centerVertical?.remove();
+    guideTop?.remove();
+    guideBottom?.remove();
+    guideLeft?.remove();
+    guideRight?.remove();
+    guideCenterHorizontal?.remove();
+    guideCenterVertical?.remove();
     return;
   }
+  alignGuides(e);
+}
+
+
+function alignGuides(e) {
   const others = [...target.parentElement.children];
   others
     .filter((o) => o.id != target.id)
@@ -201,128 +205,128 @@ function handleMousemove(e) {
     .filter((o) => !o.classList.contains("candyDoc__cursor"))
     .filter((o) => !o.classList.contains("candyDoc__guide"))
     .forEach((o) => {
-      if (Math.abs(o.getBoundingClientRect().top - clone.getBoundingClientRect().top)<=1) {
-        target.parentElement.append(top);
-        top.style.top = o.offsetTop + "px";
+      if (Math.abs(o.getBoundingClientRect().top - clone.getBoundingClientRect().top) <= 1.5) {
+        target.parentElement.append(guideTop);
+        guideTop.style.top = o.offsetTop + "px";
         isDraggingY = false;
-        if (Math.abs(e.movementY) > 1.5) {
+        if (Math.abs(e.movementY) > 2) {
           isDraggingY = true;
-          top?.remove();
+          guideTop?.remove();
         }
       }
-      if (Math.abs(o.getBoundingClientRect().left - clone.getBoundingClientRect().left)<=1) {
-        left.style.left = o.offsetLeft + "px";
-        target.parentElement.append(left);
+      if (Math.abs(o.getBoundingClientRect().left - clone.getBoundingClientRect().left) <= 1.5) {
+        guideLeft.style.left = o.offsetLeft + "px";
+        target.parentElement.append(guideLeft);
         isDraggingX = false;
-        if (Math.abs(e.movementX) > 1.5) {
+        if (Math.abs(e.movementX) > 2) {
           isDraggingX = true;
-          left?.remove();
+          guideLeft?.remove();
         }
       }
-      if (
-       Math.abs( (o.offsetTop + o.offsetHeight) -
-       (clone.offsetTop + clone.offsetHeight))
-      <=1) {
-        target.parentElement.append(bottom);
-        bottom.style.top =
+      if (Math.abs((o.getBoundingClientRect().top+ o.getBoundingClientRect().height) -
+        (clone.getBoundingClientRect().top+ clone.getBoundingClientRect().height))
+        <= 1.5) {
+        target.parentElement.append(guideBottom);
+        guideBottom.style.top =
           o.offsetTop + o.getBoundingClientRect().height + "px";
         isDraggingY = false;
-        if (Math.abs(e.movementY) > 1.5) {
+        if (Math.abs(e.movementY) > 2) {
           isDraggingY = true;
-          bottom?.remove();
+          guideBottom?.remove();
         }
       }
-      if (
-       Math.abs( (o.offsetLeft + o.offsetWidth) -
-       (clone.offsetLeft + clone.offsetWidth))<=1
-      ) {
-        target.parentElement.append(right);
-        right.style.left =
+      if (Math.abs((o.getBoundingClientRect().left+ o.getBoundingClientRect().width) -
+        (clone.getBoundingClientRect().left+ clone.getBoundingClientRect().width)) <= 1.5) {
+        target.parentElement.append(guideRight);
+        guideRight.style.left =
           o.offsetLeft + o.getBoundingClientRect().width + "px";
         isDraggingX = false;
-        if (Math.abs(e.movementX) > 1.5) {
+        if (Math.abs(e.movementX) > 2) {
           isDraggingX = true;
-          right?.remove();
+          guideRight?.remove();
         }
       }
 
-      if (
-       Math.abs((o.offsetTop) -
-        (clone.offsetTop + clone.offsetHeight))<=1
-      ) {
-        target.parentElement.append(top);
-        top.style.top = o.offsetTop + "px";
+      if (Math.abs((o.getBoundingClientRect().top) -
+        (clone.getBoundingClientRect().top + clone.getBoundingClientRect().height)) <= 1.5) {
+        target.parentElement.append(guideTop);
+        guideTop.style.top = o.offsetTop + "px";
         isDraggingY = false;
-        if (Math.abs(e.movementY) > 1.5) {
+        if (Math.abs(e.movementY) > 2) {
           isDraggingY = true;
-          top?.remove();
+          guideTop?.remove();
         }
       }
-      if (o.offsetLeft == clone.offsetLeft + clone.offsetWidth) {
-        left.style.left = o.offsetLeft + "px";
+      if (Math.abs(o.getBoundingClientRect().left - (clone.getBoundingClientRect().left + clone.getBoundingClientRect().width))<=1.5) {
+        guideLeft.style.left = o.offsetLeft + "px";
         isDraggingX = false;
-        if (Math.abs(e.movementX) > 1.5) {
+        target.parentElement.append(guideLeft);
+        if (Math.abs(e.movementX) > 2) {
           isDraggingX = true;
-          left?.remove();
+          guideLeft?.remove();
         }
 
-        target.parentElement.append(left);
+        
+        
       }
-      if (Math.abs((o.offsetTop + o.offsetHeight)- (clone.offsetTop))<=1) {
-        target.parentElement.append(bottom);
-        bottom.style.top =
+      if (Math.abs(((o.getBoundingClientRect().top + o.getBoundingClientRect().height)) - (clone.getBoundingClientRect().top)) <= 1.5) {
+        target.parentElement.append(guideBottom);
+        guideBottom.style.top =
           o.offsetTop + o.getBoundingClientRect().height + "px";
         isDraggingY = false;
-        if (Math.abs(e.movementY) > 1.5) {
+        if (Math.abs(e.movementY) > 2) {
           isDraggingY = true;
-          bottom?.remove();
+          guideBottom?.remove();
         }
       }
-      if (Math.abs((o.offsetLeft + o.offsetWidth) - clone.offsetLeft)<=1) {
-        target.parentElement.append(right);
-        right.style.left =
+      if (Math.abs((o.getBoundingClientRect().left+ o.getBoundingClientRect().width) - clone.getBoundingClientRect().left) <= 1.5) {
+        target.parentElement.append(guideRight);
+        guideRight.style.left =
           o.offsetLeft + o.getBoundingClientRect().width + "px";
         isDraggingX = false;
-        if (Math.abs(e.movementX) > 1.5) {
+        if (Math.abs(e.movementX) > 2) {
           isDraggingX = true;
-          right?.remove();
+          guideRight?.remove();
         }
       }
-      if (
-        Math.abs(
-          o.offsetLeft +
-            o.getBoundingClientRect().width / 2 -
-            (clone.offsetLeft + clone.getBoundingClientRect().width / 2)
-        ) < 2
-      ) {
-        target.parentElement.append(centerVertical);
-        centerVertical.style.left =
+      if (isCenterVertically(o)) {
+        target.parentElement.append(guideCenterVertical);
+        guideCenterVertical.style.left =
           o.offsetLeft + o.getBoundingClientRect().width / 2 + "px";
         isDraggingX = false;
-        if (Math.abs(e.movementX) > 1.5) {
+        if (Math.abs(e.movementX) > 2) {
           isDraggingX = true;
-          centerVertical?.remove();
+          guideCenterVertical?.remove();
         }
       }
-      if (
-        Math.abs(
-          o.offsetTop +
-            o.getBoundingClientRect().height / 2 -
-            (clone.offsetTop + clone.getBoundingClientRect().height / 2)
-        ) < 2
-      ) {
-        target.parentElement.append(centerHorizontal);
-        centerHorizontal.style.top =
+      if (isCenterHorizontally(o)) {
+        target.parentElement.append(guideCenterHorizontal);
+        guideCenterHorizontal.style.top =
           o.offsetTop + o.getBoundingClientRect().height / 2 + "px";
         isDraggingY = false;
-        if (Math.abs(e.movementY) > 1.5) {
+        if (Math.abs(e.movementY) > 2) {
           isDraggingY = true;
-          centerHorizontal?.remove();
+          guideCenterHorizontal?.remove();
         }
       }
     });
-}
 
+  function isCenterHorizontally(o) {
+    return Math.abs(
+      o.getBoundingClientRect().top +
+      o.getBoundingClientRect().height / 2 -
+      (clone.getBoundingClientRect().top + clone.getBoundingClientRect().height / 2)
+    ) < 5;
+  }
+
+  function isCenterVertically(o) {
+    return Math.abs(
+      o.getBoundingClientRect().left +
+      o.getBoundingClientRect().width / 2 -
+      (clone.getBoundingClientRect().left + clone.getBoundingClientRect().width / 2)
+    ) < 5;
+  }
+}
 
 export function initDraggable() {
   window.addEventListener("mousedown", initDrag);

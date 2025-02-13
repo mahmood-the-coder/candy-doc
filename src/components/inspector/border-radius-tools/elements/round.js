@@ -1,4 +1,4 @@
-import { getSelected } from "../../../selection/index.js";
+import { getSelected, getSelectedElements } from "../../../selection/index.js";
 export const round=document.createElement("div");
 round.classList.add("candyDoc__icon","candyDoc__toggle");
 round.innerHTML=/*html*/
@@ -30,7 +30,9 @@ round.innerHTML=/*html*/
 
 `
 round.addEventListener("mouseup", () => {
-    const currentTarget = getSelected()
-    if (!currentTarget) return;
-    currentTarget.querySelector(".target").style.borderRadius = "50%"
+    const selectedElements = getSelectedElements()
+    selectedElements.forEach(selected=>{
+      selected.querySelector(".target").style.borderRadius = "50%"
+
+    })
 })

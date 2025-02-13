@@ -13,16 +13,19 @@ import { getInspectorBorderWidthTools } from "../inspector/border-width-tools/in
 import { getInspectorImageSizeTools } from "../inspector/image-size-tools/index.js";
 import { getInspector } from "../inspector/index.js";
 import { getInspectorTransformTools } from "../inspector/transform-tools/index.js";
+import { getSelected, getSelectedElements } from "../selection/index.js";
 import { wrapper } from "./elements/wrapper.js";
 export function insertImage() {
- openFileModal((image)=>{
-  insert(image)
- })
+  openFileModal((image) => {
+    insert(image)
+  })
 }
 function addInspectorTools() {
-  window.addEventListener("mousedown", (e) => {
-    if(!e.target.classList.contains("candyDoc__imageWrapper") && !findAncestor(e.target,"candyDoc__imageWrapper"))return;
+  window.addEventListener("mouseup", (e) => {
 
+    
+    if (!e.target.classList.contains("candyDoc__imageWrapper") && !findAncestor(e.target,"candyDoc__imageWrapper")) return;
+   
     const inspector = getInspector();
     const scrollTop = inspector.scrollTop;
     inspector.innerHTML = "";
@@ -41,17 +44,17 @@ function addInspectorTools() {
     );
     inspector.scrollTop = scrollTop;
   });
+
 }
 
 
 window.addEventListener("load", (e) => {
- 
-    addInspectorTools()
+
+  addInspectorTools()
 });
 
-export function createImage(dataURL)
-{
-     const wrapperClone=wrapper.cloneNode(true);
-     wrapperClone.querySelector("img").src=dataURL;
-     return wrapperClone;
+export function createImage(dataURL) {
+  const wrapperClone = wrapper.cloneNode(true);
+  wrapperClone.querySelector("img").src = dataURL;
+  return wrapperClone;
 }

@@ -1,2 +1,2 @@
-export const centerVertical=document.createElement("div");
-centerVertical.classList.add("candyDoc__guideCenterVertical","candyDoc__guide");
+export const guideCenterVertical=document.createElement("div");
+guideCenterVertical.classList.add("candyDoc__guideCenterVertical","candyDoc__guide");

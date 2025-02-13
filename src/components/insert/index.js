@@ -10,8 +10,6 @@ export function insert(element) {
   if (!content) return;
   content.append(element);
   element.style.position="absolute"
-  getCenterLayoutElement().querySelectorAll(".selectable").forEach(s=>s.classList.remove("selected"))
-  element.classList.add("selected")
   element.style.left=left+"px"
   element.style.top=top+"px"
   element.style.zIndex="100"

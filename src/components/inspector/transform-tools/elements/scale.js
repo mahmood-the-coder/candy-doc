@@ -1,4 +1,4 @@
-import { getSelected } from "../../../selection/index.js";
+import { getSelectedElements } from "../../../selection/index.js";
 import { getTransform } from "./transform.js";
 
 export const scale = document.createElement("div");
@@ -42,44 +42,50 @@ scaleZ.append(scaleZLabel, scaleZController);
 scale.append(scaleLabel, scaleX, scaleY, scaleZ);
 
 scaleXController.addEventListener("input", (e) => {
-  const selected = getSelected();
-  const transform=getTransform(selected.querySelector(".target"))
-  if (!selected) return;
-  transform[2][0] = e.target.value;
-  selected.querySelector(
-    ".target"
-  ).style.transform = `translate3d(${transform[0].join(
-    ", "
-  )}) rotate3d(${transform[1].join(", ")}) scale3d(${transform[2].join(
-    ", "
-  )}) skew(${transform[3].join(", ")})`;
+  const selectedElements = getSelectedElements();
+  selectedElements.forEach(selected => {
+    const transform = getTransform(selected.querySelector(".target"))
+    if (!selected) return;
+    transform[2][0] = e.target.value;
+    selected.querySelector(
+      ".target"
+    ).style.transform = `translate3d(${transform[0].join(
+      ", "
+    )}) rotate3d(${transform[1].join(", ")}) scale3d(${transform[2].join(
+      ", "
+    )}) skew(${transform[3].join(", ")})`;
+  })
 });
 scaleYController.addEventListener("input", (e) => {
-  const selected = getSelected();
-  if (!selected) return;
- const transform=getTransform(selected.querySelector(".target"))
-  transform[2][1] = e.target.value;
-  selected.querySelector(
-    ".target"
-  ).style.transform = `translate3d(${transform[0].join(
-    ", "
-  )}) rotate3d(${transform[1].join(", ")}) scale3d(${transform[2].join(
-    ", "
-  )}) skew(${transform[3].join(", ")})`;
+  const selectedElements = getSelectedElements();
+
+  selectedElements.forEach(selected => {
+    const transform = getTransform(selected.querySelector(".target"))
+    transform[2][1] = e.target.value;
+    selected.querySelector(
+      ".target"
+    ).style.transform = `translate3d(${transform[0].join(
+      ", "
+    )}) rotate3d(${transform[1].join(", ")}) scale3d(${transform[2].join(
+      ", "
+    )}) skew(${transform[3].join(", ")})`;
+  })
 });
 scaleZController.addEventListener("input", (e) => {
-  const selected = getSelected();
-  if (!selected) return;
-  const transform=getTransform(selected.querySelector(".target"))
-  transform[2][2] = e.target.value;
-  selected.querySelector(
-    ".target"
-  ).style.transform = `translate3d(${transform[0].join(
-    ", "
-  )}) rotate3d(${transform[1].join(", ")}) scale3d(${transform[2].join(
-    ", "
-  )}) skew(${transform[3].join(", ")})`;
+  const selectedElements = getSelectedElements();
+
+  selectedElements.forEach(selected => {
+    const transform = getTransform(selected.querySelector(".target"))
+    transform[2][2] = e.target.value;
+    selected.querySelector(
+      ".target"
+    ).style.transform = `translate3d(${transform[0].join(
+      ", "
+    )}) rotate3d(${transform[1].join(", ")}) scale3d(${transform[2].join(
+      ", "
+    )}) skew(${transform[3].join(", ")})`;
+  })
 });
-scaleXController.step = 0.1;
-scaleYController.step = 0.1;
-scaleZController.step = 0.1;
+scaleXController.step = 0.01;
+scaleYController.step = 0.01;
+scaleZController.step = 0.01;

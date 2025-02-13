@@ -57,6 +57,7 @@
 .candyDoc__hierarchyItemNumber {
   color: var(--color);
   font-size: x-small;
+  transform: translateX(50%);
 }
 .candyDoc__hierarchyNestToggle
 {

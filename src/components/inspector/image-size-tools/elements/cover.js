@@ -1,6 +1,7 @@
-import { getSelected } from "../../../selection/index.js";
+import { getSelected, getSelectedElements } from "../../../selection/index.js";
 export const cover = document.createElement("div");
 cover.classList.add("candyDoc__icon","candyDoc__toggle");
+cover.dataset.tooltip="cover"
 cover.innerHTML =
   /*html*/
   `
@@ -67,10 +68,11 @@ cover.innerHTML =
 
 `;
 cover.addEventListener("mouseup", () => {
-    const currentTarget = getSelected()
-    if (!currentTarget) return;
-    const image = currentTarget.querySelector("img");
-    if (image)
-        image.style.objectFit = "cover";
+    const selectedElements = getSelectedElements()
+    selectedElements.forEach(selected=>{
+      const image = selected.querySelector("img");
+      if (image)
+          image.style.objectFit = "cover";
+    })
 
 });

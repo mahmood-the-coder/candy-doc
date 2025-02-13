@@ -31,8 +31,7 @@
 @import url("./src/components/insert/css/style.css");
 @import url("./src/components//guide/css/style.css");
 @import url("./src/components/ruler/css/style.css");
-@import url("./src/components/running-header/css/style.css");
-@import url("./src/components/running-footer/css/style.css");
+@import url("src/components/page-actions/css/style.css");
 @import url("./src/components/left-container/css/style.css");
 @import url("./src/components/right-container/css/style.css");
 @import url("./src/components/diagram/css/style.css");

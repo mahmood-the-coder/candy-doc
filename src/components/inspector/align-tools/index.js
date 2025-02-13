@@ -1,4 +1,4 @@
-import { getSelected } from "../../selection/index.js";
+import { getSelected, getSelectedElements } from "../../selection/index.js";
 import { center } from "./elements/center.js";
 import { left } from "./elements/left.js";
 import { right } from "./elements/right.js";
@@ -9,10 +9,10 @@ export function getAlignInspectorTools() {
 }
 
 window.addEventListener("mouseup", (e) => {
-  const selected = getSelected();
+  const selectedElements=getSelectedElements()
   
-  
-  if (!selected) return;
+  const selected=selectedElements[selectedElements.length-1]
+  if (!selected )return;
   
   center.classList.remove("candyDoc__toggleIcon");
   left.classList.remove("candyDoc__toggleIcon");

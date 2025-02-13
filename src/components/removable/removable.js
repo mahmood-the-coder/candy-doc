@@ -1,7 +1,7 @@
 import { charts } from "../chart/index.js";
 import { findAncestor } from "../find-ancestor/index.js";
 import { getInspector } from "../inspector/index.js";
-import { getSelected, setSelected } from "../selection/index.js";
+import { getSelected, getSelectedElements, setSelected } from "../selection/index.js";
 const removeIcon = document.createElement("div");
 removeIcon.classList.add("candyDoc__removeIcon");
 removeIcon.innerHTML = /*html*/ `
@@ -63,4 +63,10 @@ export function initRemovable() {
     const toRemove = findAncestor(e.target, "removable");
     toRemove?.remove();
   });
+  window.addEventListener("keyup",(e)=>{
+    if(e.code=="Delete")
+    {
+      getSelectedElements().forEach(selected=>selected.remove())
+    }
+  })
 }

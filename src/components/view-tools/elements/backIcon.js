@@ -1,6 +1,5 @@
 import {  getLayout} from "../../layout/index.js";
-import { getRunningFooterEditor } from "../../running-footer/index.js";
-import { getRunningHeaderEditor } from "../../running-header/index.js";
+import { getPageActions } from "../../page-actions/index.js";
 
 export const backIcon = document.createElement("div");
 backIcon.classList.add("candyDoc__icon", "candyDoc__backIcon");
@@ -49,8 +48,7 @@ backIcon.innerHTML =
 `;
 backIcon.addEventListener("mousedown", () => {
   getLayout().style.display = "grid"
-  getRunningFooterEditor().style.display = "flex"
-  getRunningHeaderEditor().style.display = "flex"
+  getPageActions().style.display = "flex"
   document.body.querySelectorAll(".candyDoc__viewToolWrapper").forEach(el => el.remove());
   document.body.querySelector(".candyDoc__viewPagesWrapper").remove();
   document.body.classList.remove("candyDoc__viewMode")

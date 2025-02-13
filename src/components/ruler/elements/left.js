@@ -1,42 +1,11 @@
 import { getCenterLayoutElement } from "../../layout/index.js";
-import { setRunningEditorDimensions } from "./runnigEditorSize.js";
 
 export const left = document.createElement("div");
 left.classList.add(
   "candyDoc__rulerHandle",
   "candyDoc__rulerHandleLeft",
-  "candyDoc__icon"
 );
-left.innerHTML =
-  /*html*/
-  `
-  <svg
-  fill="var(--color)"
-  height="15px"
-  width="15px"
-  version="1.1"
-  id="Layer_1"
-  xmlns="http://www.w3.org/2000/svg"
-  xmlns:xlink="http://www.w3.org/1999/xlink"
-  viewBox="0 0 24 24"
-  xml:space="preserve"
- 
->
-  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-  <g
-    id="SVGRepo_tracerCarrier"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  ></g>
-  <g id="SVGRepo_iconCarrier">
-    <polygon
-      style="fill-rule: evenodd; clip-rule: evenodd"
-      points="3,6 21,6 12,19 "
-    ></polygon>
-  </g>
-</svg>
 
-`;
 export function initRulerLeftHandle() {
   let startX = 0;
   let deltaX = 0;
@@ -45,11 +14,9 @@ export function initRulerLeftHandle() {
   let cursor = null;
   let zoom = 1;
   window.addEventListener("mousedown", (e) => {
-    if (!e.target.classList.contains("candyDoc__rulerHandleLeft")) return;
+    if (!e.target.classList.contains("candyDoc__rulerHandleLeft") ) return;
 
-    const page = document.body.querySelector(".candyDoc__pagesWrapper")
-    const pageScale = (page.getBoundingClientRect().width / page.offsetWidth)
-    zoom = window.devicePixelRatio * pageScale;
+    zoom = window.devicePixelRatio 
 
     cursor = document.body.querySelector(".candyDoc__cursor");
     if (!cursor) return;
@@ -140,7 +107,7 @@ export function initRulerLeftHandle() {
     if (
       cursor.parentElement.classList.contains("candyDoc__content") ||
       cursor.parentElement.classList.contains(
-        "candyDoc__runningHeaderEditor"
+        "candyDoc__pageActionsEditor"
       ) ||
       cursor.parentElement.classList.contains(
         "candyDoc__runningFooterEditor"
@@ -161,6 +128,5 @@ export function initRulerLeftHandle() {
       }
       if (left.offsetLeft > 25) cursor.style.left = cursorX + "px";
     }
-    setRunningEditorDimensions()
   }
 }

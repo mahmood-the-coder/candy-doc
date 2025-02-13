@@ -3,26 +3,73 @@ import { getInspector } from "../inspector/index.js";
 import { isInside } from "../intersection/index.js";
 import { getCenterLayoutElement } from "../layout/index.js";
 let currentTarget;
-
+let selectedElements = [];
+let zoom=1
+export function getSelectedElements()
+{
+  return selectedElements;
+}
 export function initSelectable() {
   window.addEventListener("mousedown", (e) => {
+   
     if (!getCenterLayoutElement().contains(e.target)) return;
-    if (e.target.id == "clr-picker") return;
-    if (findAncestor(e.target, "clr-picker")) return;
     if (getInspector().contains(e.target)) return;
-    document.querySelectorAll(".selectable").forEach((s) => {
-      s.classList.remove("selected");
-    });
-    if (e.target.classList.contains("selectable")) {
-      currentTarget = e.target;
-      currentTarget?.classList.add("selected");
-      
-      
-    } else {
-      currentTarget = findAncestor(e.target, "selectable");
-      currentTarget?.classList.add("selected");
+    
+    if(!e.ctrlKey)
+    {
+      selectedElements=[]
+      document.querySelectorAll(".selectable").forEach((s) => {
+        s.classList.remove("selected");
+      });
+      if (e.target?.classList?.contains("selectable")) {
+        currentTarget = e.target;
+        currentTarget?.classList.add("selected");
+        
+        
+      } else {
+        currentTarget = findAncestor(e.target, "selectable");
+        currentTarget?.classList?.add("selected");
+      }
     }
-    console.log(currentTarget);
+    else
+    {
+      if(e.target?.classList?.contains("selected") || findAncestor(e.target,"selected"))
+      {
+        if (e.target.classList.contains("selectable")) {
+          currentTarget = e.target;
+          currentTarget?.classList?.remove("selected");
+          const index=selectedElements.findIndex(el=>currentTarget=el);
+          if(index>-1)
+          {
+            selectedElements.splice(index,1)
+          }
+            
+        } else {
+          currentTarget = findAncestor(e.target, "selectable");
+          currentTarget?.classList?.remove("selected");
+          const index=selectedElements.findIndex(el=>currentTarget=el);
+          if(index>-1)
+          {
+            selectedElements.splice(index,1)
+          }
+        }
+      }
+      else
+      {
+        if (e.target?.classList?.contains("selectable")) {
+          currentTarget = e.target;
+          currentTarget?.classList.add("selected");
+          
+          
+        } else {
+          currentTarget = findAncestor(e.target, "selectable");
+          currentTarget?.classList.add("selected");
+        }
+      }
+    }
+    
+    if(currentTarget?.classList?.contains("selected"))
+    selectedElements.push(currentTarget)
   });
 }
 
@@ -34,7 +81,7 @@ export function setSelected(newTarget) {
 }
 
 export function initMultiSelection() {
-  let selectedElements = [];
+  
   let isDragging = false;
   let startX, startY; // Coordinates where the drag starts
   let wrapper;
@@ -50,7 +97,7 @@ export function initMultiSelection() {
     startY = e.offsetY;
     deltaX = 0;
     deltaY = 0;
-    // Create a new div element and append it to the body
+    zoom=window.devicePixelRatio
     wrapper = document.createElement("div");
     wrapper.id = "group__" + Date.now().toString(16);
     wrapper.classList.add("candyDoc__groupWrapper");
@@ -77,8 +124,8 @@ export function initMultiSelection() {
   // Event listener for resizing the div while dragging
   window.addEventListener("mousemove", (e) => {
     if (isDragging) {
-      deltaX += e.movementX;
-      deltaY += e.movementY;
+      deltaX += e.movementX/zoom;
+      deltaY += e.movementY/zoom;
       const width = 0 + deltaX;
       const height = 0 + deltaY;
 

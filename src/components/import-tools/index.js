@@ -1,6 +1,5 @@
 import { save } from "../DB/save.js";
 import { load } from "../DB/load.js";
-import { getHierarchyItems } from "../hierarchy-items/index.js";
 import { cursor } from "../insert/cursor.js";
 import { getCenterLayoutElement } from "../layout/index.js";
 import { userData } from "../user-data/userData.js";
@@ -60,7 +59,7 @@ function chooseJsonFile() {
 
 importIcon.addEventListener("mousedown", (e) => {
   chooseJsonFile().then((file) => {
-    console.log(file);
+  
     const reader = new FileReader();
     reader.onload = () => {
       console.log("File content:", reader.result);
@@ -74,8 +73,8 @@ importIcon.addEventListener("mousedown", (e) => {
         ".candyDoc__pagesWrapper"
       );
       pagesWrapperElement.innerHTML = data.pagesWrapper;
-      const RunningHeaderEditor=getCenterLayoutElement().querySelector(".candyDoc__runningHeaderEditor");
-      RunningHeaderEditor.innerHTML=data.runningHeader;
+      const pageActionsEditor=getCenterLayoutElement().querySelector(".candyDoc__pageActionsEditor");
+      pageActionsEditor.innerHTML=data.pageActions;
       const RunningFooterEditor=getCenterLayoutElement().querySelector(".candyDoc__runningFooterEditor");
       RunningFooterEditor.innerHTML=data.runningFooter;
                
@@ -86,10 +85,10 @@ importIcon.addEventListener("mousedown", (e) => {
       );
       userData.pagesWrapper = pagesWrapperElement.innerHTML;
      
-      userData.hierarchyItems = getHierarchyItems();
+      
 
-      const RunningHeaderEditor=getCenterLayoutElement().querySelector(".candyDoc__runningHeaderEditor");
-      userData.runningHeader=RunningHeaderEditor.innerHTML;
+      const pageActionsEditor=getCenterLayoutElement().querySelector(".candyDoc__pageActionsEditor");
+      userData.pageActions=pageActionsEditor.innerHTML;
       const RunningFooterEditor=getCenterLayoutElement().querySelector(".candyDoc__runningFooterEditor");
       userData.runningFooter=RunningFooterEditor.innerHTML;
       save(userData);

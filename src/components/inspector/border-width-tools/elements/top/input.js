@@ -1,4 +1,4 @@
-import { getSelected } from "../../../../selection/index.js";
+import { getSelected, getSelectedElements } from "../../../../selection/index.js";
 
 export const input = document.createElement("input");
 input.classList.add("candyDoc__inspectorBorderWidthController");
@@ -7,9 +7,11 @@ input.value = "1";
 input.min = "1";
 input.max = "50";
 input.addEventListener("input", (e) => {
-  const selected = getSelected();
-  if (!selected) return;
-  selected.querySelector(".target").style.borderTopWidth = e.target.value + "px";
+  const selectedElements = getSelectedElements();
+  selectedElements.forEach(selected => {
+    selected.querySelector(".target").style.borderTopWidth = e.target.value + "px";
+
+  })
 });
 
 

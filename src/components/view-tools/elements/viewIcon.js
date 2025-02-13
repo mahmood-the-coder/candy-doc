@@ -1,6 +1,5 @@
 import { getLayout } from "../../layout/index.js";
-import { getRunningFooterEditor } from "../../running-footer/index.js";
-import { getRunningHeaderEditor } from "../../running-header/index.js";
+import { getPageActions } from "../../page-actions/index.js";
 import { createView } from "../../view/index.js";
 
 export const viewIcon=document.createElement("div");
@@ -9,8 +8,7 @@ viewIcon.classList.add("candyDoc__icon","candyDoc__viewIcon");
 viewIcon.addEventListener("mousedown",()=>{
     
     getLayout().style.display="none"
-    getRunningFooterEditor().style.display="none"
-    getRunningHeaderEditor().style.display="none"
+    getPageActions().style.display="none"
     createView()
 })
 

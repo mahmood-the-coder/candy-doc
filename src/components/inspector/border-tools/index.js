@@ -1,5 +1,5 @@
 import { getCenterLayoutElement } from "../../layout/index.js";
-import { getSelected } from "../../selection/index.js";
+import {  getSelectedElements } from "../../selection/index.js";
 import { bottom } from "./elements/bottom.js";
 import { left } from "./elements/left.js";
 import { right } from "./elements/right.js";
@@ -18,9 +18,10 @@ window.addEventListener("mouseup", (e) => {
   }
    
   if (!getCenterLayoutElement().contains(e.target)) return;
-  const selected = getSelected();
+  const selectedElements=getSelectedElements();
+
+  const selected = selectedElements[selectedElements.length-1]
   if (!selected) return;
-  if (!selected?.querySelector) return;
   for(const value of Object.values(borderIcons))
   {
     value.classList.remove("candyDoc__activeIcon")

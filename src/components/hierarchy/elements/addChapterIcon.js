@@ -1,14 +1,14 @@
 import { createHierarchyItemElement } from "../../hierarchy-item-element/index.js";
 import {
-  getHierarchyItems,
-  sortHierarchyItems,
+  sortHierarchyItems
 } from "../../hierarchy-items/index.js";
-import { numberHierarchyItemElements } from "../numbering.js";
-import { getHierarchySelect } from "../select.js";
-import { sortPages } from "../sortPages.js";
+import { numberHierarchyItemElements } from "./numbering.js";
+import { getHierarchySelect } from "./select.js";
+import { sortPages } from "./sortPages.js";
 import { container } from "./container.js";
 
 export const addChapterIcon = document.createElement("div");
+addChapterIcon.dataset.tooltip="add chapter"
 addChapterIcon.innerHTML =
   /*html*/
   `
@@ -49,7 +49,7 @@ addChapterIcon.addEventListener("mousedown", () => {
   };
   const select = getHierarchySelect();
   const itemElement = createHierarchyItemElement(newItem);
-  if (select) {
+  if (select && select.parentElement) {
     if (select.dataset.type == "parent") {
       select
         .querySelector(".candyDoc__nestedHierarchyItems")
@@ -60,9 +60,7 @@ addChapterIcon.addEventListener("mousedown", () => {
   } else {
     container.append(itemElement);
   }
-  getHierarchyItems().push(newItem);
   numberHierarchyItemElements();
   sortHierarchyItems();
-  
   sortPages();
 });

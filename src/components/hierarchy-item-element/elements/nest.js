@@ -1,5 +1,11 @@
 export const nest = document.createElement("div");
 nest.classList.add("candyDoc__nestedHierarchyItems","nest");
+const dummy = document.createElement("div");
+dummy.classList.add("candyDoc__hierarchyItemWrapper");
+dummy.style.opacity = "0";
+dummy.classList.add("candyDoc__hierarchyDummy")
+dummy.style.height="15px"
+nest.append(dummy)
 export const openIcon = document.createElement("div");
 openIcon.classList.add(
   "candyDoc__icon",

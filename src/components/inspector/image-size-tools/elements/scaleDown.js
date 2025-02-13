@@ -1,6 +1,7 @@
-import { getSelected } from "../../../selection/index.js";
+import { getSelected, getSelectedElements } from "../../../selection/index.js";
 export const scaleDown = document.createElement("div");
-scaleDown.classList.add("candyDoc__icon","candyDoc__toggle");
+scaleDown.classList.add("candyDoc__icon", "candyDoc__toggle");
+scaleDown.dataset.tooltip="scale-down"
 scaleDown.innerHTML =
   /*html*/
   `
@@ -130,10 +131,11 @@ scaleDown.innerHTML =
 
 `;
 scaleDown.addEventListener("mouseup", () => {
-    const currentTarget = getSelected()
-    if (!currentTarget) return;
-    const image = currentTarget.querySelector("img");
+  const selectedElements = getSelectedElements()
+  selectedElements.forEach(selected => {
+    const image = selected.querySelector("img");
     if (image)
-        image.style.objectFit = "scale-down";
+      image.style.objectFit = "scale-down";
+  })
 
 });

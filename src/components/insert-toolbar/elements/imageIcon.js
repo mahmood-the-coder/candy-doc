@@ -2,7 +2,7 @@ import { insertImage } from "../../image/index.js";
 
 export const imageIcon = document.createElement("div");
 imageIcon.dataset.tooltip="Image"
-imageIcon.classList.add("candyDoc__icon");
+imageIcon.classList.add("candyDoc__icon","insertImage");
 imageIcon.innerHTML =
   /*html*/
   `
@@ -19,6 +19,8 @@ imageIcon.innerHTML =
   </svg>
 `;
 
-imageIcon.addEventListener("mouseup", () => {
+window.addEventListener("mouseup", (e) => {
+  if(!e.target.classList.contains("insertImage"))return;
+
   insertImage();
 });

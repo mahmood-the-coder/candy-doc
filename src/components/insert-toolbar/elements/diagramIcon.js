@@ -2,7 +2,7 @@ import { insertDiagram } from "../../diagram/Diagram.js";
 
 export const diagramIcon = document.createElement("div");
 diagramIcon.dataset.tooltip="Diagram"
-diagramIcon.classList.add("candyDoc__icon");
+diagramIcon.classList.add("candyDoc__icon","insertDiagram");
 diagramIcon.innerHTML =
   /*html*/
   `
@@ -36,6 +36,8 @@ diagramIcon.innerHTML =
 </svg>
 `;
 
-diagramIcon.addEventListener("mousedown",()=>{
+window.addEventListener("mousedown",(e)=>{
+  if(!e.target.classList.contains("insertDiagram"))return;
+
   insertDiagram()
 })

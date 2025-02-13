@@ -2,7 +2,7 @@ import { insertTable } from "../../table/Table.js";
 
 export const tableIcon = document.createElement("div");
 tableIcon.dataset.tooltip="Table"
-tableIcon.classList.add("candyDoc__icon");
+tableIcon.classList.add("candyDoc__icon","insertTable");
 tableIcon.innerHTML =
   /*html*/
   `
@@ -31,6 +31,8 @@ tableIcon.innerHTML =
     </svg>
 `;
 
-tableIcon.addEventListener("mousedown",()=>{
+window.addEventListener("mousedown",(e)=>{
+  if(!e.target.classList.contains("insertTable"))return;
+
   insertTable()
 })

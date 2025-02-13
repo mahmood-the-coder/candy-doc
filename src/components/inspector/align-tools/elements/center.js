@@ -1,6 +1,6 @@
-import { getSelected } from "../../../selection/index.js";
+import { getSelected, getSelectedElements } from "../../../selection/index.js";
 export const center = document.createElement("div");
-center.classList.add("candyDoc__icon","candyDoc__toggle");
+center.classList.add("candyDoc__icon", "candyDoc__toggle");
 center.innerHTML =
   /*html*/
   `
@@ -43,12 +43,12 @@ center.innerHTML =
 `;
 
 center.addEventListener("mouseup", () => {
-  const currentTarget = getSelected();
-  if (!currentTarget) return;
-  currentTarget.style.left = "unset";
-  currentTarget.style.right = "unset";
-  currentTarget.style.float = "none";
- 
-  currentTarget.style.left = `calc(50% - ${currentTarget.offsetWidth / 2}px)`;
-  
+
+  const selectedElements = getSelectedElements();
+  selectedElements.forEach(selected => {
+    selected.style.left = "unset";
+    selected.style.right = "unset";
+    selected.style.float = "none";
+    selected.style.left = `calc(50% - ${selected.offsetWidth / 2}px)`;
+  })
 });

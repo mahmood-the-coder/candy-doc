@@ -2,7 +2,7 @@ import { insertTextBox } from "../../text-box/index.js";
 
 export const textBox = document.createElement("div");
 textBox.dataset.tooltip="Text Box"
-textBox.classList.add("candyDoc__icon");
+textBox.classList.add("candyDoc__icon","insertTextBox");
 textBox.innerHTML =
   /*html*/
   `
@@ -34,6 +34,8 @@ textBox.innerHTML =
 </svg>
 `;
 
-textBox.addEventListener("mouseup", () => {
+window.addEventListener("mouseup", (e) => {
+  if(!e.target.classList.contains("insertTextBox"))return;
+
   insertTextBox()
 });

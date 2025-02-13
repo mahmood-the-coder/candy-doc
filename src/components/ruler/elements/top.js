@@ -1,42 +1,14 @@
 export const top = document.createElement("div");
 import { getCenterLayoutElement } from "../../layout/index.js";
-import { setRunningEditorDimensions } from "./runnigEditorSize.js";
 
 top.classList.add(
   "candyDoc__rulerHandle",
   "candyDoc__rulerHandleTop",
-  "candyDoc__icon"
-);
-top.innerHTML =
-  /*html*/
-  `
-  <svg
-  fill="var(--color)"
-  height="15px"
-  width="15px"
-  version="1.1"
-  id="Layer_1"
-  xmlns="http://www.w3.org/2000/svg"
-  xmlns:xlink="http://www.w3.org/1999/xlink"
-  viewBox="0 0 24 24"
-  xml:space="preserve"
-  transform="rotate(270)"
->
-  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-  <g
-    id="SVGRepo_tracerCarrier"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  ></g>
-  <g id="SVGRepo_iconCarrier">
-    <polygon
-      style="fill-rule: evenodd; clip-rule: evenodd"
-      points="3,6 21,6 12,19 "
-    ></polygon>
-  </g>
-</svg>
 
-`;
+);
+
+
+
 export function initRulerTopHandle() {
   let startY = 0;
   let deltaY = 0;
@@ -102,11 +74,13 @@ export function initRulerTopHandle() {
 
     if (y < 25) {
       y = 25;
+      return
     }
 
     const maxY = 400;
     if (y > maxY) {
       y = maxY;
+      return
     }
     top.style.top = y + "px";
     contents.forEach((c) => {
@@ -142,10 +116,10 @@ export function initRulerTopHandle() {
     if (
       cursor.parentElement.classList.contains("candyDoc__content") ||
       cursor.parentElement.classList.contains(
-        "candyDoc__runningHeaderEditor"
+        "candyDoc__pageActionsEditor"
       ) ||
       cursor.parentElement.classList.contains(
-        "candyDoc__runningHeaderEditor"
+        "candyDoc__pageActionsEditor"
       ) ||
       cursor.parentElement.classList.contains("candyDoc__leftContainer") ||
       cursor.parentElement.classList.contains("candyDoc__rightContainer")
@@ -158,6 +132,5 @@ export function initRulerTopHandle() {
       }
       if (top.offsetTop > 25) cursor.style.top = cursorY + "px";
     }
-    setRunningEditorDimensions()
   }
 }

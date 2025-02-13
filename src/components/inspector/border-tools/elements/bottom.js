@@ -1,4 +1,4 @@
-import { getSelected } from "../../../selection/index.js";
+import { getSelected, getSelectedElements } from "../../../selection/index.js";
 export const bottom = document.createElement("div");
 bottom.classList.add("candyDoc__icon","candyDoc__active");
 bottom.innerHTML =
@@ -27,13 +27,16 @@ bottom.innerHTML =
 </svg>
 `;
 bottom.addEventListener("mouseup", () => {
-    const currentTarget = getSelected()
-    if (!currentTarget) return;
-    if (!window.getComputedStyle(currentTarget.querySelector(".target")).borderBottom.includes("none"))
-        currentTarget.querySelector(".target").style.borderBottom = "none";
 
-    else
-        currentTarget.querySelector(".target").style.borderBottom = "1px solid #000000";
+    const selectedElements = getSelectedElements()
+
+    selectedElements.forEach(selected=>{
+      if (!window.getComputedStyle(selectedElements[selectedElements.length-1].querySelector(".target")).borderBottom.includes("none"))
+          selected.querySelector(".target").style.borderBottom = "none";
+  
+      else
+          selected.querySelector(".target").style.borderBottom = "1px solid #000000";
+    })
 
 
 

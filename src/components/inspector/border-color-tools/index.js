@@ -1,4 +1,4 @@
-import { getSelected } from "../../selection/index.js";
+import { getSelected, getSelectedElements } from "../../selection/index.js";
 import { getInspector } from "../index.js";
 import { bottom } from "./elements/bottom/index.js";
 import { getColor, rgbTOhex } from "./elements/colors.js";
@@ -13,9 +13,10 @@ export function getInspectorBorderColorTools()
 }
 
 window.addEventListener("mouseup",(e)=>{
-    const selected=getSelected();
-    if(!selected)return;
     if(getInspector().contains(e.target))return;
+    const selectedElements=getSelectedElements()
+    const selected=selectedElements[selectedElements.length-1];
+    if(!selected)return;
     
     if(!(selected?.querySelector))return;
     top.querySelector("input").value=rgbTOhex(getColor(selected.querySelector(".target"),"top"))

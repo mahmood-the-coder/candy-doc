@@ -1,5 +1,5 @@
 import { getCenterLayoutElement } from "../../layout/index.js";
-import { getSelected } from "../../selection/index.js";
+import { getSelected, getSelectedElements } from "../../selection/index.js";
 import { rotate } from "./elements/rotate.js";
 import { scale } from "./elements/scale.js";
 import { skew } from "./elements/skew.js";
@@ -11,7 +11,8 @@ export function getInspectorTransformTools() {
 }
 
 window.addEventListener("mouseup", (e) => {
-  const selected = getSelected();
+  const selectedElements = getSelectedElements();
+  const selected=selectedElements[selectedElements.length-1]
   if (!selected) return;
   if (!selected?.querySelector) return;
   const target = selected.querySelector(".target");

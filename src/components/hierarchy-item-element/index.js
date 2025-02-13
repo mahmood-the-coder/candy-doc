@@ -1,37 +1,35 @@
 import { findAncestor } from "../find-ancestor/index.js";
-import { removeItem } from "../hierarchy-items/index.js";
+import { setHierarchySelect } from "../hierarchy/elements/select.js";
 import { getCenterLayoutElement } from "../layout/index.js";
 import { dragIcon } from "./elements/dragIcon.js";
 import { head } from "./elements/head.js";
 import { name } from "./elements/name.js";
 import { nest } from "./elements/nest.js";
-import { number } from "./elements/number.js";
 import { removeIcon } from "./elements/removeIcon.js";
 import { wrapper } from "./elements/wrapper.js";
 export function createHierarchyItemElement(item) {
 
   nest.dataset.id = item.id;
-  head.append(dragIcon, name, number, removeIcon);
-  wrapper.append(head, nest);
+  head.append(dragIcon, name, removeIcon);
+  wrapper.append(head,nest);
+ 
   const clone = wrapper.cloneNode(true);
   clone.dataset.type = item.type;
   clone.dataset.id = item.id;
   clone.querySelector("input").value = item.name;
   clone.dataset.parentId = item.parentId;
-
-
-
-
-
-
+  if(item.type=="page")
+  {
+    clone.querySelector(".nest").style.height="0px"
+  }
   return clone;
 }
 
 window.addEventListener("mousedown",(e)=>{
  if(!e.target.classList.contains("candyDoc__hierarchyRemoveIcon"))return
  e.target.parentElement.parentElement.remove()
- removeItem(parseInt(e.target.parentElement.parentElement.dataset.index))
  getCenterLayoutElement().querySelector(`[data-page-id='${e.target.parentElement.parentElement.dataset.id}']`)?.remove()
+ setHierarchySelect(null)
   
 })
 window.addEventListener("input", (e) => {
@@ -41,7 +39,7 @@ window.addEventListener("input", (e) => {
     e.target.parentElement.parentElement.dataset.type != "parent"
   ) {
     const headerPageTitle = document.body.querySelectorAll(
-      ".candyDoc__runningHeaderPageTitleTextBox"
+      ".candyDoc__pageActionsPageTitleTextBox"
     );
     headerPageTitle.forEach((p) => {
       p.innerText = e.target.value;
@@ -63,7 +61,7 @@ window.addEventListener("input", (e) => {
     e.target.parentElement.parentElement.dataset.type == "parent"
   ) {
     const headerChapterTitle = document.body.querySelectorAll(
-      ".candyDoc__runningHeaderChapterTitleTextBox"
+      ".candyDoc__pageActionsChapterTitleTextBox"
     );
     headerChapterTitle.forEach((c) => {
       c.innerText = e.target.value;

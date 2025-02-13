@@ -1,5 +1,4 @@
 import { findAncestor } from "../find-ancestor/index.js";
-import { addHistory } from "../history-stack/index.js";
 import { insert } from "../insert/index.js";
 import { getAlignInspectorTools } from "../inspector/align-tools/index.js";
 import { getInspectorBackgroundTools } from "../inspector/background-image-tools/index.js";
@@ -16,6 +15,7 @@ import { textBoxWrapper } from "./elements/wrapper.js";
 import { saveEditorData } from "../editor-js/index.js";
 import { BackColorTool, ForeColorTool } from "../editor-js-color/index.js"
 import { FontTool } from "../editor-js-font/index.js";
+import {InsertText} from "../dynamic-text/index.js";
 
 export function insertTextBox() {
   const clone = textBoxWrapper.cloneNode(true);
@@ -50,9 +50,12 @@ export function insertTextBox() {
         class: BackColorTool,
         shortcut: 'CTRL+ALT+H',
       },
-      font:{
-        class:FontTool,
-        
+      font: {
+        class: FontTool,
+
+      },
+      InsertText: {
+        class: InsertText
       }
     },
     onChange: () => saveEditorData(editor, clone.id)
@@ -91,15 +94,5 @@ function addInspectorTools() {
 
 window.addEventListener("load", () => {
   addInspectorTools();
-  let lastCapture = null;
-  window.addEventListener("keyup", (e) => {
-    if (!e.target.classList.contains("candyDoc__textBox")) return;
-
-    const currentCapture = e.target.innerHTML;
-    if (lastCapture == currentCapture) return;
-    addHistory();
-  });
-
-
 });
 

@@ -1,6 +1,6 @@
-import { getSelected } from "../../../selection/index.js";
+import { getSelected, getSelectedElements } from "../../../selection/index.js";
 export const left = document.createElement("div");
-left.classList.add("candyDoc__icon","candyDoc__active");
+left.classList.add("candyDoc__icon", "candyDoc__active");
 left.innerHTML =
   /*html*/
   `
@@ -29,13 +29,14 @@ left.innerHTML =
 
 `;
 left.addEventListener("mouseup", () => {
-    const currentTarget = getSelected()
-    if (!currentTarget) return;
+  const selectedElements = getSelectedElements()
 
-    if (!window.getComputedStyle(currentTarget.querySelector(".target")).borderLeft.includes("none"))
-        currentTarget.querySelector(".target").style.borderLeft = "none";
+  selectedElements.forEach(selected => {
+    if (!window.getComputedStyle(selectedElements[selectedElements.length-1].querySelector(".target")).borderLeft.includes("none"))
+      selected.querySelector(".target").style.borderLeft = "none";
     else
-        currentTarget.querySelector(".target").style.borderLeft = "1px solid #000000";
+      selected.querySelector(".target").style.borderLeft = "1px solid #000000";
+  })
 
 
 

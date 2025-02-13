@@ -1,14 +1,15 @@
 import { createHierarchyItemElement } from "../../hierarchy-item-element/index.js";
 import {
-  getHierarchyItems,
+
   sortHierarchyItems,
 } from "../../hierarchy-items/index.js";
 import { createPage } from "../../pages/index.js";
-import { numberHierarchyItemElements } from "../numbering.js";
-import { getHierarchySelect } from "../select.js";
-import { sortPages } from "../sortPages.js";
+import { numberHierarchyItemElements } from "./numbering.js";
+import { getHierarchySelect } from "./select.js";
+import { sortPages } from "./sortPages.js";
 import { container } from "./container.js";
 export const addPageIcon = document.createElement("div");
+addPageIcon.dataset.tooltip = "add page"
 addPageIcon.innerHTML =
   /*html*/
   `
@@ -44,26 +45,28 @@ addPageIcon.addEventListener("mousedown", () => {
     type: "page",
     parentId: null,
     innerHTML: "",
- 
+
   };
   const select = getHierarchySelect();
   const itemElement = createHierarchyItemElement(newItem);
-  if (select) {
+  if (select && select.parentElement) {
     if (select.dataset.type == "parent") {
       select
         .querySelector(".candyDoc__nestedHierarchyItems")
         .append(itemElement);
     } else {
+
       select.parentElement.insertBefore(itemElement, select.nextElementSibling);
     }
+
   } else {
     container.append(itemElement);
   }
-  getHierarchyItems().push(newItem);
   numberHierarchyItemElements();
   sortHierarchyItems();
   const pageWrapper = document.body.querySelector(".candyDoc__pagesWrapper");
   const newPageElement = createPage(newItem);
   pageWrapper.append(newPageElement);
   sortPages();
+
 });

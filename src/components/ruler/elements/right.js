@@ -1,6 +1,5 @@
 import { left } from "./left.js";
 import { getCenterLayoutElement } from "../../layout/index.js";
-import { setRunningEditorDimensions } from "./runnigEditorSize.js";
 
 export const right = document.createElement("div");
 right.classList.add(
@@ -155,7 +154,7 @@ export function initRulerRightHandle() {
         "candyDoc__runningFooterEditor"
       ) ||
       cursor.parentElement.classList.contains(
-        "candyDoc__runningHeaderEditor"
+        "candyDoc__pageActionsEditor"
       ) ||
       cursor.parentElement.classList.contains("candyDoc__rightContainer")
     ) {
@@ -186,6 +185,6 @@ export function initRulerRightHandle() {
       }
       cursor.style.left = cursorX + "px";
     }
-    setRunningEditorDimensions()
+  
   }
 }
