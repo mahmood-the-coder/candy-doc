@@ -15,7 +15,6 @@ export function initRulerTopHandle() {
   let zoom = 1
   let contents;
   let draggable = [];
-  let cursor = null;
   window.addEventListener("mousedown", (e) => {
     if (!e.target.classList.contains("candyDoc__rulerHandleTop")) return;
 
@@ -24,29 +23,28 @@ export function initRulerTopHandle() {
     zoom = window.devicePixelRatio * pageScale;
 
     contents = document.querySelectorAll(".candyDoc__content");
-    cursor = document.body.querySelector(".candyDoc__cursor");
-    if (!cursor) return;
-    cursor.dataset.startY = cursor.offsetTop.toString();
-    draggable = getCenterLayoutElement().querySelectorAll(".draggable")
+   
+    draggable = [...getCenterLayoutElement().querySelectorAll(".draggable"),getCenterLayoutElement().querySelector(".candyDoc__cursor")]
     const pages = document.body.querySelectorAll(".candyDoc__page");
     pages.forEach((p) => {
       const header = p.querySelector(".candyDoc__pageHeader");
       draggable = [...draggable, ...header.children].filter((i) =>
-        i.classList.contains("draggable")
+        i.classList.contains("draggable") || i.classList.contains("candyDoc__cursor")
       );
       const footer = p.querySelector(".candyDoc__pageFooter");
       draggable = [...draggable, ...footer.children].filter((i) =>
-        i.classList.contains("draggable")
+        i.classList.contains("draggable") || i.classList.contains("candyDoc__cursor")
       );
       const leftContainer = p.querySelector(".candyDoc__leftContainer");
       draggable = [...draggable, ...leftContainer.children].filter((i) =>
-        i.classList.contains("draggable")
+        i.classList.contains("draggable") || i.classList.contains("candyDoc__cursor")
       );
       const rightContainer = p.querySelector(".candyDoc__rightContainer");
       draggable = [...draggable, ...rightContainer.children].filter((i) =>
-        i.classList.contains("draggable")
+        i.classList.contains("draggable") || i.classList.contains("candyDoc__cursor")
       );
     });
+
     draggable.forEach((d) => {
       d.dataset.startY = d.offsetTop.toString();
     });
@@ -113,24 +111,6 @@ export function initRulerTopHandle() {
       }
       if (top.offsetTop > 25) d.style.top = y + "px";
     });
-    if (
-      cursor.parentElement.classList.contains("candyDoc__content") ||
-      cursor.parentElement.classList.contains(
-        "candyDoc__pageActionsEditor"
-      ) ||
-      cursor.parentElement.classList.contains(
-        "candyDoc__pageActionsEditor"
-      ) ||
-      cursor.parentElement.classList.contains("candyDoc__leftContainer") ||
-      cursor.parentElement.classList.contains("candyDoc__rightContainer")
-    ) {
-      const cursorStartY = parseFloat(cursor.dataset.startY);
-      let cursorY = cursorStartY - deltaY;
-
-      if (cursorY < -cursor.offsetHeight / 2 + 2) {
-        cursorY = -cursor.offsetHeight / 2 + 2;
-      }
-      if (top.offsetTop > 25) cursor.style.top = cursorY + "px";
-    }
+   
   }
 }

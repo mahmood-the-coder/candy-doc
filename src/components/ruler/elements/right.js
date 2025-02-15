@@ -43,7 +43,7 @@ export function initRulerRightHandle() {
   let zoom=1
   let contents;
   let draggable = [];
-  let cursor = null;
+
   window.addEventListener("mousedown", (e) => {
     if (!e.target.classList.contains("candyDoc__rulerHandleRight")) return;
 
@@ -51,24 +51,23 @@ export function initRulerRightHandle() {
     const pageScale=(page.getBoundingClientRect().width/page.offsetWidth)
     zoom=window.devicePixelRatio *pageScale; 
 
-    cursor = document.body.querySelector(".candyDoc__cursor");
-    cursor.dataset.startX = cursor.offsetLeft.toString();
+   
     contents = document.body.querySelectorAll(".candyDoc__content");
 
-   draggable=getCenterLayoutElement().querySelectorAll(".draggable")
+   draggable= [...getCenterLayoutElement().querySelectorAll(".draggable"),getCenterLayoutElement().querySelector(".candyDoc__cursor")]
     const pages = document.body.querySelectorAll(".candyDoc__page");
     pages.forEach((p) => {
       const header = p.querySelector(".candyDoc__pageHeader");
       draggable = [...draggable, ...header.children].filter((i) =>
-        i.classList.contains("draggable")
+        i.classList.contains("draggable") || i.classList.contains("candyDoc__cursor")
       );
       const footer = p.querySelector(".candyDoc__pageFooter");
       draggable = [...draggable, ...footer.children].filter((i) =>
-        i.classList.contains("draggable")
+        i.classList.contains("draggable") || i.classList.contains("candyDoc__cursor")
       );
       const rightContainer = p.querySelector(".candyDoc__rightContainer");
       draggable = [...draggable, ...rightContainer.children].filter((i) =>
-        i.classList.contains("draggable")
+        i.classList.contains("draggable") || i.classList.contains("candyDoc__cursor")
       );
     });
     draggable.forEach((d) => {
@@ -148,43 +147,7 @@ export function initRulerRightHandle() {
       
       d.style.left = x + "px";
     });
-    if (
-      cursor.parentElement.classList.contains("candyDoc__content") ||
-      cursor.parentElement.classList.contains(
-        "candyDoc__runningFooterEditor"
-      ) ||
-      cursor.parentElement.classList.contains(
-        "candyDoc__pageActionsEditor"
-      ) ||
-      cursor.parentElement.classList.contains("candyDoc__rightContainer")
-    ) {
-      const cursorStartX = parseFloat(cursor.dataset.startX);
-      let cursorX = cursorStartX;
-
-      if (
-        cursorX >
-        right.offsetLeft -
-          cursor.offsetWidth / 2 -
-          left.offsetLeft +
-          right.offsetWidth -
-          2
-      ) {
-        cursorX =
-          right.offsetLeft -
-          cursor.offsetWidth / 2 -
-          left.offsetLeft +
-          right.offsetWidth -
-          2;
-      }
-      if (cursor.parentElement.classList.contains("candyDoc__rightContainer")) {
-        if(right.offsetLeft>maxX)
-        cursorX = cursorStartX + deltaX;
-        if (cursorX + cursor.offsetWidth / 2 - 3 < 0) {
-          cursorX = 0 - cursor.offsetWidth / 2 + 3;
-        }
-      }
-      cursor.style.left = cursorX + "px";
-    }
+   
   
   }
 }

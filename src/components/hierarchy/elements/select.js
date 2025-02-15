@@ -7,15 +7,12 @@ export function getHierarchySelect() {
 }
 export function setHierarchySelect(newSelect) {
   selected = newSelect
-  container
-    .querySelectorAll(".candyDoc__hierarchyItemWrapper")
-    .forEach((s) => {
-      s.style.border = "1px solid var(--color)";
-    });
 
 
   if (selected) {
     selected.style.border = "2px solid var(--color)"
+    selected.dataset.selected="true"
+
   }
 }
 export function initHierarchySelect() {
@@ -24,20 +21,19 @@ export function initHierarchySelect() {
       .querySelectorAll(".candyDoc__hierarchyItemWrapper")
       .forEach((s) => {
         s.style.border = "1px solid var(--color)";
+        s.dataset.selected="false"
       });
 
-    if(e.target.classList.contains("candyDoc__hierarchyDummy") )return;
     if (e.target.classList.contains("candyDoc__hierarchyItemWrapper")) {
       selected = e.target;
     } else if (findAncestor(e.target, "candyDoc__hierarchyItemWrapper")) {
       selected = findAncestor(e.target, "candyDoc__hierarchyItemWrapper")
     }
-    else {
-      selected = null;
-    }
+    
 
     if (selected) {
       selected.style.border = "2px solid var(--color)"
+      selected.dataset.selected="true"
     }
 
   });

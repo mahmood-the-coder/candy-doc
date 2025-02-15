@@ -3,6 +3,7 @@
 import { load } from "../DB/load.js";
 import { renderHierarchy } from "../hierarchy-items/index.js";
 import { header } from "./elements/header.js";
+import { initHierarchyRemove } from "./elements/remove.js";
 import { wrapper } from "./elements/wrapper.js";
 
 export function getHierarchy() {
@@ -16,12 +17,13 @@ export function getHierarchy() {
       index: 0,
       id: "0",
       number: 1,
-      name: "new page",
+      name: "page 1",
       type: "page",
       parentId: null,
       innerHTML: ""
     }])
   })
+  initHierarchyRemove()
   return wrapper;
 }
 

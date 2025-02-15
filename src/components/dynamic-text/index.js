@@ -24,7 +24,7 @@ export class InsertText {
             select.append(optionElement);
         });
 
-        select.addEventListener("input", (e) => {
+        select.addEventListener("change", (e) => {
             const page = findAncestor(e.target, "candyDoc__page");
             let value = page.dataset[e.target.value];
 
@@ -35,7 +35,8 @@ export class InsertText {
             }
 
             this.className = e.target.value;
-            const spanHTML = `<span class="${this.className}">${value}</span>`;
+            const toolTip = select.querySelector(`[value=${e.target.value}]`).label;
+            const spanHTML = `<span data-tooltip="${toolTip}" class="${this.className}" data-value="${value}">${value}</span>`;
             document.execCommand("insertHTML", false, spanHTML);
 
             window.getSelection().selectAllChildren(page.querySelector("." + this.className));
@@ -49,12 +50,9 @@ export class InsertText {
         return true;
     }
 
-    // Sanitize method should keep the class attribute for <span>
     static get sanitize() {
         return {
-            span: {
-                class: true,  // Keep any class attribute on <span> elements
-            },
+            span: true
         };
     }
 
@@ -70,23 +68,32 @@ export class InsertText {
         return false;
     }
 
-    // Serialize method: save the class and the inner HTML of the span element
     static serialize(element) {
+        // Copy dataset to serialize it
+        const dataset = { ...element.dataset };
+
         return {
             type: "insertText",  // The type of the tool
-            class: element.classList[0],  // Save the dynamic class
-            html: element.outerHTML,   // Save the whole HTML (preserves the span)
+            class: element.classList[0],  
+            html: element.outerHTML,
+            dataset: dataset,  // Add dataset to the serialized data
         };
     }
 
-    // Deserialize method: restore the span element with class and text
     static deserialize(data) {
         const span = document.createElement("span");
-        span.innerHTML = data.html || '';  // Use the saved HTML directly
+        span.innerHTML = data.html || '';  // Use the saved HTML
+
+        // Restore the dataset attributes
+        if (data.dataset) {
+            Object.keys(data.dataset).forEach(key => {
+                span.dataset[key] = data.dataset[key];
+            });
+        }
+
         return span;
     }
 }
-
 
 
 export function UpdateDynamicText() {
@@ -109,7 +116,7 @@ export function UpdateDynamicText() {
                 value = parseInt(value) + 1
             }
 
-            dynamicElement.textContent = value
+            dynamicElement.textContent = value??""
 
         })
     })

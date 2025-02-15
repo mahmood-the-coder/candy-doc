@@ -1,6 +1,5 @@
+import { UpdateDynamicText } from "../dynamic-text/index.js";
 import { findAncestor } from "../find-ancestor/index.js";
-import { setHierarchySelect } from "../hierarchy/elements/select.js";
-import { getCenterLayoutElement } from "../layout/index.js";
 import { dragIcon } from "./elements/dragIcon.js";
 import { head } from "./elements/head.js";
 import { name } from "./elements/name.js";
@@ -25,59 +24,21 @@ export function createHierarchyItemElement(item) {
   return clone;
 }
 
-window.addEventListener("mousedown",(e)=>{
- if(!e.target.classList.contains("candyDoc__hierarchyRemoveIcon"))return
- e.target.parentElement.parentElement.remove()
- getCenterLayoutElement().querySelector(`[data-page-id='${e.target.parentElement.parentElement.dataset.id}']`)?.remove()
- setHierarchySelect(null)
-  
-})
+
 window.addEventListener("input", (e) => {
-  if (!findAncestor(e.target, "candyDoc__hierarchyItemWrapper")) return
-  if (
-    e.target.classList.contains("candyDoc__pageItemName") &&
-    e.target.parentElement.parentElement.dataset.type != "parent"
-  ) {
-    const headerPageTitle = document.body.querySelectorAll(
-      ".candyDoc__pageActionsPageTitleTextBox"
-    );
-    headerPageTitle.forEach((p) => {
-      p.innerText = e.target.value;
-    });
-    const footerPageTitle = document.body.querySelectorAll(
-      ".candyDoc__runningFooterPageTitleTextBox"
-    );
-    footerPageTitle.forEach((p) => {
-      p.innerText = e.target.value;
-    });
-
-    document.body.querySelector(
-      `[data-page-id='${e.target.parentElement.parentElement.dataset.id}']`
-    ).dataset.name = e.target.value;
-  }
-
-  if (
-    e.target.classList.contains("candyDoc__pageItemName") &&
-    e.target.parentElement.parentElement.dataset.type == "parent"
-  ) {
-    const headerChapterTitle = document.body.querySelectorAll(
-      ".candyDoc__pageActionsChapterTitleTextBox"
-    );
-    headerChapterTitle.forEach((c) => {
-      c.innerText = e.target.value;
-    });
-    const footerChapterTitle = document.body.querySelectorAll(
-      ".candyDoc__runningFooterChapterTitleTextBox"
-    );
-    footerChapterTitle.forEach((c) => {
-      c.innerText = e.target.value;
-    });
-    document.body
+  const item=findAncestor(e.target, "candyDoc__hierarchyItemWrapper")
+  if (!item) return
+  if (e.target.classList.contains("candyDoc__pageItemName") && item?.dataset?.type=="parent") {
+    
+    document.body.querySelector(".candyDoc__pagesWrapper")
       .querySelectorAll(
-        `[data-parent-id='${e.target.parentElement.parentElement.dataset.id}']`
+        `[data-parent-id='${item.dataset.id}']`
       )
       .forEach((p) => {
-        p.dataset.parentName = e.target.value;
+        p.dataset.parentName = e?.target?.value??"";
       });
+    
+   
+      UpdateDynamicText()
   }
 });

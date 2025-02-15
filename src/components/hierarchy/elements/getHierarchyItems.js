@@ -1,15 +1,16 @@
 
 
 export function getHierarchyItems(container) {
-  return [...container.querySelectorAll(".candyDoc__hierarchyItemWrapper")].filter(item => !item.classList.contains("candyDoc__hierarchyDummy")).map((item, index) => {
+  return [...container.querySelectorAll(".candyDoc__hierarchyItemWrapper")].filter(element => !element.classList.contains("candyDoc__hierarchyDummy")).map((el, index) => {
     return {
-      id: item.dataset.id,
+      id: el.dataset.id,
       index: index,
       number: (index + 1).toString(),
-      name: item.querySelector("input")?.value ?? "",
-      parentId: item?.parentElement?.dataset?.id ?? null,
-      innerHTML: document.body.querySelector(`[data-page-id='${item.dataset.id}']`)?.innerHTML ?? "",
-      type: item.dataset.type
+      name: el?.querySelector("input")?.value??"",
+      parentId: el?.parentElement?.dataset?.id ?? null,
+      innerHTML: document.body.querySelector(`[data-page-id='${el.dataset.id}']`)?.innerHTML ?? "",
+      type: el.dataset.type,
+      selected:el.dataset.selected
     };
   });
 

@@ -1,13 +1,14 @@
 
 
 .candyDoc__pageActionsWrapper {
-  width: 100%;
+  width: 242px;
   height: 0px;
   position: absolute;
   z-index: 100;
   background-color: var(--background);
   top: 0;
-  left: 0;
+  left: 20%;
+  border-bottom-right-radius: 5px;
 
   border: 1px solid var(--color);
   border-top: none;
@@ -20,7 +21,7 @@
 .candyDoc__pageActionsToggle {
   position: absolute;
   top: 100%;
-  left: 20%;
+  left: 0%;
   background-color: var(--background);
   border: 1px solid var(--color);
   padding: 5px;
@@ -50,7 +51,7 @@
 }
 .candyDoc__pageActionsTools
 {
-  width: 40%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

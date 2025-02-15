@@ -1,3 +1,4 @@
+import { UpdateDynamicText } from "../../../dynamic-text/index.js";
 import { findAncestor } from "../../../find-ancestor/index.js";
 import { initCirclesAll } from "../../../inspector/shapes-tools/insert/elements/circle.js";
 import { initCurvesAll } from "../../../inspector/shapes-tools/insert/elements/curve.js";
@@ -55,6 +56,7 @@ applyChapter.addEventListener("mousedown", () => {
       initLinesAll(getCenterLayoutElement());
       initEllipsesAll(getCenterLayoutElement());
       initCurvesAll(getCenterLayoutElement())
+      UpdateDynamicText()
     }, 100);
   })
 })

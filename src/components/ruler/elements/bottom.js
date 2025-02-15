@@ -12,7 +12,6 @@ export function initRulerBottomHandle() {
   let deltaY = 0;
   let contents;
   let draggable = [];
-  let cursor = null;
   let zoom = 1
   window.addEventListener("mousedown", (e) => {
     if (!e.target.classList.contains("candyDoc__rulerHandleBottom")) return;
@@ -22,27 +21,26 @@ export function initRulerBottomHandle() {
     zoom = window.devicePixelRatio * pageScale;
 
     contents = document.body.querySelectorAll(".candyDoc__content");
-    cursor = document.body.querySelector(".candyDoc__cursor");
-    cursor.dataset.startY = cursor.offsetTop.toString();
-    draggable = getCenterLayoutElement().querySelectorAll(".draggable")
+    
+    draggable =  [...getCenterLayoutElement().querySelectorAll(".draggable"),getCenterLayoutElement().querySelector(".candyDoc__cursor")]
 
     const pages = document.body.querySelectorAll(".candyDoc__page");
     pages.forEach((p) => {
       const header = p.querySelector(".candyDoc__pageHeader");
       draggable = [...draggable, ...header.children].filter((i) =>
-        i.classList.contains("draggable")
+        i.classList.contains("draggable") || i.classList.contains("candyDoc__cursor")
       );
       const footer = p.querySelector(".candyDoc__pageFooter");
       draggable = [...draggable, ...footer.children].filter((i) =>
-        i.classList.contains("draggable")
+        i.classList.contains("draggable") || i.classList.contains("candyDoc__cursor")
       );
       const leftContainer = p.querySelector(".candyDoc__leftContainer");
       draggable = [...draggable, ...leftContainer.children].filter((i) =>
-        i.classList.contains("draggable")
+        i.classList.contains("draggable") || i.classList.contains("candyDoc__cursor")
       );
       const rightContainer = p.querySelector(".candyDoc__rightContainer");
       draggable = [...draggable, ...rightContainer.children].filter((i) =>
-        i.classList.contains("draggable")
+        i.classList.contains("draggable") || i.classList.contains("candyDoc__cursor")
       );
     });
     draggable.forEach((d) => {
@@ -65,9 +63,8 @@ export function initRulerBottomHandle() {
   });
   function handleMouseMove(ev) {
     if (!contents || contents.length <= 0) return;
-    if (!cursor) return;
 
-    deltaY -= ev.movementY/zoom;
+    deltaY -= ev.movementY / zoom;
 
     let y = startY + deltaY;
 
@@ -117,30 +114,7 @@ export function initRulerBottomHandle() {
       }
       d.style.top = y + "px";
     });
-    if (
-      cursor.parentElement.classList.contains("candyDoc__content") ||
-      cursor.parentElement.classList.contains(
-        "candyDoc__runningFooterEditor"
-      ) ||
-      cursor.parentElement.classList.contains(
-        "candyDoc__runningFooterEditor"
-      ) ||
-      cursor.parentElement.classList.contains("candyDoc__leftContainer") ||
-      cursor.parentElement.classList.contains("candyDoc__rightContainer")
-    ) {
-      const cursorStartY = parseFloat(cursor.dataset.startY);
-      let cursorY = cursorStartY;
-
-      if (
-        cursorY >
-        bottom.offsetTop - top.offsetTop - 5
-      ) {
-        cursorY =
-          bottom.offsetTop - top.offsetTop - 5;
-      }
-
-      cursor.style.top = cursorY + "px";
-    }
+   
 
   }
 }

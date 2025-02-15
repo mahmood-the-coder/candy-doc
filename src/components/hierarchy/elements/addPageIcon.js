@@ -1,13 +1,12 @@
 import { createHierarchyItemElement } from "../../hierarchy-item-element/index.js";
-import {
 
-  sortHierarchyItems,
-} from "../../hierarchy-items/index.js";
 import { createPage } from "../../pages/index.js";
-import { numberHierarchyItemElements } from "./numbering.js";
 import { getHierarchySelect } from "./select.js";
 import { sortPages } from "./sortPages.js";
 import { container } from "./container.js";
+import { updateTableOfContent } from "../../table-of-content/index.js";
+import { userData } from "../../user-data/userData.js";
+import { getHierarchyItems } from "./getHierarchyItems.js";
 export const addPageIcon = document.createElement("div");
 addPageIcon.dataset.tooltip = "add page"
 addPageIcon.innerHTML =
@@ -36,12 +35,12 @@ addPageIcon.innerHTML =
 </svg>
 `;
 addPageIcon.classList.add("candyDoc__icon");
-addPageIcon.addEventListener("mousedown", () => {
+addPageIcon.addEventListener("mouseup", () => {
   const newItem = {
-    index: 1,
+    index: 0,
     id: "item__" + Date.now().toString(16),
     number: 1,
-    name: "new page",
+    name: "page",
     type: "page",
     parentId: null,
     innerHTML: "",
@@ -54,19 +53,35 @@ addPageIcon.addEventListener("mousedown", () => {
       select
         .querySelector(".candyDoc__nestedHierarchyItems")
         .append(itemElement);
+      const index = [...select.querySelector(".nest").querySelectorAll(".candyDoc__hierarchyItemWrapper")].filter(i => !i.classList.contains("candyDoc__hierarchyDummy")).findIndex(c => c == itemElement);
+      itemElement.dataset.index = newItem.index = index;
+      itemElement.dataset.number = newItem.number = index + 1;
+      itemElement.querySelector("input").value = itemElement.dataset.name = newItem.name = "page " + (index + 1)
     } else {
 
       select.parentElement.insertBefore(itemElement, select.nextElementSibling);
+      const index = [...select.parentElement.querySelectorAll(".candyDoc__hierarchyItemWrapper")].filter(i => !i.classList.contains("candyDoc__hierarchyDummy")).findIndex(c => c == itemElement);
+      itemElement.dataset.index = newItem.index = index;
+      itemElement.dataset.number = newItem.number = index + 1;
+      itemElement.querySelector("input").value = itemElement.dataset.name = newItem.name = "page " + (index + 1)
     }
 
   } else {
     container.append(itemElement);
+    const index = [...container.querySelectorAll(".candyDoc__hierarchyItemWrapper")].filter(i => !i.classList.contains("candyDoc__hierarchyDummy")).findIndex(c => c == itemElement);
+    itemElement.dataset.index = newItem.index = index;
+    itemElement.dataset.number = newItem.number = index + 1;
+    itemElement.querySelector("input").value = itemElement.dataset.name = newItem.name = "page " + (index + 1)
   }
-  numberHierarchyItemElements();
-  sortHierarchyItems();
+
   const pageWrapper = document.body.querySelector(".candyDoc__pagesWrapper");
   const newPageElement = createPage(newItem);
+  userData.hierarchyItems.push(newItem)
   pageWrapper.append(newPageElement);
   sortPages();
+
+  if (document.body.querySelector("[data-name='Table Of Content']"))
+    updateTableOfContent()
+
 
 });

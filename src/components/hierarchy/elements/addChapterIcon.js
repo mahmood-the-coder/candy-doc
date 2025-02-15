@@ -1,11 +1,10 @@
 import { createHierarchyItemElement } from "../../hierarchy-item-element/index.js";
-import {
-  sortHierarchyItems
-} from "../../hierarchy-items/index.js";
-import { numberHierarchyItemElements } from "./numbering.js";
+
 import { getHierarchySelect } from "./select.js";
 import { sortPages } from "./sortPages.js";
 import { container } from "./container.js";
+import { updateTableOfContent } from "../../table-of-content/index.js";
+import { userData } from "../../user-data/userData.js";
 
 export const addChapterIcon = document.createElement("div");
 addChapterIcon.dataset.tooltip="add chapter"
@@ -38,7 +37,7 @@ addChapterIcon.innerHTML =
 `;
 
 addChapterIcon.classList.add("candyDoc__icon");
-addChapterIcon.addEventListener("mousedown", () => {
+addChapterIcon.addEventListener("mouseup", () => {
   const newItem = {
     index: 1,
     id: "item__" + Date.now().toString(16),
@@ -60,7 +59,10 @@ addChapterIcon.addEventListener("mousedown", () => {
   } else {
     container.append(itemElement);
   }
-  numberHierarchyItemElements();
-  sortHierarchyItems();
+   userData.hierarchyItems.push(newItem)
   sortPages();
+
+    if(document.body.querySelector("[data-name='Table Of Content']"))
+      updateTableOfContent()
+ 
 });

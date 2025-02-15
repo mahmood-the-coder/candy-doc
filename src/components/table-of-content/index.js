@@ -1,16 +1,18 @@
-import { renderHierarchy, sortHierarchyItems } from "../hierarchy-items/index.js";
+import { renderHierarchy } from "../hierarchy-items/index.js";
 import { container } from "../hierarchy/elements/container.js";
-import { numberHierarchyItemElements } from "../hierarchy/elements/numbering.js";
+import { getHierarchyItems } from "../hierarchy/elements/getHierarchyItems.js";
 import { sortPages } from "../hierarchy/elements/sortPages.js";
 import { createPage } from "../pages/index.js";
 import { userData } from "../user-data/userData.js";
-import { save } from "../DB/save.js";
+
 export function generateTableOfContent() {
-    const items = buildNestedList(userData.hierarchyItems);
+    const items = buildNestedList(userData.hierarchyItems).filter(i => i.name != "Table Of Content");
     const itemHeight = 20;
     document.body.querySelector(".candyDoc__pagesWrapper")?.querySelectorAll("[data-name='Table Of Content']").forEach(content => {
         content.remove()
     })
+ 
+    userData.hierarchyItems = userData.hierarchyItems.filter(i => i.name != "Table Of Content")
     const listHeight = itemHeight * items.length
     const contentHeight = document.body.querySelector(".candyDoc__content").getBoundingClientRect().height;
     const pages = Math.ceil(listHeight / contentHeight)
@@ -24,24 +26,24 @@ export function generateTableOfContent() {
             id: id,
             name: "Table Of Content",
             parentId: null,
-            type: "page",
+            type: "table",
             innerHTML: ""
         }
-        
         userData.hierarchyItems.unshift(page)
 
         renderHierarchy(userData.hierarchyItems)
-        sortHierarchyItems()
         const pageWrapper = document.body.querySelector(".candyDoc__pagesWrapper");
         const newPageElement = createPage(page);
-        pageWrapper.insertBefore(newPageElement,pageWrapper.children[0]);
+        pageWrapper.insertBefore(newPageElement, pageWrapper.children[0]);
         sortPages();
-       
+        newPageElement.querySelector(".candyDoc__content").appendChild(list)
+
+
 
     }
- 
-   
-    
+
+
+
 
 
 
@@ -54,7 +56,8 @@ function buildNestedHTMLList(items) {
     const ul = document.createElement('ol');
 
     // Loop through each item and create a corresponding <li>
-    items.forEach(item => {
+    items.filter(i => i.name != "Table Of Content").forEach(item => {
+
         // Create the <li> element for the current item
         const li = document.createElement('li');
         li.dataset.id = item.id;
@@ -97,20 +100,47 @@ function buildNestedList(items) {
     return nestedList;
 }
 
-function getHierarchyItems(container) {
-  userData.hierarchyItems = [...container.querySelectorAll(".candyDoc__hierarchyItemWrapper")].filter(item => !item.classList.contains("candyDoc__hierarchyDummy")).map((item,index) => {
-    return {
-      id: item.dataset.id,
-      index:index,
-      number:(index+1).toString(),
-      name: item.querySelector("input")?.value??"",
-      parentId: item?.parentElement?.dataset?.id ?? null,
-      innerHTML: document.body.querySelector(`[data-page-id='${item.dataset.id}']`)?.innerHTML??"",
-      type:item.dataset.type
-    };
-  });
- 
-  save(userData);
-  
+export function updateTableOfContent() {
+
+    const items = buildNestedList(getHierarchyItems(container));
+    const itemHeight = 20;
+
+    const listHeight = itemHeight * items.length
+    const contentHeight = document.body.querySelector(".candyDoc__content").getBoundingClientRect().height;
+    const pages = Math.ceil(listHeight / contentHeight)
+    const itemsInEachPage = Math.floor(contentHeight / itemHeight)
+    for (let index = 0; index < pages; index++) {
+        const list = buildNestedHTMLList(items.slice(index * itemsInEachPage, (index + 1) * itemsInEachPage))
+        const id = "item__" + Math.random().toString(16);
+        const page = {
+            index: 0,
+            number: 0,
+            id: id,
+            name: "Table Of Content",
+            parentId: null,
+            type: "table",
+            innerHTML: ""
+        }
+
+        const newPageElement = createPage(page);
+        newPageElement.querySelector(".candyDoc__content").append(list)
+        document.body.querySelector(".candyDoc__pagesWrapper").querySelectorAll("[data-name='Table Of Content']").forEach(tablePage => {
+            newPageElement.dataset.pageId = tablePage.dataset.pageId
+            tablePage.parentElement.replaceChild(newPageElement, tablePage)
+        })
+      
+       
+
+
+
+    }
+
+
+
+
+
+
+
+
 
 }

@@ -1,38 +1,11 @@
-import { findAncestor } from "../find-ancestor/index.js";
 import { createHierarchyItemElement } from "../hierarchy-item-element/index.js";
 import { container } from "../hierarchy/elements/container.js";
-import { getCenterLayoutElement } from "../layout/index.js";
-import { userData } from "../user-data/userData.js";
-
-export function sortHierarchyItems() {
-  const itemElements = [
-    ...container.querySelectorAll(".candyDoc__hierarchyItemWrapper"),
-  ];
-  userData.hierarchyItems = itemElements
-    .filter((el) => el?.dataset?.id)
-    .map((el, index) => {
-      const page = getCenterLayoutElement().querySelector(
-        `[data-page-id='${el.dataset.id}']`
-      );
-
-      return {
-        index: index,
-        id: el.dataset.id,
-        number: index + 1,
-        name: el.dataset.type == "page" ? "page " + (index + 1) : "new chapter",
-        type: el.dataset.type,
-        innerHTML: page?.innerHTML ?? null,
-        parentId:
-          findAncestor(el, "candyDoc__hierarchyItemWrapper")?.dataset?.id ??
-          null,
-      };
-    });
+import { setHierarchySelect } from "../hierarchy/elements/select.js";
 
 
-}
+
 
 export function renderHierarchy(items) {
-
   container.innerHTML = "";
   items.forEach((item) => {
 
@@ -45,12 +18,19 @@ export function renderHierarchy(items) {
       .forEach((c) => {
         const nested = createHierarchyItemElement(c);
         nest.append(nested);
+        if (c.selected == "true") {
+          nested.style.outline = "2px solid var(--color)"
+        }
       });
 
 
     if (!item.parentId) container.append(clone);
+    if (item.selected == "true") {
+      clone.style.outline = "2px solid var(--color)"
+    }
 
   });
+
 }
 
 

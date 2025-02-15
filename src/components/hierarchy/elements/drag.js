@@ -1,7 +1,9 @@
 import { UpdateDynamicText } from "../../dynamic-text/index.js";
-import { sortHierarchyItems } from "../../hierarchy-items/index.js";
+import { renderHierarchy } from "../../hierarchy-items/index.js";
+import { updateTableOfContent } from "../../table-of-content/index.js";
+import { userData } from "../../user-data/userData.js";
 import { container } from "./container.js";
-import { numberHierarchyItemElements } from "./numbering.js";
+import { getHierarchyItems } from "./getHierarchyItems.js";
 import { sortPages } from "./sortPages.js";
 import { swap } from "./swap.js";
 
@@ -60,12 +62,13 @@ export function initHierarchyDrag() {
     target.style.opacity = "1";
     target = null;
     clone.remove();
+
     setTimeout(() => {
-      numberHierarchyItemElements()
-      sortHierarchyItems()
-      sortPages()
       UpdateDynamicText()
-    }, 2);
+      if (document.body.querySelector("[data-name='Table Of Content']"))
+        updateTableOfContent()
+        sortPages()
+    }, 5);
 
   });
 }
