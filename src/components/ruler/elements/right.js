@@ -77,17 +77,12 @@ export function initRulerRightHandle() {
     window.addEventListener("mousemove", handleMouseMove);
     deltaX = 0;
     startX = parseInt(window.getComputedStyle(right).right.replace("px", ""));
-    contents?.forEach((c) => {
-      c.style.borderRight = "1px solid var(--color)";
-      c.style.borderRight = "1px solid var(--color)";
-    });
+    
   });
 
   window.addEventListener("mouseup", () => {
     window.removeEventListener("mousemove", handleMouseMove);
-    contents?.forEach((c) => {
-      c.style.border = "none";
-    });
+    
   });
   function handleMouseMove(ev) {
     if (!contents || contents.length <= 0) return;

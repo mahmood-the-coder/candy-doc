@@ -38,6 +38,7 @@ import { initEditorJS } from "./components/editor-js/index.js";
 import { initDuplication } from "./components/duplication/index.js"
 import { initCopy } from "./components/copy/index.js"
 import { initHistoryStack } from "./components/history-stack/index.js"
+import { numberPages } from "./components/pages/elements/numberPages.js"
 
 
 initSave()
@@ -47,7 +48,7 @@ initSave()
 
 
 
-document.body.append(getPageActions(),getLayout());
+document.body.append(getLayout());
 
 getCenterLayoutElement().append(createPages());
 
@@ -57,7 +58,7 @@ getLeftSideLayoutElement().append(getInspectorHeader(), getInspector());
 getRightSidLayoutElement().append(getHierarchyHeader(), getHierarchy());
 
 
-getBottomLayoutElement().append(getPreference(),getViewTool(),getImportTool())
+getBottomLayoutElement().append(getPreference(),getViewTool(),getImportTool(),getPageActions())
 
 
 document.querySelector(".candyDoc__content").append(cursor);

@@ -11,7 +11,6 @@ let isResizing = false;
 let deltaX = 0;
 let deltaY = 0;
 let zoom=1;
-let pageScale=1
 let draggable = [];
 const MIN_WIDTH = 10;
 const MIN_HEIGHT = 10;
@@ -34,7 +33,7 @@ export function initResizable() {
     }
     zoom=window.devicePixelRatio
     const page=document.body.querySelector(".candyDoc__page")
-    pageScale=page.getBoundingClientRect().width/page.offsetWidth
+    
     content = currentTarget?.parentElement;
 
     if (currentTarget.classList.contains("candyDoc__chartWrapper")) {
@@ -87,10 +86,9 @@ function initResize(e) {
 
 function handleMousemove(e) {
   if (!isResizing) return;
-  if (!currentTarget) return;
 
-  deltaX += e.movementX/(zoom*pageScale);
-  deltaY += e.movementY/(zoom*pageScale);
+  deltaX += e.movementX/(zoom);
+  deltaY += e.movementY/(zoom);
 
   if (currentHandle.classList.contains("candyDoc__resizeHandleRight")) {
     let width = startWidth + deltaX;
@@ -100,8 +98,8 @@ function handleMousemove(e) {
       return;
     }
     const maxWidth =
-      content.getBoundingClientRect().right/pageScale -
-      currentTarget.getBoundingClientRect().left/pageScale;
+      content.getBoundingClientRect().right -
+      currentTarget.getBoundingClientRect().left;
     if (width > maxWidth) {
       width = maxWidth;
       return;
@@ -148,8 +146,8 @@ function handleMousemove(e) {
     }
 
     const maxHeight =
-      content.getBoundingClientRect().bottom/pageScale -
-      currentTarget.getBoundingClientRect().y/pageScale;
+      content.getBoundingClientRect().bottom -
+      currentTarget.getBoundingClientRect().y;
     if (height > maxHeight) {
       height = maxHeight;
       return;
@@ -195,8 +193,8 @@ function handleMousemove(e) {
       return;
     }
     const maxHeight =
-      currentTarget.getBoundingClientRect().bottom/pageScale -
-      content.getBoundingClientRect().top/pageScale;
+      currentTarget.getBoundingClientRect().bottom -
+      content.getBoundingClientRect().top;
     if (height > maxHeight) {
       height = maxHeight;
       return;
@@ -244,8 +242,8 @@ function handleMousemove(e) {
       return;
     }
     const maxWidth =
-      currentTarget.getBoundingClientRect().right/pageScale -
-      content.getBoundingClientRect().x/pageScale;
+      currentTarget.getBoundingClientRect().right -
+      content.getBoundingClientRect().x;
     if (width > maxWidth) {
       width = maxWidth;
       return;

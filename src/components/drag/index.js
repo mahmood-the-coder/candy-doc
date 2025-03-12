@@ -61,6 +61,7 @@ window.addEventListener("mousedown", (e) => {
   clone.style.opacity = "0.5";
 
   window.addEventListener("mousemove", handleMousemove);
+
 });
 window.addEventListener("mouseup", () => {
   if (!target) return;
@@ -121,6 +122,7 @@ window.addEventListener("mouseup", () => {
   guideRight?.remove();
   guideCenterHorizontal?.remove();
   guideCenterVertical?.remove();
+
 });
 
 function handleMousemove(e) {

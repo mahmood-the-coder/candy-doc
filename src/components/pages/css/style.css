@@ -11,8 +11,15 @@
   position: relative;
   gap: 15px;
  
- 
 
+}
+.candyDoc__content{
+  position: absolute;
+  left: 100px;
+  right: 100px;
+  top: 150px;
+  bottom: 150px;
+  outline: 1px dashed var(--color);
 }
 .candyDoc__page {
   width: 210mm;

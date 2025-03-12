@@ -49,17 +49,11 @@ export function initRulerBottomHandle() {
     window.addEventListener("mousemove", handleMouseMove);
     deltaY = 0;
     startY = parseInt(window.getComputedStyle(bottom).bottom.replace("px", ""));
-    contents?.forEach((c) => {
-      c.style.borderTop = "1px solid var(--color)";
-      c.style.borderBottom = "1px solid var(--color)";
-    });
+    
   });
 
   window.addEventListener("mouseup", () => {
     window.removeEventListener("mousemove", handleMouseMove);
-    contents?.forEach((c) => {
-      c.style.border = "none";
-    });
   });
   function handleMouseMove(ev) {
     if (!contents || contents.length <= 0) return;

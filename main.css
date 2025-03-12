@@ -7,7 +7,6 @@
 @import url("./src/components/layout/css/style.css");
 @import url("./src//components/hierarchy/css/style.css");
 @import url("./src/components/pages/css/style.css");
-@import url("./src/components/content/css/style.css");
 @import url("./src/components/hierarchy-item-element/css/style.css");
 @import url("./src/components/image/css/style.css");
 @import url("./src/components/file-modal/css/style.css");
@@ -58,3 +57,5 @@
 @import url("./src/components/inspector/chart-tools/chart-colors-tool/css/style.css");
 @import url("./src/components/insert-toolbar/css/style.css");
 @import url("./src/components/view-tools/css/style.css");
+@import url("./src/components/table-of-content/css/style.css");
+@import url("./src/components/inspector/table-of-content-tools/css/style.css");

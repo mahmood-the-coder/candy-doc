@@ -141,6 +141,7 @@ export function initSwapRows() {
     toSwap = [];
     clones = [];
     table = null;
+  
   }
 }
 

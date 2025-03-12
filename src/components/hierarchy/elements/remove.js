@@ -1,4 +1,4 @@
-import { updateTableOfContent } from "../../table-of-content/index.js";
+import { generateTableOfContent } from "../../table-of-content/index.js";
 import { userData } from "../../user-data/userData.js";
 import { setHierarchySelect } from "./select.js";
 export function initHierarchyRemove() {
@@ -16,8 +16,8 @@ export function initHierarchyRemove() {
         setHierarchySelect(null);
         itemElement.remove();
 
-        if (document.body.querySelector("[data-name='Table Of Content']")) {
-            updateTableOfContent();
+        if (document.body.querySelector(".candyDoc__tableOfContent")) {
+            generateTableOfContent()
         }
 
 

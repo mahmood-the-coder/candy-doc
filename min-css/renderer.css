@@ -373,7 +373,7 @@ input {
 .candyDoc__sidebarToggle.leftToggle
 {
  position: absolute;
- right: -20px;
+ right: -35px;
  top: 50%;
  transform: translateY(-50%);
  z-index: 501;
@@ -381,7 +381,7 @@ input {
 .candyDoc__sidebarToggle.rightToggle
 {
  position: absolute;
- left: -20px;
+ left: -35px;
  top: 50%;
  transform: translateY(-50%);
  z-index: 501;
@@ -475,7 +475,7 @@ input {
 }
 .candyDoc__pagesWrapper {
   
-  width: 100%;
+ 
   min-width: 210mm;
   height: 0%;
   scroll-behavior: smooth;

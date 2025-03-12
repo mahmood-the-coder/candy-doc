@@ -42,17 +42,12 @@ export function initRulerLeftHandle() {
     window.addEventListener("mousemove", handleMouseMove);
     deltaX = 0;
     startX = parseInt(window.getComputedStyle(left).left.replace("px", ""));
-    contents?.forEach((c) => {
-      c.style.borderRight = "1px solid var(--color)";
-      c.style.borderLeft = "1px solid var(--color)";
-    });
+   
   });
 
   window.addEventListener("mouseup", () => {
     window.removeEventListener("mousemove", handleMouseMove);
-    contents?.forEach((c) => {
-      c.style.border = "none";
-    });
+    
   });
   function handleMouseMove(e) {
     if (!contents || contents.length <= 0) return;

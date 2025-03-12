@@ -1,10 +1,10 @@
 import { UpdateDynamicText } from "../../dynamic-text/index.js";
-import { renderHierarchy } from "../../hierarchy-items/index.js";
-import { updateTableOfContent } from "../../table-of-content/index.js";
+import { numberPages } from "../../pages/elements/numberPages.js";
+import { sortPages } from "../../pages/elements/sortPages.js";
+import { generateTableOfContent } from "../../table-of-content/index.js";
 import { userData } from "../../user-data/userData.js";
-import { container } from "./container.js";
+import { hierarchyContainer } from "./container.js";
 import { getHierarchyItems } from "./getHierarchyItems.js";
-import { sortPages } from "./sortPages.js";
 import { swap } from "./swap.js";
 
 export function initHierarchyDrag() {
@@ -23,8 +23,7 @@ export function initHierarchyDrag() {
       isDragging = true;
       startY =
         target.getBoundingClientRect().y -
-        container.getBoundingClientRect().y +
-        14.85;
+        hierarchyContainer.getBoundingClientRect().y + hierarchyContainer.scrollTop + 14.9
       deltaY = 0;
       target.classList.add("dragging");
       clone = target.cloneNode();
@@ -38,7 +37,7 @@ export function initHierarchyDrag() {
       clone.style.zIndex = "100";
       clone.style.cursor = "row-resize";
       target.style.opacity = "0";
-      container.append(clone);
+      hierarchyContainer.append(clone);
     }
   });
 
@@ -47,28 +46,34 @@ export function initHierarchyDrag() {
     deltaY += e.movementY / zoom;
     let y = startY + deltaY;
     const minY = 0;
-    const maxY = container.offsetHeight - target.offsetHeight;
+    const maxY = hierarchyContainer.offsetHeight + hierarchyContainer.scrollTop - target.offsetHeight;
     if (y < minY) y = minY;
     if (y > maxY) y = maxY;
     clone.style.top = y + "px";
     swap(clone, target, [
-      ...container.querySelectorAll(".candyDoc__hierarchyItemWrapper"),
+      ...hierarchyContainer.querySelectorAll(".candyDoc__hierarchyItemWrapper"),
     ].filter((c) => !c.classList.contains("dragging")));
   });
   window.addEventListener("mouseup", () => {
+
     if (!isDragging) return;
     isDragging = false;
     target?.classList.remove("dragging");
     target.style.opacity = "1";
     target = null;
     clone.remove();
+   
 
     setTimeout(() => {
-      UpdateDynamicText()
-      if (document.body.querySelector("[data-name='Table Of Content']"))
-        updateTableOfContent()
-        sortPages()
-    }, 5);
+      sortPages()
+      numberPages()
+      if (document.body.querySelector(".candyDoc__tableOfContent")) {
+        generateTableOfContent()
 
+      }
+      userData.hierarchyItems = getHierarchyItems(hierarchyContainer)
+
+      UpdateDynamicText()
+    }, 200);
   });
 }

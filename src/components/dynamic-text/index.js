@@ -10,8 +10,8 @@ export class InsertText {
             { label: "Book Title", value: "bookTitle" },
             { label: "Chapter Title", value: "parentName" },
             { label: "Page Title", value: "name" },
-            { label: "Relative Number", value: "relativeIndex" },
-            { label: "Absolute Number", value: "index" },
+            { label: "Relative Number", value: "relativeNumber" },
+            { label: "Absolute Number", value: "number" },
         ];
 
         const select = document.createElement("select");
@@ -30,16 +30,13 @@ export class InsertText {
 
             if (e.target.value === "bookTitle") {
                 value = document.title;
-            } else if (!isNaN(value)) {
-                value = parseInt(value) + 1;
-            }
-
+            } 
             this.className = e.target.value;
             const toolTip = select.querySelector(`[value=${e.target.value}]`).label;
             const spanHTML = `<span data-tooltip="${toolTip}" class="${this.className}" data-value="${value}">${value}</span>`;
             document.execCommand("insertHTML", false, spanHTML);
 
-            window.getSelection().selectAllChildren(page.querySelector("." + this.className));
+            
         });
 
         this.button = select;
@@ -101,20 +98,21 @@ export function UpdateDynamicText() {
         "bookTitle",
         "parentName",
         "name",
-        "relativeIndex",
-        "index",
+        "relativeNumber",
+        "number",
     ]
     dynamicTextSelectors.forEach(selector => {
         document.body.querySelectorAll("." + selector).forEach(dynamicElement => {
-
+          
+            
             const page = findAncestor(dynamicElement, "candyDoc__page");
             let value = page?.dataset[selector] ?? "";
+      
+            
             if (selector == "bookTitle") {
                 value = document.title;
             }
-            else if (!isNaN(value)) {
-                value = parseInt(value) + 1
-            }
+            
 
             dynamicElement.textContent = value??""
 

@@ -1,26 +1,39 @@
-import { renderHierarchy } from "../hierarchy-items/index.js";
-import { container } from "../hierarchy/elements/container.js";
+import { findAncestor } from "../find-ancestor/index.js";
+import { createHierarchyItemElement } from "../hierarchy-item-element/index.js";
+import { hierarchyContainer } from "../hierarchy/elements/container.js";
 import { getHierarchyItems } from "../hierarchy/elements/getHierarchyItems.js";
-import { sortPages } from "../hierarchy/elements/sortPages.js";
+import { getAlignInspectorTools } from "../inspector/align-tools/index.js";
+import { getInspectorBackgroundTools } from "../inspector/background-image-tools/index.js";
+import { getInspectorBackgroundRepeatTools } from "../inspector/background-repeat-tools/index.js";
+import { getInspectorBackgroundSizeTools } from "../inspector/background-size-tools/index.js";
+import { getInspectorBorderColorTools } from "../inspector/border-color-tools/index.js";
+import { getInspectorBorderImageTools } from "../inspector/border-image-tools/index.js";
+import { getInspectorBorderRadiusTools } from "../inspector/border-radius-tools/index.js";
+import { getInspectorBorderTools } from "../inspector/border-tools/index.js";
+import { getInspectorBorderWidthTools } from "../inspector/border-width-tools/index.js";
+import { getInspector } from "../inspector/index.js";
+import { getTableOfContentInspectorTools } from "../inspector/table-of-content-tools/index.js";
+import { getInspectorTransformTools } from "../inspector/transform-tools/index.js";
 import { createPage } from "../pages/index.js";
 import { userData } from "../user-data/userData.js";
+const TABLE_OF_CONTENT_ITEM_HEIGHT = 20.1;
+const TABLE_OF_CONTENT_HEIGHT = 822;
 
 export function generateTableOfContent() {
-    const items = buildNestedList(userData.hierarchyItems).filter(i => i.name != "Table Of Content");
-    const itemHeight = 20;
-    document.body.querySelector(".candyDoc__pagesWrapper")?.querySelectorAll("[data-name='Table Of Content']").forEach(content => {
-        content.remove()
-    })
- 
-    userData.hierarchyItems = userData.hierarchyItems.filter(i => i.name != "Table Of Content")
-    const listHeight = itemHeight * items.length
-    const contentHeight = document.body.querySelector(".candyDoc__content").getBoundingClientRect().height;
-    const pages = Math.ceil(listHeight / contentHeight)
+
+    const items = buildNestedList(userData.hierarchyItems)
+    const itemHeight = TABLE_OF_CONTENT_ITEM_HEIGHT;
+    const contentHeight = document.body.querySelector(".candyDoc__content")?.getBoundingClientRect()?.height ?? TABLE_OF_CONTENT_HEIGHT;
     const itemsInEachPage = Math.floor(contentHeight / itemHeight)
-    for (let index = 0; index < pages; index++) {
-        const list = buildNestedHTMLList(items.slice(index * itemsInEachPage, (index + 1) * itemsInEachPage))
-        const id = "item__" + Math.random().toString(16);
-        const page = {
+    for (let index = 0; index < items.length; index += itemsInEachPage) {
+        const tableOfContentWrapper = document.createElement("div");
+        tableOfContentWrapper.classList.add("candyDoc__tableOfContentWrapper", "resizable", "draggable", "selectable");
+        const list = buildNestedHTMLList(items.slice(index, index + itemsInEachPage))
+        list.classList.add("target", "candyDoc__tableOfContent")
+        tableOfContentWrapper.append(list)
+        list.classList.add("candyDoc__tableOfContentList")
+        const id = "table__" + index;
+        const item = {
             index: 0,
             number: 0,
             id: id,
@@ -29,52 +42,104 @@ export function generateTableOfContent() {
             type: "table",
             innerHTML: ""
         }
-        userData.hierarchyItems.unshift(page)
 
-        renderHierarchy(userData.hierarchyItems)
-        const pageWrapper = document.body.querySelector(".candyDoc__pagesWrapper");
-        const newPageElement = createPage(page);
-        pageWrapper.insertBefore(newPageElement, pageWrapper.children[0]);
-        sortPages();
-        newPageElement.querySelector(".candyDoc__content").appendChild(list)
+        const hierarchyElementExist = hierarchyContainer.querySelector(`[data-id='${item.id}']`)
+        if (!hierarchyElementExist) {
+            const HierarchyElement = createHierarchyItemElement(item);
+            HierarchyElement.classList.add("candyDoc__tableOfContentHierarchyItem")
+            hierarchyContainer.insertBefore(HierarchyElement, hierarchyContainer.childNodes[0])
+            userData.hierarchyItems = getHierarchyItems(hierarchyContainer)
+
+        }
+
+        const pagesWrapper = document.querySelector(".candyDoc__pagesWrapper");
+        const pageExist = pagesWrapper.querySelector(`[data-page-id='${item.id}']`);
+        if (!pageExist) {
+            const newPage = createPage(item);
+            newPage.dataset.tableOfContent=JSON.stringify({
+                chapter:{},
+                page:{},
+                pageLis:[],
+
+            })
+            newPage.classList.add("candyDoc__tableOfContentPage")
+            pagesWrapper.insertBefore(newPage, pagesWrapper.children[0]);
+            newPage.querySelector(".candyDoc__content").append(tableOfContentWrapper)
+            item.innerHTML = newPage.querySelector(".candyDoc__content").innerHTML
+        }
+        else {
+            pageExist.querySelector(".candyDoc__content").innerHTML = ""
+            pageExist.querySelector(".candyDoc__content").append(tableOfContentWrapper)
+            item.innerHTML = pageExist.querySelector(".candyDoc__content").innerHTML
+        }
+
 
 
 
     }
 
 
-
-
-
-
-
-
 }
 
 function buildNestedHTMLList(items) {
-    // Create a <ul> element to hold the list
-    const ul = document.createElement('ol');
 
-    // Loop through each item and create a corresponding <li>
-    items.filter(i => i.name != "Table Of Content").forEach(item => {
+    const ol = document.createElement('ol');
+    ol.classList.add("candyDoc__ol")
+    items.forEach((item) => {
 
-        // Create the <li> element for the current item
+
         const li = document.createElement('li');
+        li.classList.add("candyDoc__li")
         li.dataset.id = item.id;
-        // Create a text node or custom content for the item
-        li.textContent = `${item.number} ... ${item.name}`;
+        li.dataset.type = item.type;
+        const listItem = document.createElement("div")
+        listItem.classList.add("candyDoc__tableOfContentItem")
+        const name = document.createElement("div");
+        name.innerText = item.name;
+        name.classList.add("candyDoc__tableOfContentName")
+        const trail = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        trail.classList.add("candyDoc__tableOfContentTrail")
+        trail.setAttribute("width", "450px")
+        trail.setAttribute("height", "10px")
+        const width = 500;
+        const height = 10;
+        const centerY = height / 2; // Calculate center Y
 
-        // If the item has children, recursively build the nested list for them
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", "0");
+        line.setAttribute("y1", centerY);
+        line.setAttribute("x2", width);
+        line.setAttribute("y2", centerY);
+        line.setAttribute("stroke", "black");
+        line.setAttribute("stroke-width", "1");
+        line.setAttribute("stroke-linejoin", "bevel");
+        line.setAttribute("stroke-linecap", "round");
+
+        trail.append(line);
+        const number = document.createElement("div");
+        number.innerText = item.type == "page" ? item.number : ""
+        number.classList.add("candyDoc__tableOfContentNumber")
+
+        if (item.type == "page") {
+            listItem.append(name, trail, number)
+        }
+        else {
+            listItem.append(name, number)
+
+        }
+        li.append(listItem);
+
         if (item.children && item.children.length > 0) {
-            const nestedUl = buildNestedHTMLList(item.children); // Recursive call
-            li.appendChild(nestedUl); // Append the nested <ul> to the <li>
+
+            const chapterOl = buildNestedHTMLList(item.children); // Recursive call
+            li.append(chapterOl);
+
         }
 
-        // Append the <li> to the main <ul>
-        ul.appendChild(li);
+        ol.appendChild(li);
     });
 
-    return ul;
+    return ol;
 }
 
 function buildNestedList(items) {
@@ -82,12 +147,12 @@ function buildNestedList(items) {
     const nestedList = [];
 
     // First, map each item by id for easy access
-    items.forEach(item => {
+    items.filter(i => i.type != "table").forEach((item) => {
         itemMap[item.id] = { ...item, children: [] };
     });
 
     // Now, build the nested structure
-    items.forEach(item => {
+    items.filter(i => i.type != "table").forEach(item => {
         if (item.parentId) {
             // If the item has a parentId, push it into the parent's children array
             itemMap[item.parentId].children.push(itemMap[item.id]);
@@ -100,47 +165,36 @@ function buildNestedList(items) {
     return nestedList;
 }
 
-export function updateTableOfContent() {
 
-    const items = buildNestedList(getHierarchyItems(container));
-    const itemHeight = 20;
+window.addEventListener("mouseup", (e) => {
 
-    const listHeight = itemHeight * items.length
-    const contentHeight = document.body.querySelector(".candyDoc__content").getBoundingClientRect().height;
-    const pages = Math.ceil(listHeight / contentHeight)
-    const itemsInEachPage = Math.floor(contentHeight / itemHeight)
-    for (let index = 0; index < pages; index++) {
-        const list = buildNestedHTMLList(items.slice(index * itemsInEachPage, (index + 1) * itemsInEachPage))
-        const id = "item__" + Math.random().toString(16);
-        const page = {
-            index: 0,
-            number: 0,
-            id: id,
-            name: "Table Of Content",
-            parentId: null,
-            type: "table",
-            innerHTML: ""
-        }
-
-        const newPageElement = createPage(page);
-        newPageElement.querySelector(".candyDoc__content").append(list)
-        document.body.querySelector(".candyDoc__pagesWrapper").querySelectorAll("[data-name='Table Of Content']").forEach(tablePage => {
-            newPageElement.dataset.pageId = tablePage.dataset.pageId
-            tablePage.parentElement.replaceChild(newPageElement, tablePage)
-        })
-      
-       
+    if (!e.target.classList.contains("candyDoc__tableOfContentName")) return;
+    const id = e.target.parentElement.parentElement.dataset.id
+    const page = document.body.querySelector(".candyDoc__pagesWrapper").querySelector(`[data-page-id='${id}']`);
 
 
+    page?.scrollIntoView()
 
-    }
+})
 
-
-
-
-
-
-
-
-
-}
+window.addEventListener("mousedown", (e) => {
+    if (!e.target.classList.contains("candyDoc__tableOfContentWrapper") && !findAncestor(e.target, "candyDoc__tableOfContentWrapper")) return
+    if (e.target.tagName.toUpperCase() == "LI") return;
+    const inspector = getInspector();
+    const scrollTop = inspector.scrollTop;
+    inspector.innerHTML = "";
+    getInspector().append(
+        getInspectorTransformTools(),
+        getAlignInspectorTools(),
+        getInspectorBorderTools(),
+        getInspectorBorderColorTools(),
+        getInspectorBorderRadiusTools(),
+        getInspectorBorderWidthTools(),
+        getInspectorBackgroundTools(),
+        getInspectorBackgroundSizeTools(),
+        getInspectorBackgroundRepeatTools(),
+        getInspectorBorderImageTools(),
+        getTableOfContentInspectorTools()
+    );
+    inspector.scrollTop = scrollTop;
+})

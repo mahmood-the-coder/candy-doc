@@ -38,7 +38,7 @@ export function initCursor() {
       currentCursor = document.querySelector(".candyDoc__cursor") || cursor
       if (e.target.parentElement.classList.contains("candyDoc__group"))
         e.target.parentElement.append(currentCursor);
-      else
+      else 
       {
         e.target.append(currentCursor)
       }
@@ -215,6 +215,3 @@ export function initCursor() {
   });
 }
 
-window.addEventListener("mousedown", (e) => {
-
-})

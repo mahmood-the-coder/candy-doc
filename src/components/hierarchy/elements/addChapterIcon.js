@@ -1,13 +1,13 @@
 import { createHierarchyItemElement } from "../../hierarchy-item-element/index.js";
 
 import { getHierarchySelect } from "./select.js";
-import { sortPages } from "./sortPages.js";
-import { container } from "./container.js";
-import { updateTableOfContent } from "../../table-of-content/index.js";
+import { hierarchyContainer } from "./container.js";
+import { generateTableOfContent } from "../../table-of-content/index.js";
 import { userData } from "../../user-data/userData.js";
-
+import { getRandomInt } from "../../random-Int/index.js";
+import { numberPages } from "../../pages/elements/numberPages.js";
 export const addChapterIcon = document.createElement("div");
-addChapterIcon.dataset.tooltip="add chapter"
+addChapterIcon.dataset.tooltip = "add chapter"
 addChapterIcon.innerHTML =
   /*html*/
   `
@@ -45,9 +45,15 @@ addChapterIcon.addEventListener("mouseup", () => {
     name: "new chapter",
     type: "parent",
     parentId: null,
+    color: "white"
   };
   const select = getHierarchySelect();
   const itemElement = createHierarchyItemElement(newItem);
+  itemElement.classList.add("candyDoc__hierarchyChapter")
+  const color = `rgba(${getRandomInt(0, 255)}, ${getRandomInt(0, 255)}, ${getRandomInt(0, 255)}, 0.5)`;
+  itemElement.dataset.color = color;
+  itemElement.style.backgroundColor = color;
+  newItem.color = color
   if (select && select.parentElement) {
     if (select.dataset.type == "parent") {
       select
@@ -57,12 +63,13 @@ addChapterIcon.addEventListener("mouseup", () => {
       select.parentElement.insertBefore(itemElement, select.nextElementSibling);
     }
   } else {
-    container.append(itemElement);
+    hierarchyContainer.append(itemElement);
   }
-   userData.hierarchyItems.push(newItem)
-  sortPages();
+  userData.hierarchyItems.push(newItem)
+  setTimeout(() => {
+    numberPages()
+  if (document.body.querySelector(".candyDoc__tableOfContent"))
+    generateTableOfContent()
+  }, 10);
 
-    if(document.body.querySelector("[data-name='Table Of Content']"))
-      updateTableOfContent()
- 
 });

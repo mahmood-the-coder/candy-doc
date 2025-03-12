@@ -1,10 +1,11 @@
+import { numberPages } from "../../pages/elements/numberPages.js"
 import { generateTableOfContent } from "../../table-of-content/index.js"
 
 export const tableOfContentIcon = document.createElement("div")
-tableOfContentIcon.dataset.tooltip="generate content list"
+tableOfContentIcon.dataset.tooltip = "generate content list"
 tableOfContentIcon.classList.add("candyDoc__icon")
 tableOfContentIcon.innerHTML =/*html*/
-    `
+  `
 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
   <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
   <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -14,6 +15,7 @@ tableOfContentIcon.innerHTML =/*html*/
   </g>
 </svg>
 `
-tableOfContentIcon.addEventListener("mousedown",()=>{
-    generateTableOfContent()
+tableOfContentIcon.addEventListener("mousedown", () => {
+  numberPages()
+  generateTableOfContent()
 })

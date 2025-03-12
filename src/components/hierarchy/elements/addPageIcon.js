@@ -2,11 +2,11 @@ import { createHierarchyItemElement } from "../../hierarchy-item-element/index.j
 
 import { createPage } from "../../pages/index.js";
 import { getHierarchySelect } from "./select.js";
-import { sortPages } from "./sortPages.js";
-import { container } from "./container.js";
-import { updateTableOfContent } from "../../table-of-content/index.js";
+import { hierarchyContainer } from "./container.js";
+import { generateTableOfContent } from "../../table-of-content/index.js";
 import { userData } from "../../user-data/userData.js";
-import { getHierarchyItems } from "./getHierarchyItems.js";
+import { cursor, initCursor } from "../../insert/cursor.js";
+import { numberPages } from "../../pages/elements/numberPages.js";
 export const addPageIcon = document.createElement("div");
 addPageIcon.dataset.tooltip = "add page"
 addPageIcon.innerHTML =
@@ -53,35 +53,40 @@ addPageIcon.addEventListener("mouseup", () => {
       select
         .querySelector(".candyDoc__nestedHierarchyItems")
         .append(itemElement);
-      const index = [...select.querySelector(".nest").querySelectorAll(".candyDoc__hierarchyItemWrapper")].filter(i => !i.classList.contains("candyDoc__hierarchyDummy")).findIndex(c => c == itemElement);
-      itemElement.dataset.index = newItem.index = index;
-      itemElement.dataset.number = newItem.number = index + 1;
+      const index = [...select.querySelector(".nest").querySelectorAll(".candyDoc__hierarchyItemWrapper")].filter(i => !i.classList.contains("candyDoc__hierarchyDummy") && !i.classList.contains("candyDoc__tableOfContent") && !i.classList.contains("candyDoc__hierarchyChapter")).findIndex(c => c == itemElement);
+      itemElement.dataset.relativeNumber = newItem.number = index + 1;
       itemElement.querySelector("input").value = itemElement.dataset.name = newItem.name = "page " + (index + 1)
     } else {
 
       select.parentElement.insertBefore(itemElement, select.nextElementSibling);
-      const index = [...select.parentElement.querySelectorAll(".candyDoc__hierarchyItemWrapper")].filter(i => !i.classList.contains("candyDoc__hierarchyDummy")).findIndex(c => c == itemElement);
+      const index = [...select.parentElement.querySelectorAll(".candyDoc__hierarchyItemWrapper")].filter(i => !i.classList.contains("candyDoc__hierarchyDummy") && !i.classList.contains("candyDoc__tableOfContent") && !i.classList.contains("candyDoc__hierarchyChapter")).findIndex(c => c == itemElement);
       itemElement.dataset.index = newItem.index = index;
-      itemElement.dataset.number = newItem.number = index + 1;
+      itemElement.dataset.relativeNumber = itemElement.dataset.number = newItem.number = index + 1;
+
       itemElement.querySelector("input").value = itemElement.dataset.name = newItem.name = "page " + (index + 1)
     }
 
   } else {
-    container.append(itemElement);
-    const index = [...container.querySelectorAll(".candyDoc__hierarchyItemWrapper")].filter(i => !i.classList.contains("candyDoc__hierarchyDummy")).findIndex(c => c == itemElement);
+    hierarchyContainer.append(itemElement);
+    const index = [...hierarchyContainer.querySelectorAll(".candyDoc__hierarchyItemWrapper")].filter(i => !i.classList.contains("candyDoc__hierarchyDummy") && !i.classList.contains("candyDoc__tableOfContent") && !i.classList.contains("candyDoc__hierarchyChapter")).findIndex(c => c == itemElement);
     itemElement.dataset.index = newItem.index = index;
-    itemElement.dataset.number = newItem.number = index + 1;
+    itemElement.dataset.relativeNumber = itemElement.dataset.number = newItem.number = index + 1;
     itemElement.querySelector("input").value = itemElement.dataset.name = newItem.name = "page " + (index + 1)
   }
 
   const pageWrapper = document.body.querySelector(".candyDoc__pagesWrapper");
   const newPageElement = createPage(newItem);
+  newPageElement.dataset.number = itemElement.dataset.number
+  newPageElement.dataset.relativeNumber = itemElement.dataset.relativeNumber
   userData.hierarchyItems.push(newItem)
   pageWrapper.append(newPageElement);
-  sortPages();
-
-  if (document.body.querySelector("[data-name='Table Of Content']"))
-    updateTableOfContent()
+  const currentCursor = document?.querySelector(".candyDoc__cursor") ?? cursor
+  newPageElement.querySelector(".candyDoc__content").append(currentCursor)
+  setTimeout(() => {
+    numberPages()
+  if (document.body.querySelector(".candyDoc__tableOfContent"))
+    generateTableOfContent()
+  }, 10);
 
 
 });

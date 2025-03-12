@@ -1,6 +1,8 @@
 import { charts } from "../chart/index.js";
 import { findAncestor } from "../find-ancestor/index.js";
+import { hierarchyContainer } from "../hierarchy/elements/container.js";
 import { getInspector } from "../inspector/index.js";
+import { getCenterLayoutElement } from "../layout/index.js";
 import { getSelected, getSelectedElements, setSelected } from "../selection/index.js";
 const removeIcon = document.createElement("div");
 removeIcon.classList.add("candyDoc__removeIcon");
@@ -45,7 +47,11 @@ export function initRemovable() {
     )
       return;
     const selected = getSelected();
-
+    if (selected.classList.contains("candyDoc__tableOfContentWrapper")) {
+      const page = findAncestor(selected, "candyDoc__page");
+      findAncestor(selected, "candyDoc__page")?.remove();
+      hierarchyContainer.querySelector(`[data-id='${page.dataset.pageId}]'`)?.remove();
+    }
     charts
       .filter((apex) => apex.id == selected.id)
       .forEach((apex) => apex.destroy());
@@ -61,12 +67,13 @@ export function initRemovable() {
       });
     getInspector().innerHTML = "";
     const toRemove = findAncestor(e.target, "removable");
+
+    [...getCenterLayoutElement().querySelectorAll(`#${toRemove.id}`)].forEach(el => el.remove())
     toRemove?.remove();
   });
-  window.addEventListener("keyup",(e)=>{
-    if(e.code=="Delete")
-    {
-      getSelectedElements().forEach(selected=>selected.remove())
+  window.addEventListener("keyup", (e) => {
+    if (e.code == "Delete") {
+      getSelectedElements().forEach(selected => selected.remove())
     }
   })
 }

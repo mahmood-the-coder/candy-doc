@@ -1,17 +1,20 @@
 import { isCollideY } from "../../collision/index.js";
-import { renderHierarchy } from "../../hierarchy-items/index.js";
+import { numberPages } from "../../pages/elements/numberPages.js";
 import { isInside } from "../../intersection/index.js";
 import { userData } from "../../user-data/userData.js";
-import { container } from "./container.js";
+import { hierarchyContainer } from "./container.js";
 import { getHierarchyItems } from "./getHierarchyItems.js";
+import { generateTableOfContent } from "../../table-of-content/index.js";
+import { createPages } from "../../pages/index.js";
 const dummy = document.createElement("div");
 dummy.classList.add("candyDoc__hierarchyItemWrapper", "candyDoc__hierarchyDummy");
 dummy.style.opacity = "0";
+dummy.style.height = "1px"
 export function swap(clone, target, others) {
   const cloneRect = clone.getBoundingClientRect();
+  const pageWrapper = document.body.querySelector(".candyDoc__pagesWrapper");
   others.forEach((o) => {
     const otherRect = o.getBoundingClientRect();
-
     if (isCollideY(otherRect, cloneRect)) {
       if (o.dataset.type != "parent") {
         if (
@@ -20,6 +23,8 @@ export function swap(clone, target, others) {
         ) {
           if (!target.contains(o.parentElement))
             o.parentElement.insertBefore(target, o);
+
+
         }
 
         if (
@@ -29,19 +34,22 @@ export function swap(clone, target, others) {
           if (!target.contains(o.parentElement))
             o.parentElement.insertBefore(target, o.nextElementSibling);
 
+
+
         }
       }
+
       if (o.dataset?.type == "parent") {
         const targetItemIndex = userData.hierarchyItems.findIndex(
           (i) => i.id == target.dataset.id
         );
         if (userData.hierarchyItems[targetItemIndex])
           userData.hierarchyItems[targetItemIndex].parentId = null;
-        const page = document.body.querySelector(
-          `[data-page-id='${target.dataset.id}']`
-        );
 
+
+        const page = pageWrapper.querySelector(`[data-page-id='${target.dataset.id}']`)
         if (page?.data?.parentId) {
+
           page.dataset.parentId = null;
           page.dataset.parentName = "none"
 
@@ -51,8 +59,9 @@ export function swap(clone, target, others) {
           cloneRect.y + cloneRect.height / 2 <
           otherRect.y + cloneRect.height
         ) {
-         
+
           o.parentElement.insertBefore(target, o);
+
 
           return;
         }
@@ -63,6 +72,8 @@ export function swap(clone, target, others) {
         ) {
           o.parentElement.insertBefore(target, o.nextElementSibling);
 
+
+
         }
 
         const nest = o.querySelector(".nest");
@@ -71,24 +82,24 @@ export function swap(clone, target, others) {
           nest.append(target);
           if (userData.hierarchyItems[targetItemIndex]) {
             userData.hierarchyItems[targetItemIndex].parentId = o.dataset.id;
+            const page = pageWrapper.querySelector(`[data-page-id='${target.dataset.id}']`)
+            if (page) {
+              page.dataset.parentId = o.dataset.id
+              page.dataset.parentName = o.querySelector("input").value
+
+            }
           }
 
-          const page = document.body.querySelector(
-            `[data-page-id='${target.dataset.id}']`
-          );
-          if(page)
-          {
-            page.dataset.parentId = o.dataset.id;
-            page.dataset.parentName = o.dataset.name
-          }
-          
+
+
         }
       }
-      
+
     }
-    
+
   });
-  container.append(dummy);
-  userData.hierarchyItems=getHierarchyItems(container)
+
+  hierarchyContainer.append(dummy);
+
 }
 

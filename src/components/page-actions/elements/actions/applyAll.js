@@ -19,8 +19,8 @@ applyAll.addEventListener("mousedown", () => {
   if (!originContent) return;
   const page = findAncestor(originContent, "candyDoc__page")
   if (!page) return;
-  const parentId = page.dataset.parentId;
-  if (!parentId || parentId == "null") return;
+  const parentId = page?.dataset?.parentId??"null";
+
   selectedElements.forEach(selected => {
     document.body.querySelectorAll(`.candyDoc__page`).forEach(page => {
 

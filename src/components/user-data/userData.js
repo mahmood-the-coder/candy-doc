@@ -1,7 +1,8 @@
 import { save } from "../DB/save.js";
 import { load } from "../DB/load.js";
 import { cursor } from "../insert/cursor.js";
-import { container } from "../hierarchy/elements/container.js";
+import { hierarchyContainer } from "../hierarchy/elements/container.js";
+import { getHierarchyItems } from "../hierarchy/elements/getHierarchyItems.js";
 
 
 export const userData = {
@@ -61,7 +62,7 @@ export function initSave() {
 }
 function saveData() {
   setTimeout(() => {
-    getHierarchyItems(container);
+    userData.hierarchyItems=getHierarchyItems(hierarchyContainer)
     const pagesWrapper = document.body.querySelector(
       ".candyDoc__pagesWrapper"
     );
@@ -72,23 +73,7 @@ function saveData() {
   }, 100);
 }
 
-function getHierarchyItems(container) {
-  userData.hierarchyItems = [...container.querySelectorAll(".candyDoc__hierarchyItemWrapper")].filter(item => !item.classList.contains("candyDoc__hierarchyDummy")).map((item, index) => {
-    return {
-      id: item.dataset.id,
-      index: index,
-      number: (index + 1).toString(),
-      name: item.querySelector("input")?.value ?? "",
-      parentId: item?.parentElement?.dataset?.id ?? null,
-      innerHTML: document.body.querySelector(`[data-page-id='${item.dataset.id}']`)?.innerHTML ?? "",
-      type: item.dataset.type
-    };
-  });
 
-  save(userData);
-
-
-}
 
 function setPagesData(pagesWrapper) {
   const pagesWrapperClone = pagesWrapper.cloneNode(true);

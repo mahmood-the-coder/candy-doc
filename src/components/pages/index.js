@@ -1,8 +1,5 @@
-import { getContent } from "../content/index.js";
-import { getLeftContainer } from "../left-container/index.js";
-import { getRightContainer } from "../right-container/index.js";
+
 import { userData } from "../user-data/userData.js";
-import { page } from "./elements/page.js";
 import { wrapper } from "./elements/wrapper.js";
 export function createPages() {
   wrapper.innerHTML = "";
@@ -10,44 +7,50 @@ export function createPages() {
     .filter((i) => i.type != "parent")
     .forEach((i) => {
       const page = createPage(i);
-
+      
       wrapper.append(page);
     });
+
   return wrapper;
 }
 export function createPage(item) {
-  const content = getContent().cloneNode(true);
-
+  const content = document.createElement("div");
+  content.classList.add("candyDoc__content")
+  const page = document.createElement("div");
+  page.classList.add("candyDoc__page");
   content.innerHTML = item.innerHTML;
   page.append(content);
-  const clone = page.cloneNode(true);
-  clone.dataset.pageId = item.id;
-  clone.dataset.index = item.index;
-  clone.dataset.name = item.name;
-
+  page.dataset.pageId = item.id;
+  page.dataset.index = item.index;
+  page.dataset.name = item.name;
+  page.dataset.relativeNumber = item.relativeNumber
+  page.dataset.number = item.number
+  page.dataset.parentName = item.parentName
   const pageHeader = document.createElement("div");
   pageHeader.classList.add("candyDoc__pageHeader");
 
   const pageFooter = document.createElement("div");
   pageFooter.classList.add("candyDoc__pageFooter");
 
-  const leftContainer = getLeftContainer().cloneNode(true);
-  const rightContainer = getRightContainer().cloneNode(true);
-  clone.append(pageHeader, pageFooter, leftContainer, rightContainer);
+  const leftContainer = document.createElement("div");
+  leftContainer.classList.add("candyDoc__leftContainer");
+  const rightContainer = document.createElement("div");
+  rightContainer.classList.add("candyDoc__rightContainer");
+  page.append(pageHeader, pageFooter, leftContainer, rightContainer);
 
   if (item.parentId) {
-    clone.dataset.parentId = item.parentId;
-    clone.dataset.relativeIndex = userData.hierarchyItems
+    page.dataset.parentId = item.parentId;
+    page.dataset.relativeIndex = userData.hierarchyItems
       .filter((i) => i.parentId == item.parentId)
       .findIndex((i) => i.id == item.id);
-    clone.dataset.parentName = userData.hierarchyItems.find(
+    page.dataset.parentName = userData.hierarchyItems.find(
       (i) => i.id == item.parentId
     ).name;
   } else {
-    clone.dataset.relativeIndex = item.index;
-    clone.dataset.parentName = item.name;
+    page.dataset.relativeIndex = item.index;
+    page.dataset.parentName = item.name;
   }
-  return clone;
+  return page;
 }
 
 

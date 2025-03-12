@@ -435,7 +435,8 @@ input{
   margin-bottom: 16px;
 }
 .candyDoc__pagesWrapper {
-  width: 100%;
+  width: 210mm;
+  overflow-x: hidden;
   height: auto;
   scroll-behavior: smooth;
   display: flex;
