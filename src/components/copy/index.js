@@ -8,7 +8,7 @@ export function initCopy()
 
     window.addEventListener("copy",(e)=>{
         toCopy=[]
-        
+        toCut=[]
         if(findAncestor(e.target,"candyDoc__textBoxWrapper"))return;
         const selectedElements=getSelectedElements();
         selectedElements.forEach(selected=>{
@@ -21,9 +21,11 @@ export function initCopy()
     window.addEventListener("cut",(e)=>{
         
         toCut=[]
+        toCopy=[]
         const selectedElements=getSelectedElements();
         selectedElements.forEach(selected=>{
             toCut.push(selected);
+            selected.remove()
            
         })
 
@@ -35,11 +37,11 @@ export function initCopy()
         const cursor=document.body.querySelector(".candyDoc__cursor");
       
         toCopy.forEach(c=>{
-            c.id=Math.random(16)
+            c.id="pasted__"+Math.random(16)
             cursor.parentElement.append(c)
         })
         toCut.forEach(c=>{
-            c.id=Math.random(16)
+            c.id="pasted__"+Math.random(16)
             cursor.parentElement.append(c)
           
         })

@@ -70,6 +70,6 @@ function getPagesData() {
   pagesWrapperClone.querySelectorAll(".selectable").forEach(el => el.classList.remove("selectable"))
   pagesWrapperClone.querySelectorAll(".candyDoc__textBox").forEach(el => el.contentEditable = "false")
   pagesWrapperClone.querySelectorAll(".candyDoc__page").forEach(p => p.style.backgroundColor = "white")
-  pagesWrapperClone.querySelectorAll("div:not(.candyDoc__page)").forEach(el => { el.style.outline = "none" })
+  pagesWrapperClone.querySelectorAll("*:not(.candyDoc__page)").forEach(el => { el.style.outline = "none" })
   return pagesWrapperClone.innerHTML;
 }

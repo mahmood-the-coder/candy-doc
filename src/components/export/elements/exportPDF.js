@@ -36,8 +36,8 @@ function downloadPDF(fileName, html) {
   const options = {
     margin: [0, 0], // No margins
     filename: fileName,
-    image: { type: "jpeg", quality: 0.98 },
-    html2canvas: { scale: 2 },
+    image: { type: "jpeg", quality: 1 },
+    html2canvas: { scale: 8},
     jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
   };
 

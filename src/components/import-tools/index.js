@@ -3,9 +3,16 @@ import { load } from "../DB/load.js";
 import { cursor } from "../insert/cursor.js";
 import { getCenterLayoutElement } from "../layout/index.js";
 import { userData } from "../user-data/userData.js";
+import { UpdateDynamicText } from "../dynamic-text/index.js";
+import { initCirclesAll } from "../inspector/shapes-tools/insert/elements/circle.js";
+import { initCurvesAll } from "../inspector/shapes-tools/insert/elements/curve.js";
+import { initEllipsesAll } from "../inspector/shapes-tools/insert/elements/ellipse.js";
+import { initLinesAll } from "../inspector/shapes-tools/insert/elements/line.js";
+import { initSquareAll } from "../inspector/shapes-tools/insert/elements/square.js";
+import { renderHierarchy } from "../hierarchy-items/index.js";
 
 const importIcon = document.createElement("div");
-importIcon.dataset.tooltip="Import JSON"
+importIcon.dataset.tooltip = "Import JSON"
 importIcon.classList.add("candyDoc__icon", "candyDoc__importIcon");
 importIcon.innerHTML =
   /*html*/
@@ -59,47 +66,39 @@ function chooseJsonFile() {
 
 importIcon.addEventListener("mousedown", (e) => {
   chooseJsonFile().then((file) => {
-  
+
     const reader = new FileReader();
     reader.onload = () => {
-      console.log("File content:", reader.result);
       try {
         const data = JSON.parse(reader?.result ?? "null");
         if (data && data.id == "user-data") {
           save(data);
-         load("user-data")
-    .then((data) => {
-      const pagesWrapperElement = getCenterLayoutElement().querySelector(
-        ".candyDoc__pagesWrapper"
-      );
-      pagesWrapperElement.innerHTML = data.pagesWrapper;
-      const pageActionsEditor=getCenterLayoutElement().querySelector(".candyDoc__pageActionsEditor");
-      pageActionsEditor.innerHTML=data.pageActions;
-      const RunningFooterEditor=getCenterLayoutElement().querySelector(".candyDoc__runningFooterEditor");
-      RunningFooterEditor.innerHTML=data.runningFooter;
-               
-    })
-    .catch(() => {
-      const pagesWrapperElement = getCenterLayoutElement().querySelector(
-        ".candyDoc__pagesWrapper"
-      );
-      userData.pagesWrapper = pagesWrapperElement.innerHTML;
-     
-      
+          load("user-data")
+            .then((data) => {
+           
+              
+              const pagesWrapperElement = getCenterLayoutElement().querySelector(
+                ".candyDoc__pagesWrapper"
+              );
+              pagesWrapperElement.innerHTML = data.pagesWrapper;
+              renderHierarchy(data.hierarchyItems)
+           
 
-      const pageActionsEditor=getCenterLayoutElement().querySelector(".candyDoc__pageActionsEditor");
-      userData.pageActions=pageActionsEditor.innerHTML;
-      const RunningFooterEditor=getCenterLayoutElement().querySelector(".candyDoc__runningFooterEditor");
-      userData.runningFooter=RunningFooterEditor.innerHTML;
-      save(userData);
-    })
-    .finally(() => {
-      const content =
-        getCenterLayoutElement().querySelector(".candyDoc__content");
-      content.append(cursor);
-    });
+            })
+            .catch(() => {
+              const pagesWrapperElement = getCenterLayoutElement().querySelector(
+                ".candyDoc__pagesWrapper"
+              );
+              userData.pagesWrapper = pagesWrapperElement.innerHTML;
+              save(userData);
+            })
+            .finally(() => {
+              const content =
+                getCenterLayoutElement().querySelector(".candyDoc__content");
+              content.append(cursor);
+            });
         }
-      } catch (error) {}
+      } catch (error) { }
     };
     reader.readAsText(file);
   });

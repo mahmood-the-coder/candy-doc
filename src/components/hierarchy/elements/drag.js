@@ -14,6 +14,7 @@ export function initHierarchyDrag() {
   let target = null;
   let clone = null;
   let zoom = 1;
+  
   window.addEventListener("mousedown", (e) => {
 
     if (e.target.classList.contains("candyDoc__hierarchyItemDragIcon")) {

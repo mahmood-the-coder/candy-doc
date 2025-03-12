@@ -24,7 +24,7 @@ toggle.parentElement.style.height="40px"
         toggle.parentElement.querySelectorAll("div:not(.candyDoc__inspectorToolsWrapperToggle , .candyDoc__inspectorToolLabel)").forEach(div=>div.style.display="none")
 
 toggle.addEventListener("mousedown",(e)=>{
-    if(toggle.parentElement.offsetHeight>40)
+    if(isOpen())
     {
         toggle.parentElement.style.height="40px"
         toggle.parentElement.querySelectorAll("div:not(.candyDoc__inspectorToolsWrapperToggle , .candyDoc__inspectorToolLabel)").forEach(div=>div.style.display="none")
@@ -36,3 +36,7 @@ toggle.addEventListener("mousedown",(e)=>{
     }
  
 })
+
+function isOpen() {
+  return toggle.parentElement.offsetHeight > 40;
+}

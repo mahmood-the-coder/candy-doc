@@ -8,8 +8,6 @@ import { getHierarchyItems } from "../hierarchy/elements/getHierarchyItems.js";
 export const userData = {
   id: "user-data",
   pagesWrapper: "",
-  pageActions: "",
-  runningFooter: "",
   hierarchyItems: [{
     index: 0,
     id: "0",

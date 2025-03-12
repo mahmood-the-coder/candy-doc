@@ -68,7 +68,7 @@ export function initRemovable() {
     getInspector().innerHTML = "";
     const toRemove = findAncestor(e.target, "removable");
 
-    [...getCenterLayoutElement().querySelectorAll(`#${toRemove.id}`)].forEach(el => el.remove())
+    [...getCenterLayoutElement().querySelectorAll(`[id='${toRemove.id}']`)].forEach(el => el.remove())
     toRemove?.remove();
   });
   window.addEventListener("keyup", (e) => {

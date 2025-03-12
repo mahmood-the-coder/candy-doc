@@ -1,3 +1,4 @@
+import { searchInput } from "../inspector-search/index.js";
 import { getCenterLayoutElement } from "../layout/index.js";
 import { header } from "./elements/header.js";
 import { wrapper } from "./elements/wrapper.js";
@@ -6,6 +7,7 @@ export function getInspector() {
 }
 
 export function getInspectorHeader() {
+  header.append(searchInput)
   return header;
 }
 

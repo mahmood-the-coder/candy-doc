@@ -245,7 +245,6 @@ window.addEventListener("mouseup",(e)=>{
   if (!getCenterLayoutElement().contains(e.target)) return;
    if (!e.target.classList.contains("candyDoc__shapeLine")) return;
    e.stopPropagation();
-   setSelected(e.target);
  
    const inspector = getInspector();
    const scrollTop = inspector.scrollTop;
