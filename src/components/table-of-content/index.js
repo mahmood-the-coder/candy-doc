@@ -100,9 +100,9 @@ function buildNestedHTMLList(items) {
         const trail = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         trail.classList.add("candyDoc__tableOfContentTrail")
         trail.setAttribute("width", "450px")
-        trail.setAttribute("height", "10px")
+        trail.setAttribute("height", "25px")
         const width = 500;
-        const height = 10;
+        const height = 25;
         const centerY = height / 2; // Calculate center Y
 
         const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
@@ -169,6 +169,7 @@ function buildNestedList(items) {
 window.addEventListener("mouseup", (e) => {
 
     if (!e.target.classList.contains("candyDoc__tableOfContentName")) return;
+    if(!e.ctrlKey)return;
     const id = e.target.parentElement.parentElement.dataset.id
     const page = document.body.querySelector(".candyDoc__pagesWrapper").querySelector(`[data-page-id='${id}']`);
 
