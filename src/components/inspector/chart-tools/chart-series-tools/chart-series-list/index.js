@@ -48,8 +48,7 @@ window.addEventListener("mousedown", (e) => {
 
   const options = JSON.parse(selected?.dataset?.chartOptions ?? "null");
   if (!options) return;
-  const lastSeries = options.series[options.series.length - 1];
-  options.series.push(lastSeries);
+  options.series.push([...options.series][options.series.length-1]);
 
   selected.dataset.chartOptions = JSON.stringify(options);
 

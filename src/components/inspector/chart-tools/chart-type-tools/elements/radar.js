@@ -10,7 +10,23 @@ export const radarOptions = {
     width: 2,
   },
   chart: {
+    animations: {
+      enabled: false,
+      speed: 800,
+      animateGradually: {
+        enabled: false,
+        delay: 150
+      },
+      dynamicAnimation: {
+        enabled: false,
+        speed: 350
+      }
+    },
     type: "radar",
+    width: "100%",
+    height: "100%",
+    minHeight:250,
+    minWidth:250,
     toolbar:{
       show:false,
     }
@@ -31,11 +47,11 @@ export const radarOptions = {
     show: false,
     row: {
       colors: ["transparent"],
-      opacity: 0.5,
+      opacity: 0,
     },
     column: {
       colors: ["transparent"],
-      opacity: 0.5,
+      opacity:0,
     },
   },
   tooltip: {
@@ -45,19 +61,10 @@ export const radarOptions = {
     opacity: 0.2,
   },
   dataLabels:{
-    enabled:true
+    enabled:true,
+    colors:["#000000"]
   },
-  grid: {
-    show: true,
-    row: {
-      colors: ["transparent", "transparent"],
-      opacity: 0.5,
-    },
-    column: {
-      colors: ["transparent", "transparent"],
-      opacity: 0.5,
-    },
-  },
+  
   title:{
     align:"center",
     text:"Chart Title",

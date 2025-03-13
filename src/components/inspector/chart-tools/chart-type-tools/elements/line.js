@@ -23,15 +23,27 @@ export const lineOptions = {
   chart: {
     animations: {
       enabled: false,
+      speed: 800,
+      animateGradually: {
+        enabled: false,
+        delay: 150
+      },
+      dynamicAnimation: {
+        enabled: false,
+        speed: 350
+      }
     },
     toolbar: {
       show: false,
     },
 
     type: "line",
+    width: "100%",
+    height: "100%",
   },
   dataLabels: {
     enabled: true,
+    colors:["#000000"]
   },
   stroke: {
     show: true,

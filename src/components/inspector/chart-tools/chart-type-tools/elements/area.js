@@ -21,7 +21,21 @@ export const areaOptions = {
     enabled: false,
   },
   chart: {
+    animations: {
+      enabled: false,
+      speed: 800,
+      animateGradually: {
+        enabled: false,
+        delay: 150
+      },
+      dynamicAnimation: {
+        enabled: false,
+        speed: 350
+      }
+    },
     type: "area",
+    width: "100%",
+    height: "100%",
     animations: {
       enabled: false,
     },
@@ -30,6 +44,7 @@ export const areaOptions = {
     },
     dataLabels: {
       enabled: true,
+      colors:["#000000"]
     },
     stroke: {
       show: true,

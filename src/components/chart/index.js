@@ -18,7 +18,6 @@ import { getInspectorChartYAxisTools } from "../inspector/chart-tools/chart-yAxi
 import { getInspector } from "../inspector/index.js";
 import { getInspectorTransformTools } from "../inspector/transform-tools/index.js";
 import { getCenterLayoutElement } from "../layout/index.js";
-import { setSelected } from "../selection/index.js";
 import { chart } from "./elements/chart.js";
 import { wrapper } from "./elements/wrapper.js";
 export const charts = [];
@@ -45,16 +44,31 @@ export function insertChart() {
     chart: {
       animations: {
         enabled: false,
+        speed: 800,
+        animateGradually: {
+          enabled: false,
+          delay: 150
+        },
+        dynamicAnimation: {
+          enabled: false,
+          speed: 350
+        }
+      },
+      animations: {
+        enabled: false,
       },
       toolbar: {
         show: false,
       },
 
       type: "line",
+      width: "100%",
+      height: "100%",
       background: "transparent",
     },
     dataLabels: {
       enabled: true,
+      colors: ["#000000"]
     },
     stroke: {
       show: true,
@@ -74,19 +88,20 @@ export function insertChart() {
         opacity: 0.5,
       },
     },
-    title:{
-      align:"center",
-      text:"Chart Title",
-      style:{
-        color:"black",
-        fontSize:"16px",
-        fontWeight:"500"
+    title: {
+      align: "center",
+      text: "Chart Title",
+      style: {
+        color: "black",
+        fontSize: "16px",
+        fontWeight: "500"
       }
     }
   };
   wrapperClone.id = "chart__" + Date.now().toString(16);
   wrapperClone.dataset.chartType = "line";
   insert(wrapperClone);
+
   window.addEventListener("mousedown", (e) => {
     if (
       !e.target.classList.contains("candyDoc__chartWrapper") &&
@@ -143,20 +158,20 @@ window.addEventListener("load", () => {
     addTools();
     inspector.scrollTop = scrollTop;
   });
-  charts.forEach(c=>c?.destroy())
+  charts.forEach(c => c?.destroy())
   getCenterLayoutElement()
     .querySelectorAll(".candyDoc__chart")
     .forEach((c) => {
       c.innerHTML = "";
-      const options=JSON.parse(c.parentElement?.dataset?.chartOptions?? "null")
-      if(!options)return;
-      const apex = new ApexCharts(c,options);
-      apex.id=c.parentElement.id
-  
+      const options = JSON.parse(c.parentElement?.dataset?.chartOptions ?? "null")
+      if (!options) return;
+      const apex = new ApexCharts(c, options);
+      apex.id = c.parentElement.id
+
       apex.render().then(() => {
         charts.push(apex);
       });
     });
-   
-    
+
+
 });

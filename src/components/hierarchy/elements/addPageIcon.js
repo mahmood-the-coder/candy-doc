@@ -75,10 +75,21 @@ addPageIcon.addEventListener("mouseup", () => {
   }
 
   const pageWrapper = document.body.querySelector(".candyDoc__pagesWrapper");
-  const newPageElement = createPage(newItem);
+  let newPageElement = createPage(newItem);
   newPageElement.dataset.number = itemElement.dataset.number
   newPageElement.dataset.relativeNumber = itemElement.dataset.relativeNumber
   userData.hierarchyItems.push(newItem)
+  const firstPage=pageWrapper.querySelector(".candyDoc__page");
+  if(firstPage)
+  {
+    const clone=firstPage.cloneNode(true)
+    clone.querySelector(".candyDoc__content").innerHTML="";
+    clone.querySelector(".candyDoc__pageFooter").innerHTML="";
+    clone.querySelector(".candyDoc__pageHeader").innerHTML="";
+    clone.querySelector(".candyDoc__leftContainer").innerHTML="";
+    clone.querySelector(".candyDoc__rightContainer").innerHTML="";
+    newPageElement=clone;
+  }
   pageWrapper.append(newPageElement);
   const currentCursor = document?.querySelector(".candyDoc__cursor") ?? cursor
   newPageElement.querySelector(".candyDoc__content").append(currentCursor)

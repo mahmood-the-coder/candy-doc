@@ -27,18 +27,30 @@ export const  treemapOptions = {
     chart: {
       animations: {
         enabled: false,
+        speed: 800,
+        animateGradually: {
+          enabled: false,
+          delay: 150
+        },
+        dynamicAnimation: {
+          enabled: false,
+          speed: 350
+        }
       },
       toolbar: {
         show: false,
       },
 
       type: "treemap",
+      width: "100%",
+      height: "100%",
       zoom: {
         enabled: false,
       },
     },
     dataLabels: {
       enabled: true,
+      colors:["#000000"]
     },
 
    

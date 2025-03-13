@@ -90,14 +90,14 @@ window.addEventListener("mousedown", (e) => {
   if (!selected) return;
   const options = JSON.parse(selected?.dataset?.chartOptions ?? "null");
   if (!options) return;
-  if(options?.series?.length==1)return;
+  if (options?.series?.length == 1) return;
   options.series.splice(parseInt(e.target.parentElement.dataset.index), 1);
 
   selected.dataset.chartOptions = JSON.stringify(options);
   renderApexChart(options)
   renderChartData();
 });
-seriesElement.append(removeSeriesElementIcon,addValueIcon);
+seriesElement.append(removeSeriesElementIcon, addValueIcon);
 
 
 window.addEventListener("mousedown", (e) => {
@@ -113,12 +113,11 @@ window.addEventListener("mousedown", (e) => {
     options.chart.type == "column" ||
     options.chart.type == "area" ||
     options.chart.type == "treemap" ||
-    options.chart.type == "radar" ||
     options.chart.type == "heatmap"
   ) {
     options.series[e.target.parentElement.dataset.index].data.push({
       x: "new label",
-      y: 1,
+      y: 10,
     });
   } else if (options.chart.type == "candlestick") {
     options.series[e.target.parentElement.dataset.index].data.push({
@@ -130,12 +129,19 @@ window.addEventListener("mousedown", (e) => {
       x: "new label",
       y: [52.76, 57.35, 52.15, 57.03, 67.98],
     });
-  } else {
+  }
+  else if (options.chart.type == "radar") {
+    options.series[e.target.parentElement.dataset.index].data.push(10);
+    options.labels.push("new label")
+    
+    
+  }
+  else {
     options.series.push(0);
     options.labels.push("new label");
   }
 
   renderApexChart(options)
-  selected.dataset.chartOptions=JSON.stringify(options)
+  selected.dataset.chartOptions = JSON.stringify(options)
   renderChartData();
 });

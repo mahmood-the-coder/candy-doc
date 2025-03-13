@@ -54,18 +54,30 @@ export const candlestickOptions = {
     chart: {
       animations: {
         enabled: false,
+        speed: 800,
+        animateGradually: {
+          enabled: false,
+          delay: 150
+        },
+        dynamicAnimation: {
+          enabled: false,
+          speed: 350
+        }
       },
       toolbar: {
         show: false,
       },
 
       type: "candlestick",
+      width: "100%",
+      height: "100%",
       zoom: {
         enabled: false,
       },
     },
     dataLabels: {
       enabled: false,
+      colors:["#000000"]
     },
 
     

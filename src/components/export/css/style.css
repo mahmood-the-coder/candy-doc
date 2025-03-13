@@ -1,10 +1,9 @@
-.candyDoc__viewExportOptionsWrapper
-{
+.candyDoc__viewExportOptionsWrapper {
     position: absolute;
     top: 111%;
     right: 0px;
     width: 132px;
-    height: 90px;
+    height: 28px;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -18,8 +17,7 @@
     font-size: small;
 }
 
-.candyDoc__viewExportOption
-{
+.candyDoc__viewExportOption {
     font-size: x-smaller;
     color: var(--color);
     font-weight: 500;

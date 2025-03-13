@@ -206,7 +206,7 @@ export function renderChartData() {
         rangeWrapper.append(fromValue, toValue);
         valueItemClone.append(label, rangeWrapper);
         list.append(
-          
+
           removeSeriesElementIcon.cloneNode(),
           addValueIcon.cloneNode(true),
           valueItemClone
@@ -215,17 +215,18 @@ export function renderChartData() {
       seriesList.append(list);
       selected.dataset.chartOptions = JSON.stringify(options);
     });
-  } else if (options.chart.type == "radar") {
+  }
+  else if (options.chart.type.includes("radar")) {
     options.series.forEach((s, sIndex) => {
       const list = seriesElement.cloneNode(true);
       list.dataset.index = sIndex.toString();
-      options.labels.forEach((l, lIndex) => {
+      s.data.forEach((d, dIndex) => {
         const valueItemClone = ValueItem.cloneNode(true);
-        valueItemClone.dataset.index = lIndex.toString();
+        valueItemClone.dataset.index = dIndex.toString();
         const valueController = singleValueController.cloneNode(true);
         const label = labelController.cloneNode(true);
-        label.value = options.labels[lIndex];
-        valueController.value = options.series[sIndex].data[lIndex];
+        label.value = options.labels[dIndex]
+        valueController.value = d
         valueItemClone.append(label, valueController);
         list.append(valueItemClone);
         label.addEventListener("input", (e) => {
@@ -247,8 +248,10 @@ export function renderChartData() {
       });
       seriesList.append(list);
     });
-  } else {
-    
+    selected.dataset.chartOptions = JSON.stringify(options);
+  }
+
+  else {
     options.series.forEach((s, sIndex) => {
       const list = seriesElement.cloneNode(true);
       list.dataset.index = sIndex.toString();
@@ -281,7 +284,6 @@ export function renderChartData() {
       seriesList.append(list);
     });
   }
-
   selected.dataset.chartOptions = JSON.stringify(options);
 }
 
@@ -304,11 +306,11 @@ export function renderApexChart(options) {
     selected.querySelector(".candyDoc__chart"),
     options
   );
- 
-  charts.filter(apex=>apex.id==selected.id).forEach(apex=>apex.destroy())
-  
+
+  charts.filter(apex => apex.id == selected.id).forEach(apex => apex.destroy())
+
   apex.render().then(() => {
-    apex.id=selected.id;
+    apex.id = selected.id;
     selected.dataset.chartOptions = JSON.stringify(options);
     charts.push(apex);
   });

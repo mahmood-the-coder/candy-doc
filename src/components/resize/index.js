@@ -10,7 +10,7 @@ let currentTarget = null;
 let isResizing = false;
 let deltaX = 0;
 let deltaY = 0;
-let zoom=1;
+let zoom = 1;
 let draggable = [];
 const MIN_WIDTH = 10;
 const MIN_HEIGHT = 10;
@@ -23,24 +23,22 @@ export function initResizable() {
     }
   });
   window.addEventListener("mousedown", (e) => {
-    if(!e.target.classList.contains("handle"))
-    currentTarget?.querySelectorAll(".handle").forEach((h) => h?.remove());
+    if (!e.target.classList.contains("handle"))
+      currentTarget?.querySelectorAll(".handle").forEach((h) => h?.remove());
     currentTarget = null;
     currentTarget = findAncestor(e.target, "resizable");
-   
+
     if (!currentTarget) {
       return;
     }
-    zoom=window.devicePixelRatio
-    const page=document.body.querySelector(".candyDoc__page")
-    
+    zoom = window.devicePixelRatio
+    const page = document.body.querySelector(".candyDoc__page")
+
     content = currentTarget?.parentElement;
 
-    if (currentTarget.classList.contains("candyDoc__chartWrapper")) {
-      currentTarget.append(handleLeft, handleRight);
-    } else {
-      currentTarget.append(handleLeft, handleRight, handleBottom, handleTop);
-    }
+
+    currentTarget.append(handleLeft, handleRight, handleBottom, handleTop);
+
 
     handleBottom.removeEventListener("mousedown", initResize);
     handleBottom.addEventListener("mousedown", initResize);
@@ -87,8 +85,8 @@ function initResize(e) {
 function handleMousemove(e) {
   if (!isResizing) return;
 
-  deltaX += e.movementX/(zoom);
-  deltaY += e.movementY/(zoom);
+  deltaX += e.movementX / (zoom);
+  deltaY += e.movementY / (zoom);
 
   if (currentHandle.classList.contains("candyDoc__resizeHandleRight")) {
     let width = startWidth + deltaX;
@@ -286,4 +284,3 @@ function handleMousemove(e) {
     }
   }
 }
- 

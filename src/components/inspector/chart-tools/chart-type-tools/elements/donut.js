@@ -29,12 +29,23 @@ export const  donutOptions = {
     chart: {
       animations: {
         enabled: false,
+        speed: 800,
+        animateGradually: {
+          enabled: false,
+          delay: 150
+        },
+        dynamicAnimation: {
+          enabled: false,
+          speed: 350
+        }
       },
       toolbar: {
         show: false,
       },
 
       type: "donut",
+      width: "100%",
+      height: "100%",
       zoom: {
         enabled: false,
       },
@@ -49,6 +60,7 @@ export const  donutOptions = {
         ).toFixed(2);
         return percentage + "%";
       },
+      colors:["#000000"]
     },
 
     title:{

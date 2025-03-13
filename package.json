@@ -11,7 +11,7 @@
   },
   "build": {
     "appId": "com.mahmood.candy doc",
-    "productName": "candy doc: v1.0.1 beta",
+    "productName": "candy doc:lemon sugar v2.0.0 beta",
     "files": [
       "./min-css/renderer.css",
       "index.html",

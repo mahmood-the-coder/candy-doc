@@ -24,18 +24,30 @@ export const  rangeAreaOptions = {
     chart: {
       animations: {
         enabled: false,
+        speed: 800,
+        animateGradually: {
+          enabled: false,
+          delay: 150
+        },
+        dynamicAnimation: {
+          enabled: false,
+          speed: 350
+        }
       },
       toolbar: {
         show: false,
       },
 
       type: "rangeArea",
+      width: "100%",
+      height: "100%",
       zoom: {
         enabled: false,
       },
     },
     dataLabels: {
       enabled: false,
+      colors:["#000000"]
     },
     stroke: {
       show: true,

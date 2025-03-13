@@ -9,7 +9,21 @@ export const radialOptions = {
   labels: ["Apple", "Banana", "Orange", "Coconut"],
   colors: ["#83C5BE", "#FFDDD2"],
   chart: {
-    type: "radialBar", // Chart type
+    animations: {
+      enabled: false,
+      speed: 800,
+      animateGradually: {
+        enabled: false,
+        delay: 150
+      },
+      dynamicAnimation: {
+        enabled: false,
+        speed: 350
+      }
+    },
+    type: "radialBar",
+    width: "100%",
+    height: "100%", // Chart type
     animations: {
       enabled: false, // Disable animations
     },
@@ -34,6 +48,7 @@ export const radialOptions = {
         value: {
           show: false, // Show values (10, 100, etc.)
         },
+        colors:["#000000"]
       },
     },
   },
