@@ -1,13 +1,13 @@
-import { left } from "./left.js";
+import { leftRuler } from "./left.js";
 import { getCenterLayoutElement } from "../../layout/index.js";
 
-export const right = document.createElement("div");
-right.classList.add(
+export const rightRuler = document.createElement("div");
+rightRuler.classList.add(
   "candyDoc__rulerHandle",
   "candyDoc__rulerHandleRight",
   "candyDoc__icon"
 );
-right.innerHTML =
+rightRuler.innerHTML =
   /*html*/
   `
   <svg
@@ -76,7 +76,7 @@ export function initRulerRightHandle() {
 
     window.addEventListener("mousemove", handleMouseMove);
     deltaX = 0;
-    startX = parseInt(window.getComputedStyle(right).right.replace("px", ""));
+    startX = parseInt(window.getComputedStyle(rightRuler).right.replace("px", ""));
     
   });
 
@@ -101,7 +101,7 @@ export function initRulerRightHandle() {
       x = maxX;
       return;
     }
-    right.style.right = x + "px";
+    rightRuler.style.right = x + "px";
 
     contents.forEach((c) => {
       c.style.right = x + "px";
@@ -123,16 +123,16 @@ export function initRulerRightHandle() {
       let x = startX;
       if (
         x >
-        right.offsetLeft - d.offsetWidth - left.offsetLeft + right.offsetWidth
+        rightRuler.offsetLeft - d.offsetWidth - leftRuler.offsetLeft + rightRuler.offsetWidth
       ) {
         x =
-          right.offsetLeft -
+          rightRuler.offsetLeft -
           d.offsetWidth -
-          left.offsetLeft +
-          right.offsetWidth;
+          leftRuler.offsetLeft +
+          rightRuler.offsetWidth;
       }
       if (d.parentElement.classList.contains("candyDoc__rightContainer")) {
-        if(right.offsetLeft>479)
+        if(rightRuler.offsetLeft>479)
         x = startX + deltaX;
         if (x < 0) {
           x = 0;

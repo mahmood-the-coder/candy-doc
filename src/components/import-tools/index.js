@@ -96,6 +96,14 @@ importIcon.addEventListener("mousedown", (e) => {
               const content =
                 getCenterLayoutElement().querySelector(".candyDoc__content");
               content.append(cursor);
+              setTimeout(() => {
+                initSquareAll(getCenterLayoutElement());
+                initCirclesAll(getCenterLayoutElement());
+                initLinesAll(getCenterLayoutElement());
+                initEllipsesAll(getCenterLayoutElement());
+                initCurvesAll(getCenterLayoutElement())
+                UpdateDynamicText()
+              }, 100);
             });
         }
       } catch (error) { }

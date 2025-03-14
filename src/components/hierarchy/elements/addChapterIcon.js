@@ -6,6 +6,7 @@ import { generateTableOfContent } from "../../table-of-content/index.js";
 import { userData } from "../../user-data/userData.js";
 import { getRandomInt } from "../../random-Int/index.js";
 import { numberPages } from "../../pages/elements/numberPages.js";
+import { sortPages } from "../../pages/elements/sortPages.js";
 export const addChapterIcon = document.createElement("div");
 addChapterIcon.dataset.tooltip = "add chapter"
 addChapterIcon.innerHTML =
@@ -67,7 +68,9 @@ addChapterIcon.addEventListener("mouseup", () => {
   }
   userData.hierarchyItems.push(newItem)
   setTimeout(() => {
+    sortPages()
     numberPages()
+
   if (document.body.querySelector(".candyDoc__tableOfContent"))
     generateTableOfContent()
   }, 10);

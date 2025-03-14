@@ -1,12 +1,16 @@
 import { createHierarchyItemElement } from "../../hierarchy-item-element/index.js";
-
 import { createPage } from "../../pages/index.js";
 import { getHierarchySelect } from "./select.js";
 import { hierarchyContainer } from "./container.js";
 import { generateTableOfContent } from "../../table-of-content/index.js";
 import { userData } from "../../user-data/userData.js";
-import { cursor, initCursor } from "../../insert/cursor.js";
+import { cursor } from "../../insert/cursor.js";
 import { numberPages } from "../../pages/elements/numberPages.js";
+import { sortPages } from "../../pages/elements/sortPages.js";
+import { leftRuler } from "../../ruler/elements/left.js";
+import { rightRuler } from "../../ruler/elements/right.js";
+import { topRuler } from "../../ruler/elements/top.js";
+import { bottomRuler } from "../../ruler/elements/bottom.js";
 export const addPageIcon = document.createElement("div");
 addPageIcon.dataset.tooltip = "add page"
 addPageIcon.innerHTML =
@@ -75,25 +79,20 @@ addPageIcon.addEventListener("mouseup", () => {
   }
 
   const pageWrapper = document.body.querySelector(".candyDoc__pagesWrapper");
-  let newPageElement = createPage(newItem);
+  const newPageElement = createPage(newItem);
   newPageElement.dataset.number = itemElement.dataset.number
   newPageElement.dataset.relativeNumber = itemElement.dataset.relativeNumber
   userData.hierarchyItems.push(newItem)
-  const firstPage=pageWrapper.querySelector(".candyDoc__page");
-  if(firstPage)
-  {
-    const clone=firstPage.cloneNode(true)
-    clone.querySelector(".candyDoc__content").innerHTML="";
-    clone.querySelector(".candyDoc__pageFooter").innerHTML="";
-    clone.querySelector(".candyDoc__pageHeader").innerHTML="";
-    clone.querySelector(".candyDoc__leftContainer").innerHTML="";
-    clone.querySelector(".candyDoc__rightContainer").innerHTML="";
-    newPageElement=clone;
-  }
   pageWrapper.append(newPageElement);
+  const content=newPageElement.querySelector(".candyDoc__content");
+  content.style.left=leftRuler.style.left
+  content.style.right=rightRuler.style.right
+  content.style.top=topRuler.style.top
+  content.style.bottom=bottomRuler.style.bottom
   const currentCursor = document?.querySelector(".candyDoc__cursor") ?? cursor
   newPageElement.querySelector(".candyDoc__content").append(currentCursor)
   setTimeout(() => {
+    sortPages()
     numberPages()
   if (document.body.querySelector(".candyDoc__tableOfContent"))
     generateTableOfContent()

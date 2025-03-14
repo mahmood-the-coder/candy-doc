@@ -1,7 +1,7 @@
-export const top = document.createElement("div");
+export const topRuler = document.createElement("div");
 import { getCenterLayoutElement } from "../../layout/index.js";
 
-top.classList.add(
+topRuler.classList.add(
   "candyDoc__rulerHandle",
   "candyDoc__rulerHandleTop",
 
@@ -50,7 +50,7 @@ export function initRulerTopHandle() {
     });
     window.addEventListener("mousemove", handleMouseMove);
     deltaY = 0;
-    startY = parseInt(window.getComputedStyle(top).top.replace("px", ""));
+    startY = parseInt(window.getComputedStyle(topRuler).top.replace("px", ""));
    
   });
 
@@ -75,7 +75,7 @@ export function initRulerTopHandle() {
       y = maxY;
       return
     }
-    top.style.top = y + "px";
+    topRuler.style.top = y + "px";
     contents.forEach((c) => {
       c.style.top = y + "px";
     });
@@ -104,7 +104,7 @@ export function initRulerTopHandle() {
       if (y < 0) {
         y = 0;
       }
-      if (top.offsetTop > 25) d.style.top = y + "px";
+      if (topRuler.offsetTop > 25) d.style.top = y + "px";
     });
    
   }

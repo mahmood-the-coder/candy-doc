@@ -1,7 +1,7 @@
 import { getCenterLayoutElement } from "../../layout/index.js";
 
-export const left = document.createElement("div");
-left.classList.add(
+export const leftRuler = document.createElement("div");
+leftRuler.classList.add(
   "candyDoc__rulerHandle",
   "candyDoc__rulerHandleLeft",
 );
@@ -41,7 +41,7 @@ export function initRulerLeftHandle() {
     });
     window.addEventListener("mousemove", handleMouseMove);
     deltaX = 0;
-    startX = parseInt(window.getComputedStyle(left).left.replace("px", ""));
+    startX = parseInt(window.getComputedStyle(leftRuler).left.replace("px", ""));
    
   });
 
@@ -65,7 +65,7 @@ export function initRulerLeftHandle() {
       x = maxX;
       return;
     }
-    left.style.left = x + "px";
+    leftRuler.style.left = x + "px";
     contents.forEach((c) => {
       c.style.left = x + "px";
     });
@@ -89,12 +89,12 @@ export function initRulerLeftHandle() {
       }
       if (d.parentElement.classList.contains("candyDoc__leftContainer")) {
         x = startX;
-        if (x > left.offsetLeft - d.offsetWidth) {
-          x = left.offsetLeft - d.offsetWidth
+        if (x > leftRuler.offsetLeft - d.offsetWidth) {
+          x = leftRuler.offsetLeft - d.offsetWidth
         }
       }
 
-      if (left.offsetLeft > 25) d.style.left = x + "px";
+      if (leftRuler.offsetLeft > 25) d.style.left = x + "px";
     });
   }
 }

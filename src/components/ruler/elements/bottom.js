@@ -1,7 +1,7 @@
-import { top } from "./top.js";
+import { topRuler } from "./top.js";
 import { getCenterLayoutElement } from "../../layout/index.js";
-export const bottom = document.createElement("div");
-bottom.classList.add(
+export const bottomRuler = document.createElement("div");
+bottomRuler.classList.add(
   "candyDoc__rulerHandle",
   "candyDoc__rulerHandleBottom",
 
@@ -48,7 +48,7 @@ export function initRulerBottomHandle() {
     });
     window.addEventListener("mousemove", handleMouseMove);
     deltaY = 0;
-    startY = parseInt(window.getComputedStyle(bottom).bottom.replace("px", ""));
+    startY = parseInt(window.getComputedStyle(bottomRuler).bottom.replace("px", ""));
     
   });
 
@@ -70,7 +70,7 @@ export function initRulerBottomHandle() {
     if (y > maxY) {
       y = maxY;
     }
-    bottom.style.bottom = y + "px";
+    bottomRuler.style.bottom = y + "px";
     contents.forEach((c) => {
       c.style.bottom = y + "px";
     });
@@ -98,13 +98,13 @@ export function initRulerBottomHandle() {
       }
       if (
         y >
-        bottom.offsetTop - d.offsetHeight - top.offsetTop + bottom.offsetHeight
+        bottomRuler.offsetTop - d.offsetHeight - topRuler.offsetTop + bottomRuler.offsetHeight
       ) {
         y =
-          bottom.offsetTop -
+          bottomRuler.offsetTop -
           d.offsetHeight -
-          top.offsetTop +
-          bottom.offsetHeight;
+          topRuler.offsetTop +
+          bottomRuler.offsetHeight;
       }
       d.style.top = y + "px";
     });
