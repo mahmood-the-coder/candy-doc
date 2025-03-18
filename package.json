@@ -10,19 +10,14 @@
     "dist": "electron-builder"
   },
   "build": {
-    "appId": "com.mahmood.candy doc",
-    "productName": "candy doc:lemon sugar v2.0.0 beta",
+    "appId": "com.mahmood.candydoc",
+    "productName": "candy doc: lemon sugar v2.0.0 beta",
     "files": [
       "./min-css/renderer.css",
       "index.html",
-      "mathjs/index.js",
       "src/**/*",
-      "mathjs/**/*",
-      "coloris/**/*",
-      "apex-chart-js/**/*",
-      "HTML2PDF/**/*",
       "main.js",
-      "./editor-js/**/*"
+      "node_modules/**/*"
     ],
     "directories": {
       "output": "dist"

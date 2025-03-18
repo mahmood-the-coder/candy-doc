@@ -33,3 +33,11 @@
 .candyDoc__viewExportIconWrapper {
   left: calc(100% - 70px);
 }
+
+.candyDoc__viewHighlight
+{
+  position: absolute;
+  pointer-events: all;
+  cursor: pointer;
+
+}

@@ -62,3 +62,5 @@
 @import url("./src/components/inspector-search/css/style.css");
 @import url("./src/components/text-editor/toolbar/css/style.css");
 @import url("./src/components/dynamic-text/css/style.css");
+@import url("./src/components/ordered-list/css/style.css");
+@import url("./src/components/unordered-list/css/style.css");

@@ -4,10 +4,16 @@ import { getRange } from "../../range/index.js";
 import { wrapper } from "./elements/wrapper.js";
 
 export function initTextEditorToolBar() {
-    
+    window.addEventListener("keydown", (e) => {
+        wrapper?.remove()
+    })
     window.addEventListener("mouseup", (e) => {
         setTimeout(() => {
             const range = getRange();
+            if (document.body.classList.contains("candyDoc__viewMode")) {
+                wrapper?.remove();
+                return;
+            }
             if (!range) {
                 wrapper?.remove()
                 return;
@@ -20,13 +26,13 @@ export function initTextEditorToolBar() {
                 wrapper?.remove()
                 return;
             }
-            if(range.startOffset==range.endOffset){
+            if (range.startOffset == range.endOffset) {
                 wrapper?.remove()
                 return;
             };
             document.body.append(wrapper)
-            wrapper.style.left=range.getBoundingClientRect().x+"px"
-            wrapper.style.top=range.getBoundingClientRect().y+50+"px"
+            wrapper.style.left = range.getBoundingClientRect().x + "px"
+            wrapper.style.top = range.getBoundingClientRect().y + 50 + "px"
         }, 10);
     })
 }

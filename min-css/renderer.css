@@ -275,6 +275,21 @@ input {
   z-index: 100;
   position: absolute;
 }
+
+.ce-inline-toolbar {
+  transition: none !important; /* Remove smooth animation */
+  animation: none !important;  /* Disable fade-in effect */
+  
+}
+
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+h6:first-child{
+  margin-top: 0;
+}
 :root {
     --color: #0073ff; 
     --background:rgb(2, 5, 46);
@@ -2744,8 +2759,7 @@ input {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* gap: 5px; */
-    width: 100%;
+    width: fit-content;
     height: auto;
 }
 
@@ -2984,13 +2998,12 @@ input {
     font-size: x-small;
     color: var(--color);
 }
-.candyDoc__viewExportOptionsWrapper
-{
+.candyDoc__viewExportOptionsWrapper {
     position: absolute;
     top: 111%;
     right: 0px;
     width: 132px;
-    height: 90px;
+    height: 60px;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -3004,13 +3017,13 @@ input {
     font-size: small;
 }
 
-.candyDoc__viewExportOption
-{
+.candyDoc__viewExportOption {
     font-size: x-smaller;
     color: var(--color);
     font-weight: 500;
     width: 100%;
     cursor: pointer;
+    
 }
 .candyDoc__inspectorBackgroundInput
 {
@@ -3457,5 +3470,69 @@ input {
 {
     color: white
     
+}
+.candyDoc__textEditorToolbarWrapper
+{
+    position: absolute;
+    background-color: var(--background);
+    color: var(--color);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+    max-width: 375px;
+    width: 100%;
+    z-index: 1000;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    border: 1px solid var(--color);
+    border-radius: 5px;
+    padding: 5px;
+}
+.candyDoc__textEditorToolbarSelect
+{
+    width: 70px;
+}
+.candyDoc__textEditorIcon
+{
+    width: 15px !important;
+    height: 15px !important;
+}
+.candyDoc__dynamicTextSelect
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    position: absolute;
+    bottom: 105%;
+    left: 44%;
+    transform: translateX(-50%);
+    color: var(--color);
+    gap: 5px;
+    border: 1px solid var(--color);
+    border-radius: 5px;
+    padding: 3px;
+    background-color: white;
+    cursor: pointer;
+    visibility: hidden;
+
+}
+.candyDoc__dynamicTextToggle
+{
+    width: 80px;
+    height: 20px;
+    font-size: x-small;
+    color: var(--color);
+    line-height: 10px;
+    border: 1px solid var(--color);
+    padding: 5px;
+    border-radius: 4px;
+}
+.candyDoc__dynamicTextWrapper
+{
+    position: relative;
 }
 
