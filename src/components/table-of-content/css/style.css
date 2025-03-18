@@ -1,0 +1,77 @@
+.candyDoc__li {
+
+    width: 100%;
+    list-style: none;
+}
+
+.candyDoc__tableOfContentName {
+    cursor: pointer;
+    width: 150px;
+    min-width: 150px;
+    text-align: start;
+
+}
+.candyDoc__tableOfContentNumber {
+    width: 150px;
+    min-width: 150px;
+    text-align: end;
+
+}
+.candyDoc__ol {
+    padding: 0;
+    padding-left: 10px;
+    height: 100%;
+
+
+}
+
+.candyDoc__tableOfContent {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.candyDoc__tableOfContentItem {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.candyDoc__tableOfContentTrail {
+
+    text-align: center;
+    flex-grow: 1;
+    width: 100%;
+    height:25px;
+    overflow-x: hidden;
+}
+
+.candyDoc__tableOfContentList {
+
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: auto;
+}
+
+.candyDoc__tableOfContentWrapper {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.candyDoc__tableOfContentWrapper .candyDoc__resizeHandleTop {
+    display: none;
+}
+
+.candyDoc__tableOfContentWrapper .candyDoc__resizeHandleBottom {
+    display: none;
+}

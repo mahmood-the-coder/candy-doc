@@ -1,0 +1,47 @@
+.candyDoc__rulerHandle {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.candyDoc__rulerHandleTop {
+  top: 150px;
+  left:0px;
+  background-color: var(--color);
+  height: 5px;
+  width: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+.candyDoc__rulerHandleBottom {
+  bottom: 150px;
+  left:0px;
+  background-color: var(--color);
+  height: 5px;
+  width: 10px;
+  transform: translateY(50%);
+  cursor: pointer;
+}
+
+.candyDoc__rulerHandleLeft {
+  left: 100px;
+  top:0px;
+  background-color: var(--color);
+  height: 10px;
+  width: 5px;
+  cursor: pointer;
+  transform: translateX(-100%);
+  z-index: 52;
+  
+}
+
+.candyDoc__rulerHandleRight {
+ 
+  right: 100px;
+  top:0px;
+  background-color: var(--color);
+  height: 10px;
+  width: 5px;
+  cursor: pointer;
+  transform: translateX(100%);
+  z-index: 52;
+}

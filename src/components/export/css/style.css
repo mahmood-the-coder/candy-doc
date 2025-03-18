@@ -1,0 +1,27 @@
+.candyDoc__viewExportOptionsWrapper {
+    position: absolute;
+    top: 111%;
+    right: 0px;
+    width: 132px;
+    height: 60px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+    border: 1px solid var(--color);
+    border-radius: 5px;
+    padding: 5px;
+    display: none;
+    color: var(--color);
+    font-size: small;
+}
+
+.candyDoc__viewExportOption {
+    font-size: x-smaller;
+    color: var(--color);
+    font-weight: 500;
+    width: 100%;
+    cursor: pointer;
+    
+}

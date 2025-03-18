@@ -1,0 +1,35 @@
+.candyDoc__editorUIToggleContainer
+{
+    display: block;
+    position: relative;
+    width: 50px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: rgba(from var(--color) r g b / 0.3);
+  
+
+}
+.candyDoc__editorUIToggleHandle
+{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--color);
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: left 300ms ease-in-out;
+}
+
+.candyDoc__editorUIToggleWrapper
+{
+    width: fit-content;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    color: var(--color);
+    font-size: x-small;
+}

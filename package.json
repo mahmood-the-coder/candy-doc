@@ -1,0 +1,80 @@
+{
+  "name": "candy-doc",
+  "version": "1.0.1",
+  "description": "an advance document editor.",
+  "main": "main.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "electronmon .",
+    "build-css": "webpack --config webpack.config.mjs",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.mahmood.candy doc",
+    "productName": "candy doc:lemon sugar v2.0.0 beta",
+    "files": [
+      "./min-css/renderer.css",
+      "index.html",
+      "mathjs/index.js",
+      "src/**/*",
+      "mathjs/**/*",
+      "coloris/**/*",
+      "apex-chart-js/**/*",
+      "HTML2PDF/**/*",
+      "main.js",
+      "./editor-js/**/*"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "zip"
+      ],
+      "icon": "icon.png"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "icon": "icon.png",
+      "category": "public.app-category.productivity"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "icon": "icon.png",
+      "category": "Utility"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  },
+  "author": "Mahmood Khodadady",
+  "license": "GNU",
+  "devDependencies": {
+    "copy-webpack-plugin": "^12.0.2",
+    "css-loader": "^7.1.2",
+    "electron": "^34.2.0",
+    "electron-builder": "^25.1.8",
+    "electronmon": "^2.0.3",
+    "mini-css-extract-plugin": "^2.9.2",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.1",
+    "webpack-merge": "^6.0.1"
+  },
+  "dependencies": {
+    "@melloware/coloris": "^0.24.0",
+    "apexcharts": "^4.5.0",
+    "html2pdf.js": "^0.9.0",
+    "mathjs": "^14.3.1"
+  }
+}

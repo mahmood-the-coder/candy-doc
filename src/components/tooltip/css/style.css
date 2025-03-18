@@ -1,0 +1,13 @@
+.candyDoc__tooltip
+{
+    width: fit-content;
+    height: fit-content;
+    padding: 8px;
+    background-color: var(--background);
+    border:2px solid var(--color);
+    color: var(--color);
+    border-radius: 5px;
+    position: absolute;
+    font-size: x-small;
+    z-index: 400;
+}

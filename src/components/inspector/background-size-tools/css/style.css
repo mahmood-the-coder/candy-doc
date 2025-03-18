@@ -1,0 +1,104 @@
+.candyDoc__inspectorBackgroundInput
+{
+    position: relative;
+}
+.candyDoc__inspectorBackgroundInputController
+{
+    border: 1px solid var(--color);
+    border-radius: 3px;
+    width: 46px;
+    outline: none;
+    color: var(--color);
+}
+.candyDoc__inspectorBackgroundInputLabel{
+    position: absolute;
+    font-size: x-small;
+    color: var(--color);
+    padding: 1px;
+    border-radius: 2px;
+    bottom: 100%;
+    left: 0;
+    background-color: var(--background);
+}
+
+.candyDoc__inspectorBackgroundSizeList
+{
+    border: 1px solid var(--color);
+    border-radius: 5px;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    min-height: 10px;
+    padding: 5px;
+    gap: 5px;
+}
+.candyDoc__addBackgroundSizeIcon
+{
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+}
+.candyDoc__inspectorBackgroundSizeItem
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid var(--color);
+    border-radius: 5px;
+    height: 25px;
+    width: 100%;
+    position: relative;
+}
+
+.candyDoc__inspectorBackgroundSizeItemRemove
+{
+    position: absolute;
+    right: 5px;
+    top: 49%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+}
+.candyDoc__inspectorBackgroundSizeItemDrag
+{
+    position: absolute;
+    left: 5px;
+    top: 47%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+}
+.candyDoc__inspectorBackgroundSizeInput
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+    width: 100px;
+}
+.candyDoc__inspectorBackgroundSizeInputController
+{
+    border: 1px solid var(--color);
+    border-radius: 3px;
+    width: 46px;
+    outline: none;
+    color: var(--color);
+}
+.candyDoc__inspectorBackgroundSizeInputLabel
+{
+    font-size: x-small;
+    color: var(--color);
+    padding: 1px;
+    border-radius: 2px;
+    bottom: 100%;
+    left: 0;
+    background-color: var(--background);
+}

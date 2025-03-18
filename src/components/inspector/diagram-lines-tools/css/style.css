@@ -1,0 +1,27 @@
+.candyDoc__inspectorDiagramStrokeDasharray,
+.candyDoc__inspectorDiagramStroke,
+.candyDoc__inspectorDiagramDashArray,
+.candyDoc__inspectorDiagramStrokeWidth{
+    position: relative;
+    padding: 5px;
+    border: 1px solid var(--color);
+    border-radius: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.candyDoc__inspectorDiagramStrokeDasharrayLabel,
+.candyDoc__inspectorDiagramStrokeLabel,
+.candyDoc__inspectorDiagramStrokeWidthLabel,
+.candyDoc__inspectorDiagramDashArrayLabel{
+    position: absolute;
+    bottom: 95%;
+    left: 5px;
+    background-color: var(--background);
+    border-radius: 5px;
+    font-size: x-small;
+    color: var(--color);
+}

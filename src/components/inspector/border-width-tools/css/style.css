@@ -1,0 +1,22 @@
+
+.candyDoc__inspectorBorderWidthController {
+  width: 36px;
+  outline: none;
+  border: 1px solid var(--color);
+  border-radius: 3px;
+  position: relative;
+  color: var(--color);
+}
+.candyDoc__inspectorBorderWidthLabel {
+  position: absolute;
+  font-size: x-small;
+  color: var(--color);
+  padding: 1px;
+  border-radius: 2px;
+  bottom: 100%;
+  left: 0;
+}
+.candyDoc__inspectorBorderWidthInput
+{
+    position: relative;
+}

@@ -1,0 +1,117 @@
+.candyDoc__chartOptionsBorderColorLabel {
+  color: var(--color);
+  font-size: x-small;
+  position: absolute;
+  background-color: var(--background);
+  border-radius: 5px;
+  bottom: 95%;
+  left: 5px;
+}
+
+.candyDoc__chartOptionsBorderColor {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border-radius: 5px;
+  position: relative;
+  border: 1px solid var(--color);
+}
+.candyDoc__inspectorChartGridColors {
+  width: 100%;
+  height: auto;
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: 10px;
+  padding-top:10px;
+  border: 1px solid var(--color);
+  border-radius: 3px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  gap:10px
+}
+.candyDoc__inspectorChartGridColorsLabel {
+  font-size: x-small;
+  color: var(--color);
+  border-radius: 5px;
+  padding: 5px;
+  background-color: var(--background);
+  position: absolute;
+  bottom: 95%;
+  left: 5px;
+}
+
+.candyDoc__inspectorChartGridColorsItem {
+  width: 100%;
+  height: 20px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.candyDoc__inspectorChartGridColorsItemRemoveIcon {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.candyDoc__inspectorChartGridColorDragIcon
+{
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.candyDoc__inspectorChartGridPadding
+{
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid var(--color);
+  gap: 10px;
+  position: relative;
+}
+
+.candyDoc__inspectorChartGridPaddingItem
+{
+  position: relative;
+  padding: 5px;
+  border: 1px solid var(--color);
+  border-radius: 5px;
+}
+.candyDoc__inspectorChartGridPaddingItemController
+{
+  width: 40px;
+  border: 1px solid var(--color);
+  outline: none;
+}
+.candyDoc__inspectorChartGridPaddingItemControllerLabel
+{
+  position: absolute;
+  bottom: 95%;
+  left: 5px;
+  background-color: var(--background);
+  border-radius: 5px;
+  font-size: x-small;
+}
+.candyDoc__inspectorChartGridPaddingLabel
+{
+  position: absolute;
+  font-size: x-small;
+  color: var(--color);
+  background-color: var(--background);
+  border-radius: 5px;
+  bottom: 100%;
+  left: 5px;
+}

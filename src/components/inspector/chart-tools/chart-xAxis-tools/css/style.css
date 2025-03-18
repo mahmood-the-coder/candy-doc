@@ -1,0 +1,16 @@
+.candyDoc__inspectorChartOptionItem
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+    width: 100%;
+    border: 1px solid var(--color);
+    border-radius: 5px;
+    margin-top: 10px;
+    height: auto ;
+    flex-wrap: wrap;
+    padding: 3px;
+}
+

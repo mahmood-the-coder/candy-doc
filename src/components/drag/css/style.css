@@ -1,0 +1,10 @@
+.candyDoc__dragHandle {
+  position: absolute;
+  top: -4px;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  cursor:move;
+  color: var(--color);
+  z-index: 100;
+}

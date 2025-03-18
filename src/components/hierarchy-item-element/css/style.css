@@ -1,0 +1,81 @@
+.candyDoc__hierarchyItemWrapper {
+  position: relative;
+  user-select: none;
+  user-select: none;
+  min-width: fit-content;
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+  border: 1px solid var(--color);
+  padding: 3px;
+
+}
+.candyDoc__nestedHierarchyItems {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  gap: 2px;
+  width: 100%;
+  height: auto;
+}
+
+.candyDoc__hierarchyElementItemHead {
+  position: relative;
+  user-select: none;
+  min-width: fit-content;
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 3px;
+  padding-left: 10px;
+}
+.candyDoc__pageItemName {
+  font-size: x-small;
+  width: 100%;
+  color: var(--color);
+  outline: none;
+  border: none;
+  border-bottom: 1px solid var(--color);
+  padding: 2px 4px;
+}
+
+.candyDoc__hierarchyItemDragIcon {
+  position: absolute;
+  left: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 21;
+  cursor: crosshair;
+}
+.candyDoc__hierarchyItemNumber {
+  color: var(--color);
+  font-size: x-small;
+  transform: translateX(50%);
+}
+.candyDoc__hierarchyNestToggle
+{
+  position: absolute;
+  top: 0;
+  left: 100%;
+  
+  z-index: 500;
+}
+
+.candyDoc__hierarchyRemoveIcon
+{
+  position: absolute;
+  bottom: 50%;
+  transform: translateY(-50%);
+  right: 0px;
+  cursor: pointer;
+  width: 10px;
+  height: 10px;
+
+}

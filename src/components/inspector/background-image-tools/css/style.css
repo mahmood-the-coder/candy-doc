@@ -1,0 +1,79 @@
+.candyDoc__inspectorBackgroundList
+{
+    border: 1px solid var(--color);
+    border-radius: 5px;
+    padding: 5px;
+    width: 100%;
+    min-height: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+}
+.candyDoc__inspectorBackgroundAddIcon
+{
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    bottom:5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.candyDoc__inspectorBackgroundItem
+{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 25px;
+    align-items: center;
+    width: 100%;
+    height: 25px;
+    position: relative;
+    border: 1px solid var(--color);
+    border-radius: 5px;
+}
+.candyDoc__inspectorBackgroundItemRemove{
+    position: absolute;
+    right: 5px;
+    top: 49%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+}
+
+.candyDoc__inspectorBackgroundItemDrag
+{
+    position: absolute;
+    left: 5px;
+    top: 47%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+}
+.candyDoc__inspectorBackgroundItemPreview
+{
+    width: 40px;
+    height: 18px;
+    position: absolute;
+    left: 40px;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    border: 1px solid var(--color);
+    border-radius: 3px;
+}
+.candyDoc__inspectorBackgroundItemChooseImage
+{
+    position: absolute;
+    top: 17%;
+    left: 65px;
+    height: 15px;
+    width: 15px;
+}
+.candyDoc__inspectorBackgroundImageGradient
+{
+    position: absolute;
+    top: 12%;
+    left: 85px;
+    height: 17px;
+    width: 17px;
+}

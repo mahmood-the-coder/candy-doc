@@ -1,0 +1,134 @@
+.candyDoc__mainLayoutElement {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+  grid-template-rows: 0% calc(100% - 30px) 30px;
+
+  
+}
+.candyDoc__topLayoutElement {
+  grid-area: 1 / 1 / 2 / 4;
+  border: 1px solid var(--color);
+  border-bottom: none;
+  display: flex;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 0;
+  padding: 10px;
+  z-index: -1;
+  
+}
+.candyDoc__leftSideLayoutElement {
+  grid-area: 1 / 1 / 3 / 2;
+  border: 1px solid var(--color);
+  padding: 10px;
+ 
+}
+.candyDoc__rightSideLayoutElement {
+  grid-area: 2 / 3 / 3 / 4;
+  border: 1px solid var(--color);
+  padding: 10px;
+ 
+}
+.candyDoc__centerLayoutElement {
+  grid-area: 1 / 2 / 3 / 3; 
+  scroll-behavior: smooth;
+  border: 1px solid var(--color);
+  position: relative;
+  overflow-y: auto;
+  overflow-x: auto;
+  z-index: 1;
+}
+
+.candyDoc__viewPagesWrapper
+{
+  width: fit-content;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 5px;
+  position: relative;
+  gap: 5px;
+  overflow-y: auto;
+}
+
+.candyDoc__bottomLayoutElement
+{
+  grid-area: 3 / 1 / 4 / 4;
+  border: 1px solid var(--color);
+  border-bottom:3px solid var(--color);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  background-color: var(--background);
+  padding: 5px;
+  gap: 2%;
+  z-index: 10;
+ 
+}
+
+.candyDoc__sidebarToggle
+{
+ position: absolute;
+ display: none;
+ top: 50%;
+ transform: translateY(-50%);
+ z-index: 501;
+}
+.candyDoc__sidebarToggle.leftToggle
+{
+ position: absolute;
+ right: -35px;
+ top: 50%;
+ transform: translateY(-50%);
+ z-index: 501;
+}
+.candyDoc__sidebarToggle.rightToggle
+{
+ position: absolute;
+ left: -35px;
+ top: 50%;
+ transform: translateY(-50%);
+ z-index: 501;
+}
+@media screen and (max-width: 1200px) {
+  
+  .candyDoc__mainLayoutElement {
+    grid-template-columns: 0% 100% 0%;
+    grid-template-rows: 0% calc(100% - 30px) 30px;;
+   
+  }
+ 
+  .candyDoc__sidebarToggle
+  {
+    display: block;
+  }
+  .candyDoc__leftSideLayoutElement {
+  
+    position: absolute;
+    left: -251px;
+    background-color: var(--background);
+    height: 60%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 500;
+    width: 250px;
+  }
+  .candyDoc__rightSideLayoutElement {
+    position: absolute;
+    right: -251px;
+    background-color: var(--background);
+    height: 60%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 500;
+    width: 250px;
+  }
+ }
+

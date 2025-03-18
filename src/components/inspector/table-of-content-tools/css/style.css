@@ -1,0 +1,161 @@
+.candyDoc__inspectorPageArray
+{
+    width: 176px;
+    border: 1px solid var(--color);
+    min-height: 25px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    padding: 5px;
+    padding-top: 25px;
+}
+
+.candyDoc__inspectorPageArrayAddButton
+{
+    position: absolute;
+    top: 99%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.candyDoc__inspectorPagesArrayLabel
+{
+    position: absolute;
+    bottom: 95%;
+    left: -7px;
+    background-color: white;
+    padding: 3px;
+    border-radius: 5px;
+}
+.candyDoc__inspectorPageArrayWrapper
+{
+    position: relative;
+}
+.candyDoc__inspectorPageItem
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid var(--color);
+    padding: 8px;
+    padding-top: 25px;
+    position: relative;
+    
+}
+.candyDoc__pageDashLabel,
+.candyDoc__pageWidthLabel
+{
+    position: absolute;
+    bottom: 95%;
+    left: -7px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: xx-small;
+}
+.candyDoc__pageDashWrapper,
+.candyDoc__pageWidthWrapper
+{
+ position: relative;
+ height: 37px;
+}
+
+.candyDoc__pageColorWrapper
+{
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    scale: 0.7;
+
+}
+.candyDoc__inspectorPagesArrayItemDrag
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 15px;
+}
+.candyDoc__pagesArrayRemove
+{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 10px;
+    height: 15px;
+}
+.candyDoc__inspectorChapterToolsWrapper
+{
+    width: 175px;
+    height: 50px;
+    border: 1px solid var(--color);
+    border-radius: 5px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: center;
+    position: relative;
+    height: auto;
+    padding: 10px 10px;
+}
+.candyDoc__chapterToolsFont
+{
+    width: 50px;
+    font-size: xx-small;
+
+}
+.candyDoc__chapterToolsFontWrapper
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    border-radius: 5px;
+    height: 25px;
+    
+   
+   
+}
+
+.candyDoc__inspectorChapterToolsLabel
+{
+    position: absolute;
+    bottom: 98%;
+    left: -7px;
+    padding: 5px;
+    background-color: white;
+    border-radius: 5px;
+}
+.candyDoc__chapterToolsFontSizeWrapper
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+.candyDoc__chapterToolsFontSize
+{
+    width: 50px;
+
+}
+.candyDoc__chapterToolsFontSizeLabel
+{
+    position: absolute;
+    bottom: 95%;
+    left: -7px;
+    background-color: white;
+    border-radius: 5px;
+   
+}
+.candyDoc__chapterToolsFontLabel
+{
+    position: absolute;
+    bottom: 75%;
+    left:-7px;
+    background-color:white;
+    border-radius: 5px;
+}

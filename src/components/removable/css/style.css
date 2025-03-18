@@ -1,0 +1,7 @@
+.candyDoc__removeIcon{
+    position: absolute;
+    right: 0px;
+    bottom: -3px;
+    cursor: pointer;
+    z-index: 100;
+}
