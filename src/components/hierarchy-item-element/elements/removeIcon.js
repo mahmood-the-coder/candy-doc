@@ -1,4 +1,6 @@
 import { setHierarchySelect } from "../../hierarchy/elements/select.js";
+import { cursor } from "../../insert/cursor.js";
+import { getCenterLayoutElement } from "../../layout/index.js";
 import { numberPages } from "../../pages/elements/numberPages.js";
 import { sortPages } from "../../pages/elements/sortPages.js";
 import { generateTableOfContent } from "../../table-of-content/index.js";
@@ -43,7 +45,7 @@ export function initHierarchyRemove() {
         if (!itemElement) return;
 
 
-        removeAll(itemElement); // Remove children before deleting the main element
+        removeAll(itemElement); 
         setHierarchySelect(null);
         itemElement.remove();
 
@@ -52,6 +54,10 @@ export function initHierarchyRemove() {
           numberPages();
           sortPages()
           generateTableOfContent();
+          const cursorExist=getCenterLayoutElement().querySelector(".candyDoc__cursor");
+          if(!cursorExist){
+            getCenterLayoutElement().querySelector(".candyDoc__content")?.append(cursor)
+          }
       }
        }, 10);
 

@@ -11,6 +11,7 @@ import { leftRuler } from "../../ruler/elements/left.js";
 import { rightRuler } from "../../ruler/elements/right.js";
 import { topRuler } from "../../ruler/elements/top.js";
 import { bottomRuler } from "../../ruler/elements/bottom.js";
+import { getLeftContainer } from "../../left-container/index.js";
 export const addPageIcon = document.createElement("div");
 addPageIcon.dataset.tooltip = "add page"
 addPageIcon.innerHTML =
@@ -84,18 +85,32 @@ addPageIcon.addEventListener("mouseup", () => {
   newPageElement.dataset.relativeNumber = itemElement.dataset.relativeNumber
   userData.hierarchyItems.push(newItem)
   pageWrapper.append(newPageElement);
-  const content=newPageElement.querySelector(".candyDoc__content");
-  content.style.left=leftRuler.style.left
-  content.style.right=rightRuler.style.right
-  content.style.top=topRuler.style.top
-  content.style.bottom=bottomRuler.style.bottom
+  const content = newPageElement.querySelector(".candyDoc__content");
+  content.style.left = leftRuler?.style?.left??"50px"
+  content.style.right = rightRuler?.style?.right??"50px"
+  content.style.top = topRuler?.style?.top??"100px"
+  content.style.bottom = bottomRuler?.style?.bottom??"100px"
+  const leftContainer = newPageElement.querySelector(".candyDoc__leftContainer");
+  leftContainer.style.right = `calc(100% - ${leftRuler?.style?.left??"50px"})`
+  const rightContainer = newPageElement.querySelector(".candyDoc__rightContainer");
+  rightContainer.style.left = `calc(100% - ${rightRuler?.style?.right??"50px"})`
+  const footer = newPageElement.querySelector(".candyDoc__pageFooter");
+  footer.style.top = content?.style?.bottom??"100px"
+  footer.style.bottom = 0;
+  footer.style.left = content?.style?.left??"50px"
+  footer.style.right = content?.style?.right??"50px"
+  const header = newPageElement.querySelector(".candyDoc__pageHeader");
+  header.style.bottom = content?.style?.top??"100px"
+  header.style.top = 0;
+  header.style.left = content?.style?.left??"50px"
+  header.style.right = content?.style?.right??"50px"
   const currentCursor = document?.querySelector(".candyDoc__cursor") ?? cursor
   newPageElement.querySelector(".candyDoc__content").append(currentCursor)
   setTimeout(() => {
     sortPages()
     numberPages()
-  if (document.body.querySelector(".candyDoc__tableOfContent"))
-    generateTableOfContent()
+    if (document.body.querySelector(".candyDoc__tableOfContent"))
+      generateTableOfContent()
   }, 10);
 
 

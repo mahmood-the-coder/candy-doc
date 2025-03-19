@@ -1,3 +1,6 @@
+
+
+
 import { findAncestor } from "../find-ancestor/index.js";
 import { guideBottom } from "../guide/elements/bottom.js";
 import { guideCenterHorizontal } from "../guide/elements/centerHorizontal.js";
@@ -20,16 +23,13 @@ let isDragging = false;
 let isDraggingX = true;
 let isDraggingY = true;
 let zoom=1;
-let pageScale=1
 window.addEventListener("mousedown", (e) => {
   if (!e.target.classList.contains("candyDoc__dragHandle")) {
     return;
   }
   
  
-  const page=document.body.querySelector(".candyDoc__pagesWrapper")
-  pageScale=(page.getBoundingClientRect().width/page.offsetWidth)
-  zoom=window.devicePixelRatio *pageScale; 
+  zoom=window.devicePixelRatio; 
   isDragging = true;
   const moveHandle = e.target;
 
@@ -144,8 +144,8 @@ function handleMousemove(e) {
   
 
   const maxX =
-    content.getBoundingClientRect().width/pageScale -
-    target.getBoundingClientRect().width/pageScale
+    content.getBoundingClientRect().width -
+    target.getBoundingClientRect().width
   const minX = 0 ;
 
   if (
@@ -162,8 +162,8 @@ function handleMousemove(e) {
   }
 
   const maxY =
-    content.getBoundingClientRect().height/pageScale -
-    target.getBoundingClientRect().height/pageScale
+    content.getBoundingClientRect().height -
+    target.getBoundingClientRect().height
   const minY = 0 ;
 
   if (
