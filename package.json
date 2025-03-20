@@ -1,6 +1,6 @@
 {
   "name": "candy-doc",
-  "version": "1.0.1",
+  "version": "2.0.1",
   "description": "an advance document editor.",
   "main": "main.js",
   "type": "commonjs",
@@ -11,7 +11,7 @@
   },
   "build": {
     "appId": "com.mahmood.candydoc",
-    "productName": "candy doc: lemon sugar v2.0.0 beta",
+    "productName": "candy doc: lemon sugar v2.0.1 beta",
     "files": [
       "./min-css/renderer.css",
       "index.html",

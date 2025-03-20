@@ -14,11 +14,11 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
 }
-* {
-   box-sizing: border-box;
-   user-select: none; 
-}
 
+* {
+  box-sizing: border-box;
+  user-select: none;
+}
 
 .candyDoc__icon {
   cursor: pointer;
@@ -3228,6 +3228,13 @@ h6:first-child{
   left: calc(100% - 70px);
 }
 
+.candyDoc__viewHighlight
+{
+  position: absolute;
+  pointer-events: all;
+  cursor: pointer;
+
+}
 .candyDoc__li {
 
     width: 100%;
@@ -3534,5 +3541,35 @@ h6:first-child{
 .candyDoc__dynamicTextWrapper
 {
     position: relative;
+}
+.candyDoc__orderedList{
+    width: 100%;
+    height: 100%;
+    outline: 1px dotted var(--color);
+    position: relative;
+    margin: 0;
+    padding-left: 15px;
+}
+.candyDoc__orderedListWrapper
+{
+    width: 250px;
+    height: 150px;
+    position: absolute;
+    
+}
+.candyDoc__unOrderedList{
+    width: 100%;
+    height: 100%;
+    outline: 1px dotted var(--color);
+    position: relative;
+    margin: 0;
+    padding-left: 15px;
+}
+.candyDoc__orderedListWrapper
+{
+    width: 250px;
+    height: 150px;
+    position: absolute;
+    
 }
 

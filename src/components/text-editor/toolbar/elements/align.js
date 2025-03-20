@@ -24,9 +24,12 @@ align.append(left, center, right, justify)
 align.addEventListener("change", (e) => {
     const range = getRange();
     if (!range) return;
-
-
-    range.commonAncestorContainer.parentElement.style.textAlign = e.target.value
+    let current=range.startContainer;
+    while(current.nodeName!="DIV")
+    {
+        current=current.parentElement;
+    }
+    current.style.textAlign = e.target.value
 
 })
 align.addEventListener("mousedown", (e) => {
